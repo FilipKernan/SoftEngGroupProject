@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="home_style.css">
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+</head>
+<body>
+    <div>
+        <a>CS3733 Moth</a>
+        <button style="float:right;">Editor</button>
+    </div>
+    <main>
+        <div style="width: 100%; height: auto;" align="center">
+            <div style="width: 1560px; height: auto;">
+                <h1>
+                    Playlists:
+                </h1>
+                <div class="container">
+                    <div id="arrowL">
+                        <
+                    </div>
+                    <div id="arrowR">
+                        >
+                    </div>
+                    <div class="list-container">
+                        <div class='list'>
+                            <div class='item playlist'>
+                                1
+                            </div>
+                            <div class='item playlist'>
+                                2
+                            </div>
+                            <div class='item playlist'>
+                                3
+                            </div>
+                            <div class="item playlist">
+                                4
+                            </div>
+                            <div class='item playlist' style="background: blue;">
+                                5
+                            </div>
+                            <div class='item playlist' style="background: blue;">
+                                6
+                            </div>
+                            <div class='item playlist' style="background: blue;">
+                                7
+                            </div>
+                            <div class="item playlist" style="background: blue;">
+                                8
+                            </div>
+                            <div class="item playlist" style="background: green;">
+                                9
+                            </div>
+                            <div class="item playlist" style="background: green;">
+                                10
+                            </div>
+                            <div class="item playlist" style="background: green;">
+                                11
+                            </div>
+                            <div class="item playlist" style="background: green;">
+                                12
+                            </div>
+                            <div class="item playlist" style="background: pink;">
+                                13
+                            </div>
+                            <div class="item playlist" style="background: pink;">
+                                14
+                            </div>
+                            <div class="item playlist" style="background: pink;">
+                                15
+                            </div>
+                            <div class="item playlist" style="background: pink;">
+                                16
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; height: auto;" align="center">
+            <div style="width: 1560px; height: auto;">
+                <h1>
+                    Library:
+                </h1>
+                <div class="container">
+                    <div id="arrowLL">
+                        <
+                    </div>
+                    <div id="arrowRL">
+                        >
+                    </div>
+                    <div class="list-container">
+                        <div class='list'>
+                            <div class='item library'>
+                                1
+                            </div>
+                            <div class='item library'>
+                                2
+                            </div>
+                            <div class='item library'>
+                                3
+                            </div>
+                            <div class="item library">
+                                4
+                            </div>
+                            <div class='item library' style="background: blue;">
+                                5
+                            </div>
+                            <div class='item library' style="background: blue;">
+                                6
+                            </div>
+                            <div class='item library' style="background: blue;">
+                                7
+                            </div>
+                            <div class="item library" style="background: blue;">
+                                8
+                            </div>
+                            <div class="item library" style="background: green;">
+                                9
+                            </div>
+                            <div class="item library" style="background: green;">
+                                10
+                            </div>
+                            <div class="item library" style="background: green;">
+                                11
+                            </div>
+                            <div class="item library" style="background: green;">
+                                12
+                            </div>
+                            <div class="item library" style="background: pink;">
+                                13
+                            </div>
+                            <div class="item library" style="background: pink;">
+                                14
+                            </div>
+                            <div class="item library" style="background: pink;">
+                                15
+                            </div>
+                            <div class="item library" style="background: pink;">
+                                16
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $itemP = $('div.playlist'), //Cache your DOM selector
+            visibleP = 8, //Set the number of items that will be visible
+            indexP = 0, //Starting index
+            endIndexP = ($itemP.length / visibleP) - 1; //End index
+
+        $('div#arrowR').click(function() {
+            debugger;
+            if (indexP < endIndexP) {
+                indexP++;
+                $itemP.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowL').click(function() {
+            if (indexP > 0) {
+                indexP--;
+                $itemP.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+
+        var $item = $('div.library'), //Cache your DOM selector
+            visible = 8, //Set the number of items that will be visible
+            index = 0, //Starting index
+            endIndex = ($item.length / visible) - 1; //End index
+
+        $('div#arrowRL').click(function() {
+            debugger;
+            if (index < endIndex) {
+                index++;
+                $item.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowLL').click(function() {
+            if (index > 0) {
+                index--;
+                $item.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+    });
+</script>
+</body>
+</html>
