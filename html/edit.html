@@ -1,10 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+
+    <title> CS3733 Moth </title>
+    <link rel="stylesheet" type="text/css" href="../css/edit_style.css"/>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 </head>
 <body>
-$END$
+<!-- HTML5 article tag for content -->
+
+
+    <div>
+
+        <a style= "font-size: 24px">CS3733 Moth</a>
+        <button style = "float:right" class="home">Home</button>
+    </div>
+
+    <h1>
+        Video Segments (Click to add)
+    </h1>
+    <div class="container">
+        <div id="arrowL">
+            <
+        </div>
+        <div id="arrowR">
+            >
+        </div>
+        <div class= "list-container">
+            <div class= 'list'>
+                <div class= 'item playlist'>
+                    <video width="280" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <p>
+        Character: <input type="text" name="character"><br>
+        Transcript: <input type="text" name="transcript"><br>
+        <button class="search">Search</button>
+    </p>
+    <p style="float: right">
+        Name: <input type= "text" value= "playlist1" name= "playlistName"><br>
+    </p>
+
+    <div>
+    <h1>
+        Edit Playlist
+    </h1>
+    <div class="container">
+        <div id="arrowLL">
+            <
+        </div>
+        <div id="arrowRL">
+            >
+        </div>
+        <div class= "list-container2">
+            <div class= 'list'>
+                <div class= 'item editList'>
+                    <button class="delete" style="float: right"> X</button>
+                    <video width="280" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+
+                <div class= 'item editList'>
+                    <button class="delete" style="float: right"> X</button>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item editList'>
+                    <button class="delete" style="float: right"> X</button>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item editList'>
+                    <button class="delete" style="float: right"> X</button>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item editList'>
+                    <button class="delete" style="float: right"> X</button>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>CS3733 Moth &copy; 2019</footer>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $itemP = $('div.playlist'), //Cache your DOM selector
+            visibleP = 4, //Set the number of items that will be visible
+            indexP = 0, //Starting index
+            endIndexP = ($itemP.length / visibleP) - 1; //End index
+
+        $('div#arrowR').click(function() {
+            debugger;
+            if (indexP < endIndexP) {
+                indexP++;
+                $itemP.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowL').click(function() {
+            if (indexP > 0) {
+                indexP--;
+                $itemP.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+
+        var $item = $('div.editList'), //Cache your DOM selector
+            visible = 4, //Set the number of items that will be visible
+            index = 0, //Starting index
+            endIndex = ($item.length / visible) - 1; //End index
+
+        $('div#arrowRL').click(function() {
+            debugger;
+            if (index < endIndex) {
+                index++;
+                $item.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowLL').click(function() {
+            if (index > 0) {
+                index--;
+                $item.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+    });
+</script>
 </body>
 </html>

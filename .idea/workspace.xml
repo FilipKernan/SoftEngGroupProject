@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18e50c8-a6f3-4657-8aeb-13390c8674de" name="Default Changelist" comment="Fixed the CSS not loading bug">
+    <list default="true" id="1be66707-d104-4e9d-bb39-0a6f11c2e43a" name="Default Changelist" comment="edit page and css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/edit_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/edit_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/home.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,6 +26,14 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
