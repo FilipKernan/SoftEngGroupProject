@@ -8,6 +8,11 @@ $(document).ready(function() {
         if (indexP < endIndexP) {
             indexP++;
             $itemP.animate({ 'left': '-=25.1%' });//Set width of your div here
+            if (indexP === endIndexP) {
+                $('div#arrowR').css("color", "red");
+            } if(indexP !== 0) {
+                $('div#arrowL').css("color", "black");
+            }
         }
     });
 
@@ -15,6 +20,11 @@ $(document).ready(function() {
         if (indexP > 0) {
             indexP--;
             $itemP.animate({ 'left': '+=25.1%' });//Set width of your div here
+            if (indexP === 0) {
+                $('div#arrowL').css("color", "red");
+            } if (indexP !== endIndexP) {
+                $('div#arrowR').css("color", "black");
+            }
         }
     });
 
@@ -27,6 +37,11 @@ $(document).ready(function() {
         if (index < endIndex) {
             index++;
             $item.animate({ 'left': '-=25.1%' });//Set width of your div here
+            if (index === endIndex) {
+                $('div#arrowRL').css("color", "red");
+            } if (index !== 0) {
+                $('div#arrowLL').css("color", "black");
+            }
         }
     });
 
@@ -34,6 +49,11 @@ $(document).ready(function() {
         if (index > 0) {
             index--;
             $item.animate({ 'left': '+=25.1%' });//Set width of your div here
+            if (index === 0) {
+                $('div#arrowLL').css("color", "red");
+            } if (index !== endIndex) {
+                $('div#arrowRL').css("color", "black");
+            }
         }
     });
 });
