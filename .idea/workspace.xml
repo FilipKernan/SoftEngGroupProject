@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18e50c8-a6f3-4657-8aeb-13390c8674de" name="Default Changelist" comment="Fixed the CSS not loading bug">
+    <list default="true" id="a18e50c8-a6f3-4657-8aeb-13390c8674de" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/HomeSlider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/home_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/home.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,6 +27,13 @@
     <expand />
     <select />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -44,12 +53,18 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ersch\IdeaProjects\SoftEngGroupProject" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -104,7 +119,7 @@
       <workItem from="1573666905368" duration="378000" />
       <workItem from="1573667318224" duration="49000" />
       <workItem from="1574111893693" duration="694000" />
-      <workItem from="1574366619391" duration="1224000" />
+      <workItem from="1574366619391" duration="16118000" />
     </task>
     <task id="LOCAL-00001" summary="Minor Update">
       <created>1573171203205</created>
@@ -113,7 +128,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573171203205</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed the CSS not loading bug">
+      <created>1574367861110</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574367861110</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added gitignore for intellij user specific files">
+      <created>1574368731121</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1574368731121</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +164,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Minor Update" />
     <MESSAGE value="Fixed the CSS not loading bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the CSS not loading bug" />
+    <MESSAGE value="Added gitignore for intellij user specific files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added gitignore for intellij user specific files" />
   </component>
 </project>
