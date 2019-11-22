@@ -17,6 +17,62 @@
         Library
     </header>
 
+    <div class="container">
+        <div id="arrowL">
+            <
+        </div>
+        <div id="arrowR">
+            >
+        </div>
+        <div class= "list-container">
+            <div class= 'list'>
+                <div class= 'item playlist'>
+                    <video width="280" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class= 'item playlist'>
+                    <video width="290" height="190" controls>
+
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
 </section>
 
 <section class="thirdParty">
@@ -34,4 +90,47 @@
 </footer>
 
 </body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $itemP = $('div.playlist'), //Cache your DOM selector
+            visibleP = 4, //Set the number of items that will be visible
+            indexP = 0, //Starting index
+            endIndexP = ($itemP.length / visibleP) - 1; //End index
+
+        $('div#arrowR').click(function() {
+            if (indexP < endIndexP) {
+                indexP++;
+                $itemP.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowL').click(function() {
+            if (indexP > 0) {
+                indexP--;
+                $itemP.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+
+        var $item = $('div.editList'), //Cache your DOM selector
+            visible = 4, //Set the number of items that will be visible
+            index = 0, //Starting index
+            endIndex = ($item.length / visible) - 1; //End index
+
+        $('div#arrowRL').click(function() {
+            debugger;
+            if (index < endIndex) {
+                index++;
+                $item.animate({ 'left': '-=1200px' });//Set width of your div here
+            }
+        });
+
+        $('div#arrowLL').click(function() {
+            if (index > 0) {
+                index--;
+                $item.animate({ 'left': '+=1200px' });//Set width of your div here
+            }
+        });
+    });
+</script>
 </html>
