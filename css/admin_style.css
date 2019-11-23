@@ -73,6 +73,7 @@ footer{
 {
     overflow: hidden;
     width: 1200px;
+    height: 230px;
     float: left;
     border: solid 1px blue;
 }
