@@ -4,18 +4,21 @@
     height: auto;
     overflow: hidden;
 }
+
 .list-container {
     overflow: hidden;
     width: 97%;
     float: left;
-    //border: solid 1px blue;
+/ / border: solid 1 px blue;
 }
+
 .list {
     white-space: nowrap;
     background: #fff;
-    //min-width: 320%; // elements*(width+2*padding) 352.458
-    float: left;
+/ / min-width: 320 %;
+/ / elements *(width + 2 * padding) 352.458 float: left;
 }
+
 #arrowR {
     background: yellow;
     width: 1.5%;
@@ -29,6 +32,7 @@
     color: #000;
     padding-top: 25px;
 }
+
 #arrowL {
     margin-top: 55.5px;
     background: yellow;
@@ -56,6 +60,7 @@
     color: #000;
     padding-top: 25px;
 }
+
 #arrowLL {
     margin-top: 55.5px;
     background: yellow;
@@ -69,6 +74,7 @@
     color: red;
     padding-top: 25px;
 }
+
 .item {
     display: inline-block;
     background: red;
@@ -105,11 +111,11 @@
 .delete_playlist {
     position: absolute;
     margin: 5px;
-    right:0;
+    right: 0;
 
 }
 
 .controls {
-   display: none;
+    display: none;
 }
 
