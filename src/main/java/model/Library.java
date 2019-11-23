@@ -11,14 +11,14 @@ public class Library {
 
     }
 
-    public boolean tryAddingPlaylist(String plID, String vidSegURL){
+    public boolean tryAddingPlaylist(String plID, String vidSegID){
         for (Playlist pl: playlists) {
             if(plID.equals(pl.getID())){
-                return pl.addVideoSegment(vidSegURL);
+                return pl.addVideoSegment(vidSegID);
             }
         }
 
-        playlists.add(new Playlist(plID, vidSegURL));
+        playlists.add(new Playlist(plID, vidSegID));
         return true;
     }
 
