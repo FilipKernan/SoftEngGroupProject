@@ -1,85 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link rel="stylesheet" href="../css/slider/slider.css">
+    <link rel="stylesheet" href="../css/slider/librarySlider.css">
     <link rel="stylesheet" href="../css/admin_style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <meta charset="UTF-8">
     <title>Library</title>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-    <script src="../js/HomeSlider.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/librarySlider.js"></script>
 
 </head>
 <body>
-<h1 class="mainHeader">
-    Admin
-</h1>
+<div>
+    <a>CS3733 Moth -- Admin</a>
+</div>
 
-<section class="library">
-    <header>
-        Library
-    </header>
-
-    <div class="container">
-        <div id="arrowL">
-            <
-        </div>
-        <div id="arrowR">
-            >
-        </div>
-        <div class= "list-container">
-            <div class= 'list'>
-                <div class= 'item playlist'>
-                    <button class="mark" style="float: right"> Mark</button>
-                    <video width="280" height="190" controls>
-
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
+<section>
+    <div style="width: 100%; height: auto;" align="center">
+        <div style="width: 1560px; height: auto;">
+            <h1>
+                Library:
+            </h1>
+            <div class="container">
+                <div id="arrowLL">
+                    <
                 </div>
-
-                <div class= 'item playlist'>
-                    <button class="mark" style="float: right"> Mark</button>
-                    <video width="290" height="190" controls>
-
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
+                <div id="arrowRL">
+                    >
                 </div>
-
-                <div class= 'item playlist'>
-                    <button class="mark" style="float: right"> Mark</button>
-                    <video width="290" height="190" controls>
-
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="list-container">
+                    <div class='list' id="Library">
+                    </div>
                 </div>
-
-                <div class= 'item playlist'>
-                    <button class="mark" style="float: right"> Mark</button>
-                    <video width="290" height="190" controls>
-
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-
-                <div class= 'item playlist'>
-                    <button class="mark" style="float: right"> Mark</button>
-                    <video width="290" height="190" controls>
-
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-
-
             </div>
         </div>
     </div>
-
-
-
 </section>
 
 <section class="thirdParty">
@@ -93,7 +50,8 @@
 </section>
 
 <footer>
-    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </footer>
 
 <div class="modal" id="newPartyModel">
@@ -110,40 +68,5 @@
     </div>
 
 </div>
-
-
 </body>
-
-<script type="text/javascript">
-
-
-    // Get the modal
-    var modal = document.getElementById("newPartyModel");
-
-    var submit = document.getElementById("modalSubmit");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    function openModel() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    submit.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 </html>

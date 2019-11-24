@@ -18,21 +18,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GetAllPlaylistsHandler implements RequestHandler<Object, ReturnPlaylistsResponse> {
+
     public LambdaLogger logger;
 
-
-    List<Playlist> getConstants() throws Exception {
+    List<Playlist> getPlaylists() throws Exception {
         logger.log("in getPlaylists");
         PlaylistDAO dao = new PlaylistDAO();
 
-        return dao.getAllConstants();
+        return dao.getAllPlaylists();
     }
 
     @Override
     public ReturnPlaylistsResponse handleRequest(Object input, Context context){
        ReturnPlaylistsResponse response;
         try{
-            List<Playlist> list = getConstants();
+            List<Playlist> list = getPlaylists();
             response = new ReturnPlaylistsResponse(list, 200);
 
         } catch (Exception e) {

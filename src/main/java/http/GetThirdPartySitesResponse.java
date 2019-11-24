@@ -1,31 +1,31 @@
 package http;
 
-import model.Playlist;
+import model.ThirdPartySite;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReturnPlaylistsResponse {
+public class GetThirdPartySitesResponse {
 
-    public final List<Playlist> list;
+    public final List<ThirdPartySite> list;
     public final int statusCode;
     public final String error;
 
-    public ReturnPlaylistsResponse (List<Playlist> list, int code) {
+    public GetThirdPartySitesResponse(List<ThirdPartySite> list, int code) {
         this.list = list;
         this.statusCode = code;
         this.error = "";
     }
 
-    public ReturnPlaylistsResponse (int code, String errorMessage) {
+    public GetThirdPartySitesResponse(int code, String errorMessage) {
         this.list = new ArrayList<>();
         this.statusCode = code;
         this.error = errorMessage;
     }
 
     public String toString() {
-        if (list == null) { return "NoPlaylists"; }
-        return "AllPlaylists(" + list.size() + ")";
+        if (list == null) { return "EmptySites"; }
+        return "AllSites(" + list.size() + ")";
     }
 
 }

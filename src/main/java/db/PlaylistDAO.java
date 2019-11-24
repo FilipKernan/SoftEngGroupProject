@@ -95,7 +95,7 @@ public class PlaylistDAO {
 //        }
 //    }
 
-    public List<Playlist> getAllConstants() throws Exception {
+    public List<Playlist> getAllPlaylists() throws Exception {
 
         ArrayList<Playlist> allPlaylists = new ArrayList<>();
         try {
@@ -122,13 +122,14 @@ public class PlaylistDAO {
 
     private boolean updatePlaylist(ResultSet resultSet, ArrayList<Playlist> allPlaylists) throws Exception {
         String id  = resultSet.getString("playlistID");
+        String name  = resultSet.getString("playlistName");
         String videoID = resultSet.getString("videoID");
         for (Playlist pl: allPlaylists) {
             if(pl.getID().equals(id)){
                 return pl.addVideoSegment(videoID);
             }
         }
-        allPlaylists.add(new Playlist (id, videoID));
+        allPlaylists.add(new Playlist (id, videoID, name));
         return true;
     }
 

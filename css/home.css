@@ -1,0 +1,9 @@
+/* Makes controls appear on hover*/
+.video:hover + .controls, .controls:hover {
+    display: block;
+}
+
+/* edit and delete controls -- makes them hidden by default*/
+.controls {
+    display: none;
+}

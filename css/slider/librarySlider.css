@@ -1,0 +1,35 @@
+/* Right arrow*/
+#arrowRL {
+    background: yellow;
+    width: 20px;
+    height: 50px;
+    float: right;
+    cursor: pointer;
+    margin-top: 55.5px;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: #000;
+    padding-top: 25px;
+}
+
+/* Left arrow*/
+#arrowLL {
+    margin-top: 55.5px;
+    background: yellow;
+    width: 20px;
+    height: 50px;
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: red;
+    padding-top: 25px;
+}
+
+/* Container for all video clips*/
+.library {
+    height: 163px;
+}
+
