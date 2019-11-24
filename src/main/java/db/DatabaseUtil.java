@@ -16,9 +16,9 @@ public class DatabaseUtil {
     // https://docs.aws.amazon.com/lambda/latest/dg/env_variables.html
     //
     // The above link shows how to do that.
-    public final static String rdsMySqlDatabaseUrl = System.getenv("rdsMySqlDatabaseUrl");
-    public final static String dbUsername = System.getenv("dbUsername");
-    public final static String dbPassword = System.getenv("dbPassword");
+    public final static String rdsMySqlDatabaseUrl = System.getenv("mothdb.crgxk0edkh1m.us-east-2.rds.amazonaws.com");
+    public final static String dbUsername = System.getenv("mothAdmin");
+    public final static String dbPassword = System.getenv("trustTheNaturalRecursion");
 
     public final static String jdbcTag = "jdbc:mysql://";
     public final static String rdsMySqlDatabasePort = "3306";
