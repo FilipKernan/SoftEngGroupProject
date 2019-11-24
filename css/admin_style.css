@@ -71,14 +71,11 @@ footer{
     overflow: hidden;
     width: 97%;
     float: left;
-/ / border: solid 1 px blue;
 }
 
 .list {
     white-space: nowrap;
     background: #fff;
-/ / min-width: 320 %;
-/ / elements *(width + 2 * padding) 352.458 float: left;
 }
 
 .item {
