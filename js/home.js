@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    // add 5 clips programmatically
     addVideoClip("movie.ogg");
     addVideoClip("movie.ogg");
     addVideoClip("movie.ogg");
@@ -7,6 +7,7 @@ $(document).ready(function () {
     addVideoClip("movie.ogg");
 });
 
+// adds a new video clip to the end of the slider
 function addVideoClip(url) {
     var clip = $("<div class='item library'>\n" +
         "                            <a>Video Failed to load</a>\n" +

@@ -1,0 +1,42 @@
+/* Right arrow*/
+#arrowR {
+    background: yellow;
+    width: 1.5%;
+    height: 50px;
+    float: right;
+    cursor: pointer;
+    margin-top: 55.5px;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: #000;
+    padding-top: 25px;
+}
+
+/* Left arrow*/
+#arrowL {
+    margin-top: 55.5px;
+    background: yellow;
+    width: 1.5%;
+    height: 50px;
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: red;
+    padding-top: 25px;
+}
+
+/* Edit playlist icon*/
+.edit_playlist {
+    position: fixed;
+    margin: 5px;
+}
+
+/* delete playlist icon*/
+.delete_playlist {
+    position: absolute;
+    margin: 5px;
+    right: 0;
+}

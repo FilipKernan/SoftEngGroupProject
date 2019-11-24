@@ -4,6 +4,7 @@ $(document).ready(function () {
         indexP = 0, //Starting index
         endIndexP = $itemP.length - visibleP; //End index
 
+// slide video clips to the left one and update the state of the controls
     $('div#arrowR').click(function () {
         if (indexP < endIndexP) {
             indexP++;
@@ -17,6 +18,7 @@ $(document).ready(function () {
         }
     });
 
+// slide video clips to the right one and update the state of the controls
     $('div#arrowL').click(function () {
         if (indexP > 0) {
             indexP--;

@@ -1,0 +1,42 @@
+/* Container for the whole slider (including controls)*/
+.container {
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+}
+
+/* container for .list*/
+.list-container {
+    overflow: hidden;
+    width: 97%;
+    float: left;
+}
+
+/* Container for all elements*/
+.list {
+    white-space: nowrap;
+    background: #fff;
+}
+
+/* A slider element*/
+.item {
+    display: inline-block;
+    background: red;
+    width: 24%;
+    height: 186px;
+    margin: 0.4%;
+    position: relative;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: White;
+}
+
+/* a video/image*/
+.video {
+    position: absolute;
+    max-height: 163px;
+    width: 100%;
+    left: 0;
+}
+
