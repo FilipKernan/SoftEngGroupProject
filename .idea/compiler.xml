@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="HelloWorld" />
+        <module name="C3733Moth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="C3733Moth" target="1.8" />
       <module name="HelloWorld" target="1.8" />
     </bytecodeTargetLevel>
   </component>

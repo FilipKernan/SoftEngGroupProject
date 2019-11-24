@@ -1,4 +1,5 @@
-package main.java.handlers;
+package handlers;
 
-public class GetAllVideosHandler {
+public class GetAllVideosSegmentsHandler {
+
 }
