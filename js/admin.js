@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+// Load 5 video clips
+    addVideoClip("movie.ogg");
+    addVideoClip("movie.ogg");
+    addVideoClip("movie.ogg");
+    addVideoClip("movie.ogg");
+    addVideoClip("movie.ogg");
+
 // Get the modal
     var modal = document.getElementById("newPartyModel");
 
@@ -45,3 +52,19 @@ $(document).ready(function () {
             "                        </i>")
     });
 });
+
+// Creates a new video clip in the slider
+function addVideoClip(url) {
+    var clip = $("<div class='item library'>\n" +
+        "                            <video controls class=\"video\">\n" +
+        "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
+        "                            </video>\n" +
+        "                            <div class=\"controls\">\n" +
+        "                                <i class=\"material-icons mark\" style=\"top: 0\">\n" +
+        "                                    radio_button_unchecked\n" +
+        "                                </i>\n" +
+        "                            </div>\n" +
+        "                        </div>\n" +
+        "                        <a> </a>");
+    $("#Library").append(clip);
+}
