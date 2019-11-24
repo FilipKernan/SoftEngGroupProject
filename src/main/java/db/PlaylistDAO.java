@@ -95,7 +95,7 @@ public class PlaylistDAO {
 //        }
 //    }
 
-    public List<Playlist> getAllConstants() throws Exception {
+    public List<Playlist> getAllPlaylists() throws Exception {
 
         ArrayList<Playlist> allPlaylists = new ArrayList<>();
         try {
