@@ -16,7 +16,7 @@ public class DatabaseUtil {
     // https://docs.aws.amazon.com/lambda/latest/dg/env_variables.html
     //
     // The above link shows how to do that.
-    public final static String rdsMySqlDatabaseUrl = System.getenv("rdsMySqlDatabaseUrl");
+    public final static String rdsMySqlDatabaseUrl = System.getenv("rdsUrl");
     public final static String dbUsername = System.getenv("dbUsername");
     public final static String dbPassword = System.getenv("dbPassword");
 
@@ -34,7 +34,6 @@ public class DatabaseUtil {
      */
     protected static Connection connect() throws Exception {
         if (conn != null) { return conn; }
-
         try {
             System.out.println("start connecting......");
             Class.forName("com.mysql.jdbc.Driver");
