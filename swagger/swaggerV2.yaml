@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: Soft Eng API
   version: "1.0"
-  title: Moth API
+  title: Moth API V2
   contact:
     name: Moth
     email: cvieira@wpi.edu
