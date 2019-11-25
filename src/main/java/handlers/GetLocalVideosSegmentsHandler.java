@@ -21,7 +21,6 @@ public class GetLocalVideosSegmentsHandler implements RequestHandler<LocalVideoS
         logger.log("Handling localVideoSegment lambda");
 
         LocalVideoSegmentResponse response;
-
         try {
             List<VideoSegment> list = getVideoSegments();
             response = new LocalVideoSegmentResponse(list, 200);
