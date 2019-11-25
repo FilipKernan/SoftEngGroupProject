@@ -24,8 +24,8 @@ public class ReturnPlaylistsResponse {
     }
 
     public String toString() {
-        if (list == null) { return "EmptyConstants"; }
-        return "AllConstants(" + list.size() + ")";
+        if (list == null) { return "NoPlaylists"; }
+        return "AllPlaylists(" + list.size() + ")";
     }
 
 }

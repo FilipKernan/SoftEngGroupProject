@@ -34,5 +34,6 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-kinesis:1.11.631" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.631" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-lambda-java-core:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.36" level="project" />
   </component>
 </module>
