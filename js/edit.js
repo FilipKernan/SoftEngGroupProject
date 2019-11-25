@@ -1,9 +1,6 @@
 $(document).ready(function () {
-    addVideoClip("test.ogg");
-    addVideoClip("test.ogg");
-    addVideoClip("test.ogg");
-    addVideoClip("test.ogg");
-    addVideoClip("test.ogg");
+    getVideoSegments();
+
 
     appendVideoClip("test.ogg");
     appendVideoClip("test.ogg");
