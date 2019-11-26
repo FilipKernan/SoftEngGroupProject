@@ -46,7 +46,7 @@ $(document).ready(function () {
 
 // Creates a new video clip in the slider
 function addVideoClip(url) {
-    var clip = $("<div class='item library2'>\n" +
+    var clip = $("<div class='item library'>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
@@ -55,9 +55,11 @@ function addVideoClip(url) {
         "                                    radio_button_unchecked\n" +
         "                                </i>\n" +
         "                            </div>\n" +
+        "                               <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
+        "                               <div style=\"bottom: 0; position:absolute; left: 50%; transform: translate(-50%); width: 100%; overflow-wrap: break-word; font-size: 6.5px\">Transcript: "+ transcript +"</div>\n" +
         "                        </div>\n" +
         "                        <a> </a>");
-    $("#Library2").append(clip);
+    $("#Library").append(clip);
 }
 
 // When the user clicks on the button, open the modal
