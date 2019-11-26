@@ -1,11 +1,7 @@
 $(document).ready(function () {
-
+    getVideoSegments();
 // Load 5 video clips
-    addVideoClip("movie.ogg");
-    addVideoClip("movie.ogg");
-    addVideoClip("movie.ogg");
-    addVideoClip("movie.ogg");
-    addVideoClip("movie.ogg");
+
 
 // Get the modal
     var modal = document.getElementById("newPartyModel");
