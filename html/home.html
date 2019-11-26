@@ -37,8 +37,8 @@
                     <div class='list' id="Playlist">
                     </div>
                 </div>
-                <button style="float: left">
-                    Create
+                <button style="float: left" onclick="openModal()">
+                    Create Playlist
                 </button>
             </div>
         </div>
@@ -75,5 +75,20 @@
 
 
 </main>
+
+
+<div class="modal" id="newPlaylist">
+
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form>
+            Playlist Name<br>
+            <input type="text"><br>
+            <input type="submit" id="modalSubmit">
+        </form>
+    </div>
+
+</div>
+
 </body>
 </html>
