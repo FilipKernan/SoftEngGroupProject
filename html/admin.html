@@ -47,7 +47,7 @@
     <ul>
         <li><img src="../assets/error.png" class="icon" onclick="">Site 1</li>
     </ul>
-    <button onclick="openModel()"><img src="../assets/plus.png" class="icon"> Add New Site</button>
+    <button onclick="openModal()"><img src="../assets/plus.png" class="icon"> Add New Site</button>
 </section>
 
 <footer>
@@ -59,11 +59,11 @@
 
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form>
+        <form onsubmit="closeModal(); return false;">
             Third party name: <br>
-            <input type="text"><br>
+            <input type="text" id="thirdPartyNameField"><br>
             Third party URL<br>
-            <input type="text"><br>
+            <input type="text" id="thirdPartyURLField"><br>
             <input type="submit" id="modalSubmit">
         </form>
     </div>

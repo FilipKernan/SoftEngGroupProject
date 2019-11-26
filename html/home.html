@@ -82,9 +82,9 @@
 
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form>
+        <form onsubmit="closeModal(); return false;">
             Playlist Name<br>
-            <input type="text"><br>
+            <input type="text" id="playlistNameField"><br>
             <input type="submit" id="modalSubmit">
         </form>
     </div>

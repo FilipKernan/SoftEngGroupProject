@@ -61,7 +61,16 @@ function addVideoClip(url) {
 }
 
 // When the user clicks on the button, open the modal
-function openModel() {
+function openModal() {
     var modal = document.getElementById("newPartyModel");
     modal.style.display = "block";
+}
+
+function closeModal() {
+    var modal = document.getElementById("newPartyModel");
+    var thirdPartyName = document.getElementById("thirdPartyNameField");
+    thirdPartyName.value = "";
+    var thirdPartyURL = document.getElementById("thirdPartyURLField");
+    thirdPartyURL.value = "";
+    modal.style.display = "none";
 }

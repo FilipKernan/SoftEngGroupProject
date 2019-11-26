@@ -84,3 +84,11 @@ function openModal() {
     var modal = document.getElementById("newPlaylist");
     modal.style.display = "block";
 }
+
+
+function closeModal() {
+    var modal = document.getElementById("newPlaylist");
+    var playlistNameField = document.getElementById("playlistNameField");
+    playlistNameField.value = "";
+    modal.style.display = "none";
+}
