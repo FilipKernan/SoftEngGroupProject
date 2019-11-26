@@ -46,7 +46,7 @@ $(document).ready(function () {
 
 // Creates a new video clip in the slider
 function addVideoClip(url) {
-    var clip = $("<div class='item library'>\n" +
+    var clip = $("<div class='item library2'>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
@@ -57,7 +57,7 @@ function addVideoClip(url) {
         "                            </div>\n" +
         "                        </div>\n" +
         "                        <a> </a>");
-    $("#Library").append(clip);
+    $("#Library2").append(clip);
 }
 
 // When the user clicks on the button, open the modal

@@ -1,7 +1,6 @@
 var $item, visible, index, endindex;
 
-function prepareSlider() {
-
+function preparePlaylistSlider() {
     var $itemP = $('div.playlist'), //Cache your DOM selector
         visibleP = 4, //Set the number of items that will be visible
         indexP = 0, //Starting index
@@ -37,5 +36,5 @@ function prepareSlider() {
 }
 
 $(document).ready(function () {
-prepareSlider()
+    preparePlaylistSlider();
 });

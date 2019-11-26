@@ -1,6 +1,6 @@
 var $item, visible, index, endindex;
 
-function prepareSlider() {
+function preparelibrarySlider() {
     var $item = $('div.library'), //Cache your DOM selector
         visible = 4, //Set the number of items that will be visible
         index = 0, //Starting index
@@ -33,4 +33,32 @@ function prepareSlider() {
             }
         }
     });
+    // slide video clips to the left one and update the state of the controls
+    $('div#arrowRL2').click(function () {
+        if (index2 < endIndex2) {
+            index2++;
+            $item2.animate({'left': '-=25.1%'}); //Set width of div here
+            if (index2 === endIndex2) {
+                $('div#arrowRL2').css("color", "red");
+            }
+            if (index2 !== 0) {
+                $('div#arrowLL2').css("color", "black");
+            }
+        }
+    });
+
+// slide video clips to the right one and update the state of the controls
+    $('div#arrowLL2').click(function () {
+        if (index2 > 0) {
+            index2--;
+            $item2.animate({'left': '+=25.1%'}); //Set width of div here
+            if (index2 === 0) {
+                $('div#arrowLL2').css("color", "red");
+            }
+            if (index2 !== endIndex2) {
+                $('div#arrowRL2').css("color", "black");
+            }
+        }
+    });
+
 }

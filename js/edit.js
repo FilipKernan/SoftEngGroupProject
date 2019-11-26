@@ -2,11 +2,11 @@ $(document).ready(function () {
     getVideoSegments();
 
 
-    appendVideoClip("test.ogg");
-    appendVideoClip("test.ogg");
-    appendVideoClip("test.ogg");
-    appendVideoClip("test.ogg");
-    appendVideoClip("test.ogg");
+    appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
 
     var $item2 = $('div.library2'), //Cache your DOM selector
         visible2 = 4, //Set the number of items that will be visible
@@ -44,7 +44,7 @@ $(document).ready(function () {
 });
 
 // adds a new video clip to the end of the slider
-function addVideoClip(url) {
+function addVideoClip(url, transcript, character) {
     var clip = $("<div class='item library'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
@@ -52,12 +52,14 @@ function addVideoClip(url) {
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +
         "                            </div>\n" +
+        "                            <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
+        "                            <div style=\"bottom: 0; position:absolute; left: 50%; transform: translate(-50%); width: 100%; overflow-wrap: break-word; font-size: 6.5px\">Transcript: "+ transcript +"</div>\n" +
         "                        </div>" +
         "                        <a> </a>");
     $("#Library").append(clip);
 }
 
-function appendVideoClip(url) {
+function appendVideoClip(url, transcript, character) {
     var clip = $("<div class='item library2'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
