@@ -1,11 +1,12 @@
-$(document).ready(function () {
+var $item, visible, index, endindex;
+
+function prepareSlider() {
     var $item = $('div.library'), //Cache your DOM selector
         visible = 4, //Set the number of items that will be visible
         index = 0, //Starting index
         endIndex = $item.length - visible; //End index
 
-
-// slide video clips to the left one and update the state of the controls
+    // slide video clips to the left one and update the state of the controls
     $('div#arrowRL').click(function () {
         if (index < endIndex) {
             index++;
@@ -32,4 +33,4 @@ $(document).ready(function () {
             }
         }
     });
-});
+}

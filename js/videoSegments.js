@@ -14,5 +14,6 @@ function getVideoSegments() {
                 addVideoClip(url);
             }
         }
+        prepareSlider();
     };
 }
