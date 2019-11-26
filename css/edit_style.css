@@ -1,21 +1,21 @@
-
-#arrowR
-{
+/* Right arrow*/
+#arrowRL2 {
     background: yellow;
     width: 20px;
     height: 50px;
     float: right;
     cursor: pointer;
-    margin-top: 90px;
+    margin-top: 54px;
     text-align: center;
     font-family: Arial;
     font-size: 20px;
     color: #000;
     padding-top: 25px;
 }
-#arrowL
-{
-    margin-top: 90px;
+
+/* Left arrow*/
+#arrowLL2 {
+    margin-top: 54px;
     background: yellow;
     width: 20px;
     height: 50px;
@@ -24,76 +24,23 @@
     text-align: center;
     font-family: Arial;
     font-size: 20px;
-    color: #000;
+    color: red;
     padding-top: 25px;
 }
 
-.container
-{
-    width: 1242px;
-    height: auto;
-    overflow: hidden;
-}
-.list-container
-{
-    overflow: hidden;
-    width: 1200px;
-    float: left;
-    border: solid 1px blue;
+/* Makes controls appear on hover*/
+.video:hover + .controls, .controls:hover {
+    display: block;
 }
 
-.list-container2
-{
-    overflow: hidden;
-    width: 1200px;
-    float: left;
-    height: 230px;
-    border: solid 1px blue;
-}
-.list
-{
-    background: #fff;
-    min-width: 3400px;
-    float: left;
+/* edit and delete controls -- makes them hidden by default*/
+.controls {
+    display: none;
 }
 
-.item
-{
-    width: 290px;
-    height: 200px;
+/* delete playlist icon*/
+.remove_clip {
+    position: absolute;
     margin: 5px;
-    float: left;
-    position: relative;
-    text-align: center;
-    font-family: Arial;
-    font-size: 20px;
-    color: White;
-}
-#arrowRL
-{
-    background: yellow;
-    width: 20px;
-    height: 50px;
-    float: right;
-    cursor: pointer;
-    margin-top: 90px;
-    text-align: center;
-    font-family: Arial;
-    font-size: 20px;
-    color: #000;
-    padding-top: 25px;
-}
-#arrowLL
-{
-    margin-top: 90px;
-    background: yellow;
-    width: 20px;
-    height: 50px;
-    float: left;
-    cursor: pointer;
-    text-align: center;
-    font-family: Arial;
-    font-size: 20px;
-    color: #000;
-    padding-top: 25px;
+    right: 0;
 }
