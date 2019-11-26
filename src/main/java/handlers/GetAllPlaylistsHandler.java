@@ -22,7 +22,6 @@ public class GetAllPlaylistsHandler implements RequestHandler<Object, ReturnPlay
     public LambdaLogger logger;
 
     List<Playlist> getPlaylists() throws Exception {
-        logger.log("in getPlaylists");
         PlaylistDAO dao = new PlaylistDAO();
 
         return dao.getAllPlaylists();
