@@ -1,7 +1,32 @@
 $(document).ready(function () {
     getVideoSegments();
     getPlaylists();
-/*
+
+    // Get the modal
+    var modal = document.getElementById("newPlaylist");
+
+    var submit = document.getElementById("modalSubmit");
+
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    submit.onclick = function () {
+        modal.style.display = "none";
+    };
+
+// When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    /*
     addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", "test1");
     addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", "test2");
     addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", "test3");
@@ -54,4 +79,8 @@ function addPlaylist(url, name) {
  $("#Playlist").append(playlist);
 }
 
-
+// When the user clicks on the button, open the modal
+function openModal() {
+    var modal = document.getElementById("newPlaylist");
+    modal.style.display = "block";
+}
