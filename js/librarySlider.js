@@ -6,6 +6,11 @@ function preparelibrarySlider() {
         index = 0, //Starting index
         endIndex = $item.length - visible; //End index
 
+    var $item2 = $('div.library2'), //Cache your DOM selector
+        visible2 = 4, //Set the number of items that will be visible
+        index2 = 0, //Starting index
+        endIndex2 = $item2.length - visible2; //End index
+
     // slide video clips to the left one and update the state of the controls
     $('div#arrowRL').click(function () {
         if (index < endIndex) {
