@@ -105,11 +105,13 @@ public class PlaylistDAO {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                try{
-                    updatePlaylist(resultSet, allPlaylists);
-                } catch (Exception e) {
-                    throw new Exception("Failed in adding playlists: " + e.getMessage());
-                }
+                Playlist c = createPlaylistNO(resultSet);
+                allPlaylists.add(c);
+//                try{
+//                    updatePlaylist(resultSet, allPlaylists);
+//                } catch (Exception e) {
+//                    throw new Exception("Failed in adding playlists: " + e.getMessage());
+//                }
             }
             resultSet.close();
             statement.close();
@@ -131,6 +133,13 @@ public class PlaylistDAO {
         }
         allPlaylists.add(new Playlist (id, videoID, name));
         return true;
+    }
+
+    //Name only create playlist
+    private Playlist createPlaylistNO(ResultSet resultSet) throws Exception {
+        String id  = resultSet.getString("playlistID");
+        String name  = resultSet.getString("playlistName");
+        return new Playlist(name);
     }
 
 }

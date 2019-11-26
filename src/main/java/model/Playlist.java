@@ -13,6 +13,10 @@ public class Playlist {
         videoSegmentIDs.add(vidSegID);
     }
 
+    public Playlist(String name){
+        this.name = name;
+    }
+
     public Playlist(String id, String vidSegID, String name){
         this.id = id;
         videoSegmentIDs.add(vidSegID);
