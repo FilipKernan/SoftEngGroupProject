@@ -3,12 +3,12 @@ function getVideoSegments() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     xhr.send();
-    console.log("sent");
+    //console.log("sent");
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log("XHR:" + xhr.responseText);
+            //console.log("XHR:" + xhr.responseText);
             json = JSON.parse(xhr.responseText);
-            console.log(json.list);
+            //console.log(json.list);
             for (var i = 0; i < json.list.length; i++) {
                 url = json.list[i].url;
                 transcript = json.list[i].transcript;
@@ -23,7 +23,7 @@ function getVideoSegments() {
 
 function getPlaylists() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
+    xhr.open("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
     xhr.send();
     console.log("sent");
     xhr.onloadend = function () {
