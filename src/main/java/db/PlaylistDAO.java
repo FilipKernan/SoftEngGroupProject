@@ -58,9 +58,9 @@ public class PlaylistDAO {
 //
     public boolean deletePlaylist(String id) throws Exception {
         try {
-            PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE name = ?;");
+            PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE playlistID = ?;");
             psName.setString(1, id);
-            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE name = ?;");
+            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
             psVideos.setString(1, id);
             int numAffected = psName.executeUpdate();
             int numAffectedPlaylistVideos = psName.executeUpdate();
@@ -74,11 +74,10 @@ public class PlaylistDAO {
         }
     }
 
-
     public boolean createPlaylist(Playlist playlist) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlist WHERE name = ?;");
-            ps.setString(1, playlist.getID());
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlist WHERE playlistName = ?;");
+            ps.setString(1, playlist.getName());
             ResultSet resultSet = ps.executeQuery();
 
             // already present?
@@ -91,6 +90,31 @@ public class PlaylistDAO {
             ps = conn.prepareStatement("INSERT INTO playlist (playlistID,playlistName) values(?,?);");
             ps.setString(1,  playlist.getID());
             ps.setString(2,  playlist.getName());
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert constant: " + e.getMessage());
+        }
+    }
+
+    public boolean appendVideoSegmentToPlaylist(String playlistID, String videoID) throws Exception {
+        try {
+//            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID = ? AND videoID = ?;");
+//            ps.setString(1, playlist.getID());
+//            ps.setString(2, playlist.getID());
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            // already present?
+//            while (resultSet.next()) {
+//                Playlist c = generatePlaylist(resultSet);
+//                resultSet.close();
+//                return false;
+//            }
+
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO playlistRelation (playlistID,videoID) values(?,?);");
+            ps.setString(1,  playlistID);
+            ps.setString(2,  videoID);
             ps.execute();
             return true;
 
