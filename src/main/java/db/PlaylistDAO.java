@@ -60,8 +60,8 @@ public class PlaylistDAO {
         try {
             PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE playlistID = ?;");
             psName.setString(1, id);
-            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistName = ?;");
-            psVideos.setString(2, id);
+            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
+            psVideos.setString(1, id);
             int numAffected = psName.executeUpdate();
             int numAffectedPlaylistVideos = psName.executeUpdate();
             psName.close();
