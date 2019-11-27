@@ -56,19 +56,23 @@ public class PlaylistDAO {
 //        }
 //    }
 //
-//    public boolean deleteConstant(Playlist constant) throws Exception {
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("DELETE FROM Constants WHERE name = ?;");
-//            ps.setString(1, constant.name);
-//            int numAffected = ps.executeUpdate();
-//            ps.close();
-//
-//            return (numAffected == 1);
-//
-//        } catch (Exception e) {
-//            throw new Exception("Failed to insert constant: " + e.getMessage());
-//        }
-//    }
+    public boolean deleteConstant(String id) throws Exception {
+        try {
+            PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE name = ?;");
+            psName.setString(1, id);
+            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE name = ?;");
+            psVideos.setString(1, id);
+            int numAffected = psName.executeUpdate();
+            int numAffectedPlaylistVideos = psName.executeUpdate();
+            psName.close();
+            psVideos.close();
+
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert constant: " + e.getMessage());
+        }
+    }
 //
 //
 //    public boolean addConstant(Playlist constant) throws Exception {
