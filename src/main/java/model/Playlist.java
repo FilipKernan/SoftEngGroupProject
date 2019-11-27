@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Playlist {
 
@@ -15,6 +16,7 @@ public class Playlist {
 
     public Playlist(String name){
         this.name = name;
+        this.id = UUID.randomUUID().toString();
     }
 
     public Playlist(String id, String vidSegID, String name){
@@ -40,5 +42,9 @@ public class Playlist {
 
     public String getName() {
         return name;
+    }
+
+    public String toString(){
+        return id;
     }
 }

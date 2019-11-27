@@ -6,10 +6,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import db.PlaylistDAO;
 import http.DeletePlaylistRequest;
 import http.DeletePlaylistResponse;
-import http.ReturnPlaylistsResponse;
-import model.Playlist;
-
-import java.util.List;
 
 public class DeletePlaylistHandler implements RequestHandler<DeletePlaylistRequest, DeletePlaylistResponse> {
 
@@ -18,7 +14,7 @@ public class DeletePlaylistHandler implements RequestHandler<DeletePlaylistReque
     boolean deletePlaylist(String id) throws Exception {
         PlaylistDAO dao = new PlaylistDAO();
 
-        return dao.deleteConstant(id);
+        return dao.deletePlaylist(id);
     }
 
     @Override

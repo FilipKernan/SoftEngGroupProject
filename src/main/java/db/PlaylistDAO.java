@@ -56,7 +56,7 @@ public class PlaylistDAO {
 //        }
 //    }
 //
-    public boolean deleteConstant(String id) throws Exception {
+    public boolean deletePlaylist(String id) throws Exception {
         try {
             PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE name = ?;");
             psName.setString(1, id);
@@ -73,31 +73,31 @@ public class PlaylistDAO {
             throw new Exception("Failed to insert constant: " + e.getMessage());
         }
     }
-//
-//
-//    public boolean addConstant(Playlist constant) throws Exception {
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
-//            ps.setString(1, constant.name);
-//            ResultSet resultSet = ps.executeQuery();
-//
-//            // already present?
-//            while (resultSet.next()) {
-//                Playlist c = generatePlaylist(resultSet);
-//                resultSet.close();
-//                return false;
-//            }
-//
-//            ps = conn.prepareStatement("INSERT INTO Constants (name,value) values(?,?);");
-//            ps.setString(1,  constant.name);
-//            ps.setDouble(2,  constant.value);
-//            ps.execute();
-//            return true;
-//
-//        } catch (Exception e) {
-//            throw new Exception("Failed to insert constant: " + e.getMessage());
-//        }
-//    }
+
+
+    public boolean createPlaylist(Playlist playlist) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlist WHERE name = ?;");
+            ps.setString(1, playlist.getID());
+            ResultSet resultSet = ps.executeQuery();
+
+            // already present?
+            while (resultSet.next()) {
+                Playlist c = generatePlaylist(resultSet);
+                resultSet.close();
+                return false;
+            }
+
+            ps = conn.prepareStatement("INSERT INTO playlist (playlistID,playlistName) values(?,?);");
+            ps.setString(1,  playlist.getID());
+            ps.setString(2,  playlist.getName());
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert constant: " + e.getMessage());
+        }
+    }
 
     public List<Playlist> getAllPlaylists() throws Exception {
 
@@ -109,7 +109,7 @@ public class PlaylistDAO {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Playlist c = createPlaylistNO(resultSet);
+                Playlist c = generatePlaylist(resultSet);
                 allPlaylists.add(c);
 //                try{
 //                    updatePlaylist(resultSet, allPlaylists);
@@ -140,7 +140,7 @@ public class PlaylistDAO {
     }
 
     //Name only create playlist
-    private Playlist createPlaylistNO(ResultSet resultSet) throws Exception {
+    private Playlist generatePlaylist(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("playlistID");
         String name  = resultSet.getString("playlistName");
         return new Playlist(name);
