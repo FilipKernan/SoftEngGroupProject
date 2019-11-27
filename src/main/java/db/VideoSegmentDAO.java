@@ -19,6 +19,20 @@ public class VideoSegmentDAO {
         }
     }
 
+    public boolean deleteVideoSegment(String id) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM video WHERE videoID = ?;");
+            ps.setString(1, id);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert constant: " + e.getMessage());
+        }
+    }
+
 
     public List<VideoSegment> getLocalVideoSegments() throws Exception{
         List<VideoSegment> localSegments = new ArrayList<>();
