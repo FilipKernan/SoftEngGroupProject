@@ -125,6 +125,9 @@ public class PlaylistTester {
                 System.out.println(pl.getName() + " " + pl.getID());
             }
 
+            System.out.println("\nTesting it not allowing a duplicate to be added");
+            Assert.assertFalse(plDAO.createPlaylist(playlists.get(0)));
+
         } catch (Exception e){
             System.out.println("Exception: " + e.toString());
         }
