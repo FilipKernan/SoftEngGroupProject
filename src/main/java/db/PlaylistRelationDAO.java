@@ -1,17 +1,20 @@
 package db;
 
-import java.sql.*;
+import model.Playlist;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Playlist;
-
-public class PlaylistDAO {
+public class PlaylistRelationDAO {
     //data access object
 
-    java.sql.Connection conn;
+    Connection conn;
 
-    public PlaylistDAO() {
+    public PlaylistRelationDAO() {
         try  {
             conn = DatabaseUtil.connect();
         } catch (Exception e) {
