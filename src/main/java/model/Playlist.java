@@ -7,7 +7,7 @@ public class Playlist {
 
     private String id;
     private String name;
-    public ArrayList<String> videoSegmentIDs;
+    private ArrayList<String> videoSegmentIDs;
 
 //    public Playlist(String id, String vidSegID){
 //        this.id = id;
@@ -15,16 +15,19 @@ public class Playlist {
 //    }
 
     public Playlist(String id, String name){
+        videoSegmentIDs = new ArrayList<>();
         this.id = id;
         this.name = name;
     }
 
     public Playlist(String name){
+        videoSegmentIDs = new ArrayList<>();
         this.name = name;
         this.id = UUID.randomUUID().toString();
     }
 
     public Playlist(String id, String vidSegID, String name){
+        videoSegmentIDs = new ArrayList<>();
         this.id = id;
         videoSegmentIDs.add(vidSegID);
         this.name = name;
@@ -52,4 +55,9 @@ public class Playlist {
     public String toString(){
         return id;
     }
+
+    public ArrayList<String> getVideoSegmentIDs() {
+        return videoSegmentIDs;
+    }
+
 }

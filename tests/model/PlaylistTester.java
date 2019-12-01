@@ -2,6 +2,8 @@ package model;
 
 import com.amazonaws.services.dynamodbv2.xspec.S;
 import db.PlaylistDAO;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,11 +11,54 @@ import java.util.List;
 import java.util.UUID;
 
 public class PlaylistTester {
-    PlaylistDAO plDAO = new PlaylistDAO();
+    private PlaylistDAO plDAO;
 
     @Test
     public void createPlaylist(){
-        Playlist pl = new Playlist("New Playlist");
+        Playlist pl = new Playlist("Hello There");
+    }
+
+    @Test
+    public void playlistModelTester(){
+        String name = "General Kenobi";
+        Playlist pl = new Playlist(name);
+        Assert.assertEquals(name, pl.getName());
+        Assert.assertNotEquals(null, pl.getID());
+
+        String id2 = "123";
+        String name2 = "Hello There";
+        Playlist pl2 = new Playlist(id2, name2);
+        Assert.assertEquals(name2, pl2.getName());
+        Assert.assertEquals(id2, pl2.getID());
+
+        String rename = "You are a bold one";
+        pl.renamePlaylist(rename);
+        Assert.assertEquals(rename, pl.getName());
+        Assert.assertNotEquals(null, pl.getID());
+
+        String rename2 = "Surely you realize you are doomed";
+        pl2.renamePlaylist(rename2);
+        Assert.assertEquals(rename2, pl2.getName());
+        Assert.assertEquals(id2, pl2.getID());
+
+        String name3 = "You fool";
+        String id3 = UUID.randomUUID().toString();
+        String vidID3 = UUID.randomUUID().toString();
+        Playlist pl3 = new Playlist(id3, vidID3, name3);
+        Assert.assertEquals(id3, pl3.getID());
+        Assert.assertEquals(name3, pl3.getName());
+        Assert.assertEquals(vidID3, pl3.getVideoSegmentIDs().get(0));
+
+        String vidID4 = UUID.randomUUID().toString();
+        pl3.addVideoSegment(vidID4);
+        Assert.assertEquals(pl3.getVideoSegmentIDs().size(), 2);
+
+        Assert.assertEquals(pl3.toString(), id3);
+    }
+
+    @Before
+    public void makeDatabase(){
+        plDAO = new PlaylistDAO();
     }
 
     @Test
@@ -59,7 +104,7 @@ public class PlaylistTester {
 
             System.out.println("\nTest creating a new playlist and adding it to playlists");
             List<Playlist> addThesePls = new ArrayList<>();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 Playlist newPL = new Playlist(UUID.randomUUID().toString());
                 addThesePls.add(newPL);
                 plDAO.createPlaylist(newPL);
