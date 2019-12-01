@@ -1,6 +1,5 @@
 package model;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import db.PlaylistDAO;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,6 +15,7 @@ public class PlaylistTester {
     @Test
     public void createPlaylist(){
         Playlist pl = new Playlist("Hello There");
+        Assert.assertEquals("Hello There", pl.getName());
     }
 
     @Test
