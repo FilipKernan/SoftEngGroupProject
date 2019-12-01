@@ -73,14 +73,14 @@ public class PlaylistTester {
             System.out.println("\nTest creating a new playlist and adding it to playlists");
             Playlist newPlaylist = new Playlist("Hello There - Unique Name");
             System.out.println("Newly Created Playlist: \n\tName:" + newPlaylist.getName() + "\n\tID: " + newPlaylist.getID());
-            plDAO.createPlaylist(newPlaylist);
+            Assert.assertTrue(plDAO.createPlaylist(newPlaylist));
             playlists = plDAO.getAllPlaylists();
             for (Playlist pl: playlists ) {
                 System.out.println(pl.getName() + " " + pl.getID());
             }
 
             System.out.println("\nTest deleting a playlist");
-            plDAO.deletePlaylist(newPlaylist.getID());
+            Assert.assertTrue(plDAO.deletePlaylist(newPlaylist.getID()));
             System.out.println("We will be deleting playlist with name " + newPlaylist.getName() +
                     "and ID " + newPlaylist.getID());
             playlists = plDAO.getAllPlaylists();
@@ -107,7 +107,7 @@ public class PlaylistTester {
             for (int i = 0; i < 10; i++) {
                 Playlist newPL = new Playlist(UUID.randomUUID().toString());
                 addThesePls.add(newPL);
-                plDAO.createPlaylist(newPL);
+                Assert.assertTrue(plDAO.createPlaylist(newPL));
             }
             playlists = plDAO.getAllPlaylists();
             for (Playlist pl: playlists ) {
@@ -117,7 +117,7 @@ public class PlaylistTester {
             System.out.println("\nTest deleting a playlist");
 
             for (Playlist pl: addThesePls) {
-                plDAO.deletePlaylist(pl.getID());
+                Assert.assertTrue(plDAO.deletePlaylist(pl.getID()));
             }
 
             playlists = plDAO.getAllPlaylists();
@@ -127,6 +127,9 @@ public class PlaylistTester {
 
             System.out.println("\nTesting it not allowing a duplicate to be added");
             Assert.assertFalse(plDAO.createPlaylist(playlists.get(0)));
+
+            System.out.println("\nTesting it not allowing deleting a playlist with an ID that doesn't exist");
+            Assert.assertFalse(plDAO.deletePlaylist(new Playlist("This shouldn't exist").getID()));
 
         } catch (Exception e){
             System.out.println("Exception: " + e.toString());
