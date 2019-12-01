@@ -9,9 +9,14 @@ public class Playlist {
     private String name;
     public ArrayList<String> videoSegmentIDs;
 
-    public Playlist(String id, String vidSegID){
+//    public Playlist(String id, String vidSegID){
+//        this.id = id;
+//        videoSegmentIDs.add(vidSegID);
+//    }
+
+    public Playlist(String id, String name){
         this.id = id;
-        videoSegmentIDs.add(vidSegID);
+        this.name = name;
     }
 
     public Playlist(String name){

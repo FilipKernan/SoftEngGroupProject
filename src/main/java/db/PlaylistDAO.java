@@ -167,7 +167,7 @@ public class PlaylistDAO {
     private Playlist generatePlaylist(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("playlistID");
         String name  = resultSet.getString("playlistName");
-        return new Playlist(name);
+        return new Playlist(id, name);
     }
 
 }
