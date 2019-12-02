@@ -17,7 +17,6 @@ public class RegisterThirdPartySitesHandler implements RequestHandler<RegisterTh
 
     @Override
     public RegisterThirdPartyResponse handleRequest(RegisterThirdPartyRequest req, Context context){
-        logger.log("in getThird");
         ThirdPartySitesDAO dao = new ThirdPartySitesDAO();
 
         RegisterThirdPartyResponse response;
