@@ -48,6 +48,14 @@ public class Playlist {
     }
 
 
+    public boolean removeVideoSegment(String vidSegID){
+        for(int i = 0; i < videoSegmentIDs.size(); i++){
+            if(videoSegmentIDs.get(i) == vidSegID){
+                videoSegmentIDs.remove(i);
+                return true;
+            }
+        }return false;
+    }
     public String getName() {
         return name;
     }

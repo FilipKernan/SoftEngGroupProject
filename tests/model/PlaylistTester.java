@@ -54,6 +54,15 @@ public class PlaylistTester {
         Assert.assertEquals(pl3.getVideoSegmentIDs().size(), 2);
 
         Assert.assertEquals(pl3.toString(), id3);
+
+        String vidID5 = UUID.randomUUID().toString();
+        String id4 = UUID.randomUUID().toString();
+        String name4 = "playlist4";
+        Playlist pl4 = new Playlist(id4, vidID5, name4);
+        Assert.assertEquals(vidID5, pl4.getVideoSegmentIDs().get(0));
+        Assert.assertEquals(1, pl4.getVideoSegmentIDs().size());
+        pl4.removeVideoSegment(vidID5);
+        Assert.assertNull(pl4.getVideoSegmentIDs());
     }
 
     @Before
