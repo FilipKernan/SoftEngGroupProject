@@ -10,6 +10,7 @@ import http.RegisterThirdPartyResponse;
 import model.ThirdPartySite;
 
 import java.util.List;
+import java.util.UUID;
 
 public class RegisterThirdPartySitesHandler implements RequestHandler<RegisterThirdPartyRequest, RegisterThirdPartyResponse> {
 
@@ -21,9 +22,8 @@ public class RegisterThirdPartySitesHandler implements RequestHandler<RegisterTh
 
         RegisterThirdPartyResponse response;
         try{
-            //TODO make unique ID
-            String uniqueID = null;
-            ThirdPartySite tps = new ThirdPartySite(req.getUrl(), uniqueID, null);
+            String uniqueID = UUID.randomUUID().toString();
+            ThirdPartySite tps = new ThirdPartySite(req.getUrl(), uniqueID);
             if(req.isAddTPS()){
                 if(dao.addThirdPartySite(tps)) {
                     response = new RegisterThirdPartyResponse(req.getUrl() + " added", 200);

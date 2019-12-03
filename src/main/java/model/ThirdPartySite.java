@@ -6,12 +6,10 @@ public class ThirdPartySite {
 
     private String url;
     private String ID;
-    public List<String> videoSegmentIDs;
 
-    public ThirdPartySite(String url, String ID, String videoSegmentID){
+    public ThirdPartySite(String url, String ID){
         this.url = url;
         this.ID = ID;
-        videoSegmentIDs.add(videoSegmentID);
     }
 
     public String getUrl() {
@@ -20,11 +18,6 @@ public class ThirdPartySite {
 
     public String getID() {
         return ID;
-    }
-
-    public boolean addVideoSegment(String vidSegID){
-        videoSegmentIDs.add(vidSegID);
-        return true;
     }
 
 }
