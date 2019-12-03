@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Library {
-    public ArrayList<Playlist> playlists = null;
-    public ArrayList<VideoSegment> videoSegments = null;
+    private ArrayList<Playlist> playlists = null;
+    private ArrayList<VideoSegment> videoSegments = null;
 
     public Library(){
 
@@ -22,4 +22,39 @@ public class Library {
         return true;
     }
 
+    public boolean addPlaylist(Playlist pl){
+        playlists.add(pl);
+        return true;
+    }
+
+    public  boolean removePlaylist(String plID){
+        for(int i = 0; i < playlists.size(); i++){
+            if(playlists.get(i).getID() == plID){
+                playlists.remove(i);
+                return true;
+            }
+        }return false;
+    }
+
+    public ArrayList<Playlist> getPlaylistIDs(){
+        return playlists;
+    }
+
+    public boolean importVideoSegment(VideoSegment vs){
+        videoSegments.add(vs);
+        return true;
+    }
+
+    public boolean deleteVideoSegment(String vsID){
+        for(int i = 0; i < videoSegments.size(); i++){
+            if(videoSegments.get(i).UUID == vsID){
+                videoSegments.remove(i);
+                return true;
+            }
+        }return false;
+    }
+
+    public ArrayList<VideoSegment> getVideoSegments(){
+        return videoSegments;
+    }
 }
