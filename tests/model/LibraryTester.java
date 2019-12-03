@@ -12,14 +12,14 @@ public class LibraryTester {
         //add playlist
         Library l1 = new Library();
         Playlist pl1 = new Playlist("name1");
-        Assert.assertNull(l1.getPlaylistIDs());
+        Assert.assertEquals(0, l1.getPlaylistIDs().size());
         l1.addPlaylist(pl1);
         Assert.assertEquals(1, l1.getPlaylistIDs().size());
         Assert.assertEquals(pl1, l1.getPlaylistIDs().get(0));
 
         //remove playlist
         l1.removePlaylist(pl1.getID());
-        Assert.assertNull(l1.getPlaylistIDs());
+        Assert.assertEquals(0, l1.getPlaylistIDs().size());
     }
 
     @Test
@@ -32,14 +32,14 @@ public class LibraryTester {
         VideoSegment v1 = new VideoSegment(url1, vID, transcript1, character1);
 
         //import video segment
-        Assert.assertNull(l2.getVideoSegments());
+        Assert.assertEquals(0, l2.getVideoSegments().size());
         l2.importVideoSegment(v1);
         Assert.assertEquals(1, l2.getVideoSegments().size());
         Assert.assertEquals(v1, l2.getVideoSegments().get(0));
 
         //delete video segment
         l2.deleteVideoSegment(v1.UUID);
-        Assert.assertNull(l2.getVideoSegments());
+        Assert.assertEquals(0, l2.getVideoSegments().size());
 
 
     }

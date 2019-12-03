@@ -8,7 +8,8 @@ public class Library {
     private ArrayList<VideoSegment> videoSegments = null;
 
     public Library(){
-
+        playlists  = new ArrayList<Playlist>();
+        videoSegments = new ArrayList<VideoSegment>();
     }
 
     public boolean tryAddingPlaylist(String plID, String vidSegID){

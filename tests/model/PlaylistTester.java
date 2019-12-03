@@ -62,7 +62,7 @@ public class PlaylistTester {
         Assert.assertEquals(vidID5, pl4.getVideoSegmentIDs().get(0));
         Assert.assertEquals(1, pl4.getVideoSegmentIDs().size());
         pl4.removeVideoSegment(vidID5);
-        Assert.assertNull(pl4.getVideoSegmentIDs());
+        Assert.assertEquals(0, pl4.getVideoSegmentIDs().size());
     }
 
     @Before
