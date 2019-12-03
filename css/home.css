@@ -45,3 +45,7 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.delete_video:hover{
+    cursor: pointer;
+}

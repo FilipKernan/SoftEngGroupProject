@@ -1,10 +1,10 @@
 package http;
 
-public class AppendVideoToPlaylistRequest {
+public class DeleteVideoSegmentInPlaylistRequest {
     private String playlistID;
     private String videoID;
 
-    public AppendVideoToPlaylistRequest(String playlistID, String videoID){
+    public DeleteVideoSegmentInPlaylistRequest(String playlistID, String videoID){
         this.playlistID = playlistID;
         this.videoID = videoID;
     }
