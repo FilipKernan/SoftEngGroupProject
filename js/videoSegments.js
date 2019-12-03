@@ -33,7 +33,8 @@ function getPlaylists() {
             console.log(json.list);
             for (var i = 0; i < json.list.length; i++) {
                 playlistName = json.list[i].name;
-                addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", playlistName);
+                playlistID = json.list[i].id;
+                addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", playlistName, playlistID);
             }
         }
         preparePlaylistSlider();
