@@ -14,6 +14,7 @@
     <script src="../js/playlistSlider.js"></script>
     <script src="../js/librarySlider.js"></script>
     <script src="../js/videoSegments.js"></script>
+    <script src="../js/search.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
@@ -44,11 +45,11 @@
         </div>
     </div>
 
-    <p>
+    <form onsubmit="return false" class="search">
         Character: <input type="text" name="character"><br>
         Transcript: <input type="text" name="transcript"><br>
-        <button class="search">Search</button>
-    </p>
+        <button name="search">Search</button>
+    </form>
 
     <div style="width: 100%; height: auto;" align="center">
         <div style="width: 1560px; height: auto;">
