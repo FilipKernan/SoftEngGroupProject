@@ -15,7 +15,7 @@ public class AppendVideoToPlaylistResponse {
     }
 
     public AppendVideoToPlaylistResponse(int code, String errorMessage) {
-        this.videoID = null;
+        this.videoID = "-1";
         this.statusCode = code;
         this.error = errorMessage;
     }

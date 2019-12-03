@@ -4,7 +4,7 @@ public class AppendVideoToPlaylistRequest {
     private String playlistID;
     private String videoID;
 
-    public AppendVideoToPlaylistRequest(String name, String id){
+    public AppendVideoToPlaylistRequest(String playlistID, String videoID){
         this.playlistID = playlistID;
         this.videoID = videoID;
     }
