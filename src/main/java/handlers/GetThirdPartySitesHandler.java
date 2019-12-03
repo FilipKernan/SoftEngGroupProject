@@ -21,7 +21,6 @@ public class GetThirdPartySitesHandler implements RequestHandler<Object, GetThir
     public LambdaLogger logger;
 
     List<ThirdPartySite> getThirdPartySites() throws Exception {
-        logger.log("in getThird");
         ThirdPartySitesDAO dao = new ThirdPartySitesDAO();
 
         return dao.getAllThirdPartySites();
