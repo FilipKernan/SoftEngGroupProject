@@ -4,8 +4,8 @@ $(document).ready(function () {
 
     // Get the modal
     var modal = document.getElementById("newPlaylist");
-
     var submit = document.getElementById("modalSubmit");
+
 
 // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -95,6 +95,12 @@ function openModal() {
 function closeModal() {
     var modal = document.getElementById("newPlaylist");
     var playlistNameField = document.getElementById("playlistNameField");
-    playlistNameField.value = "";
+    if(playlistNameField.value != ""){
+
+        addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", playlistNameField.value);
+        preparePlaylistSlider();
+    }
+
+playlistNameField.value = "";
     modal.style.display = "none";
 }
