@@ -51,23 +51,22 @@ public class PlaylistRelationDAO {
     }
 
     public List<String> getVidSegsInPlaylist(String plID) throws Exception{
+
+        ArrayList<String> vidSegs = new ArrayList<>();
         try {
-            List<String> vidSegs = new ArrayList<>();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID=?;");
-            ps.setString(1,  plID);
-            ResultSet resultSet = ps.executeQuery();
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM playlistRelation";
+            ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
                 vidSegs.add(resultSet.getString("videoID"));
             }
             resultSet.close();
-            ps.close();
-
+            statement.close();
             return vidSegs;
 
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting books: " + e.getMessage());
         }
     }
 
