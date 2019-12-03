@@ -22,10 +22,11 @@ public class PlaylistRelationDAO {
         }
     }
 
-    public boolean deleteVidSegInPlaylist(String videoID, String playlistID) throws Exception {
+    public boolean deleteVidSegInPlaylist(String playlistID, String videoID) throws Exception {
         try {
             PreparedStatement psName = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID=? AND videoID=?;");
-            psName.setString(1, videoID);
+            psName.setString(1, playlistID);
+            psName.setString(2, videoID);
             int numAffected = psName.executeUpdate();
             psName.close();
 
