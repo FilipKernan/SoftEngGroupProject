@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function search(response, character, transcript) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     xhr.send();
     xhr.onloadend = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {

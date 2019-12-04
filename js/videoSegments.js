@@ -1,7 +1,7 @@
 // gets all video segments from AWS and creates library entries for each of them
 function getVideoSegments() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     xhr.send();
     //console.log("sent");
     xhr.onloadend = function () {
@@ -23,7 +23,7 @@ function getVideoSegments() {
 
 function getPlaylists() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
+    xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
     xhr.send();
     console.log("sent");
     xhr.onloadend = function () {
