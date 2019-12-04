@@ -56,7 +56,7 @@ public class PlaylistDAO {
             return true;
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert constant: " + e.getMessage());
+            throw new Exception("Failed to insert playlist: " + e.getMessage());
         }
     }
 
