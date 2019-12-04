@@ -23,11 +23,11 @@ public class PlaylistDAO {
         try {
             PreparedStatement psName = conn.prepareStatement("DELETE FROM playlist WHERE playlistID = ?;");
             psName.setString(1, id);
-            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
-            psVideos.setString(1, id);
+//            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
+//            psVideos.setString(1, id);
             int numAffected = psName.executeUpdate();
             psName.close();
-            psVideos.close();
+//            psVideos.close();
 
             return (numAffected == 1);
 
