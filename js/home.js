@@ -96,9 +96,8 @@ function closeModal() {
     var modal = document.getElementById("newPlaylist");
     var playlistNameField = document.getElementById("playlistNameField");
     if(playlistNameField.value != ""){
-
-        addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", playlistNameField.value);
-        preparePlaylistSlider();
+        createPlaylist(playlistNameField.value);
+        console.log("Created a new playlist.");
     }
 
 playlistNameField.value = "";
