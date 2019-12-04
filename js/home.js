@@ -28,6 +28,7 @@ $(document).ready(function () {
 
     $('body').on('click', 'div.delete_video', function (e) {
         console.log("deleting...");
+
         var target = $(e.target).parent().parent().parent();
         target.remove();
     });
@@ -62,8 +63,8 @@ function addVideoClip(url, transcript, character) {
     $("#Library").append(clip);
 }
 
-function addPlaylist(url, name) {
- var playlist = $("<div class='item playlist'>\n" +
+function addPlaylist(url, name, id) {
+ var playlist = $("<div class='item playlist' id=\'" + id + "\'>\n" +
      "                            <a>"+name+"</a>\n" +
      "                            <br>\n" +
      "                            <img src=\""+url+"\"\n" +
