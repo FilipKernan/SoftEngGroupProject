@@ -53,3 +53,7 @@
 .delete_playlist:hover{
     cursor: pointer;
 }
+
+.edit_playlist:hover{
+    cursor: pointer;
+}
