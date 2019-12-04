@@ -43,7 +43,6 @@ $(document).ready(function () {
     });
 });
 
-
 // $('body').on('click', 'div.add_video', function (e) {
 //     console.log("adding...");
 //     var target = $(e.target).parent().parent().parent();

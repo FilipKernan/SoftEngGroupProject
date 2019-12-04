@@ -28,9 +28,9 @@ $(document).ready(function () {
 
     $('body').on('click', 'div.delete_video', function (e) {
         console.log("deleting...");
-
         var target = $(e.target).parent().parent().parent();
         target.remove();
+        preparelibrarySlider()
     });
 
     $('body').on('click', 'div.delete_playlist', function (e) {
@@ -39,8 +39,6 @@ $(document).ready(function () {
             console.log("deleting...");
             $('.list#Playlist').children().remove();
             getPlaylists();
-            //var target = $(e.target).parent().parent().parent();
-            //target.remove();
         }
     });
 
