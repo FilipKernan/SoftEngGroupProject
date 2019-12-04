@@ -1,7 +1,7 @@
 package http;
 
-public class PlaylistGetRequest {
-    public PlaylistGetRequest () {
+public class GetAllPlaylistRequest {
+    public GetAllPlaylistRequest() {
 
     }
 

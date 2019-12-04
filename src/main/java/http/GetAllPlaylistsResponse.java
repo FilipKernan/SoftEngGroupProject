@@ -5,19 +5,19 @@ import model.Playlist;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReturnPlaylistsResponse {
+public class GetAllPlaylistsResponse {
 
     public final List<Playlist> list;
     public final int statusCode;
     public final String error;
 
-    public ReturnPlaylistsResponse (List<Playlist> list, int code) {
+    public GetAllPlaylistsResponse(List<Playlist> list, int code) {
         this.list = list;
         this.statusCode = code;
         this.error = "";
     }
 
-    public ReturnPlaylistsResponse (int code, String errorMessage) {
+    public GetAllPlaylistsResponse(int code, String errorMessage) {
         this.list = new ArrayList<>();
         this.statusCode = code;
         this.error = errorMessage;
