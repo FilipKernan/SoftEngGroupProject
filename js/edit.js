@@ -43,6 +43,14 @@ $(document).ready(function () {
     });
 });
 
+
+// $('body').on('click', 'div.add_video', function (e) {
+//     console.log("adding...");
+//     var target = $(e.target).parent().parent().parent();
+//     addVideoClip(target.url, target.transcript, target.character);
+//     preparelibrarySlider()
+// });
+
 // adds a new video clip to the end of the slider
 function addVideoClip(url, transcript, character) {
     var clip = $("<div class='item library'>\n" +
@@ -51,8 +59,12 @@ function addVideoClip(url, transcript, character) {
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +
-        "                            </div>\n" +
-        "                            <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
+        "                                <div class=\"add_video\" style=\"top: 0\">\n" +
+        "                                    <i class=\"material-icons\">\n" +
+        "                                        add\n" +
+        "                                    </i>\n" +
+        "                                </div>\n" +
+        "                            </div>\n" +        "                            <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
         "                            <div style=\"bottom: 0; position:absolute; left: 50%; transform: translate(-50%); width: 100%; overflow-wrap: break-word; font-size: 6.5px\">Transcript: "+ transcript +"</div>\n" +
         "                        </div>" +
         "                        <a> </a>");
