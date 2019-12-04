@@ -31,7 +31,7 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
             if(success){
                 response = new CreatePlaylistResponse(playlist, 200);
             } else {
-                response = new CreatePlaylistResponse(playlist, 409);
+                response = new CreatePlaylistResponse(409, "There is already a playlist in the db with this name");
             }
 
         } catch (Exception e) {
