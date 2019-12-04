@@ -25,3 +25,11 @@
 .add_video:hover{
     cursor: pointer;
 }
+
+.wrapperPlay {
+    text-align: center;
+}
+
+.play {
+    position: absolute;
+}

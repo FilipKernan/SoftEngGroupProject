@@ -5,8 +5,8 @@ $(document).ready(function () {
     getClipInPlayList()
 
 
-    // appendVideoClip("test.ogg", "", "");
-    // appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
+    appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
