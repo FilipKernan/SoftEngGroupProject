@@ -134,15 +134,15 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/SearchVideoSegmentRequest'
-          responses:
-            200:
-              description: searched video segments
-              schema:
-                $ref: '#/definitions/SearchVideoSegmentResponse'
-            400:
-              description: invalid input
-            404:
-              description: Element not found
+      responses:
+        200:
+          description: searched video segments
+          schema:
+            $ref: '#/definitions/SearchVideoSegmentResponse'
+        400:
+          description: invalid input
+        404:
+          description: Element not found
 
   /admin/thirdParty:
     post:
