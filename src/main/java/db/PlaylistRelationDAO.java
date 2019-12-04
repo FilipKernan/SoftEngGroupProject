@@ -54,9 +54,10 @@ public class PlaylistRelationDAO {
 
         ArrayList<String> vidSegs = new ArrayList<>();
         try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID =?;");
+            ps.setString(1,  plID);
             Statement statement = conn.createStatement();
-            String query = "SELECT * FROM playlistRelation";
-            ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 vidSegs.add(resultSet.getString("videoID"));
