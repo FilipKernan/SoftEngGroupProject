@@ -50,11 +50,19 @@ function createPlaylist(name) {
     console.log("sent");
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log("status:====" + xhr.status);
+            console.log("status:" + xhr.status);
             if (xhr.status == 200) {
                 console.log ("XHR:" + xhr.responseText);
-                $('.list#Playlist').children().remove();
-                getPlaylists();
+                var js = JSON.parse(xhr.responseText);
+                var status = js["statusCode"];
+                if(status != 200){
+                    alert("Error: " + status + "\n" + js["error"]);
+                }else{
+                    $('.list#Playlist').children().remove();
+                    getPlaylists();
+                }
+
+
             } else {
                 console.log("actual:" + xhr.responseText)
                 var js = JSON.parse(xhr.responseText);
