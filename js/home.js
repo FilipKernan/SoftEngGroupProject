@@ -3,7 +3,7 @@ $(document).ready(function () {
     getPlaylists();
 
     // Get the modal
-    var modal = document.getElementById("newPlaylist");
+    var modal = document.getElementById("playlistModalSubmit");
 
     var submit = document.getElementById("modalSubmit");
 
@@ -69,7 +69,7 @@ function addPlaylist(url, name, playlistID) {
      "                                        edit\n" +
      "                                    </i>\n" +
      "                                </div>\n" +
-     "                                <div class=\"delete_playlist\" onclick='deletePlaylistModal(\""+ playlistID +"\")'>\n" +
+     "                                <div class=\"delete_playlist\" onclick='deletePlaylistModal(\"" + name + "\",\""+ playlistID +"\")'>\n" +
      "                                    <i class=\"material-icons\">\n" +
      "                                        close\n" +
      "                                    </i>\n" +
@@ -94,7 +94,7 @@ function closeModal(id) {
     modal.style.display = "none";
 }
 
-function deletePlaylistModal(playlistID) {
+function deletePlaylistModal(name, playlistID) {
     console.log(name);
     var modal = "<div class='modal-content'>" +
         "               <span class=\"close\" onclick='closeModal(\"deletePlaylist\")'>&times;</span>" +
@@ -124,3 +124,41 @@ function deletePlaylist(playlistID) {
         }
     };
 }
+
+
+function newSegment() {
+    var form = document.newVideoSegmentForm;
+
+    var data = {};
+    date["character"] = form.character.value;
+
+    var segments = document.newVideoSegmentForm.base64Encoding.value.split(',');
+    date["base64EncodedValue"] = segments[1];
+
+    data["transcript"] = form.transcript.value;
+
+    data["id"] = "";
+
+    var js = JSON.stringify(data);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "url", true);
+
+    xhr.send(js);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+                getVideoSegments();
+            } else {
+                console.log("actual:" + xhr.responseText)
+                var js = JSON.parse(xhr.responseText);
+                var err = js["response"];
+                alert (err);
+            }
+        }
+    }
+}
+

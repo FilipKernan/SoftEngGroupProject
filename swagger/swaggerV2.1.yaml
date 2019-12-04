@@ -461,7 +461,7 @@ definitions:
         type: string
       character:
         type: string
-      bsae64-encoded Value:
+      base64-encoded Value:
         type:
   DeleteVideoSegmentRequest:
     required:

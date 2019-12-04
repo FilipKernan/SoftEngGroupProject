@@ -37,7 +37,7 @@
                     <div class='list' id="Playlist">
                     </div>
                 </div>
-                <button style="float: left" onclick="openModal("newPlaylist")">
+                <button style="float: left" onclick="openModal('newPlaylist')">
                     Create Playlist
                 </button>
             </div>
@@ -67,7 +67,7 @@
 
                     </div>
                 </div>
-                <button style="float: left">
+                <button style="float: left" onclick="openModal('newVideoSegment')">
                     Upload
                 </button>
             </div>
@@ -85,7 +85,7 @@
         <form onsubmit="closeModal('newPlaylist'); return false;">
             Playlist Name<br>
             <input type="text" id="playlistNameField"><br>
-            <input type="submit" id="modalSubmit">
+            <input type="submit" id="playlistModalSubmit">
         </form>
     </div>
 
@@ -97,5 +97,39 @@
 
 </div>
 
+<div class="modal" id="newVideoSegment">
+
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('newVideoSegment')">&times;</span>
+        <form name="newVideoSegmentForm" onsubmit="newSegment(); closeModal('newVideoSegment'); return false;">
+            Character Name<br>
+            <input name="character"type="text" id="videoCharacterField"><br>
+            Transcript<br>
+            <textarea rows="5" cols="60" name="transcript" id="videoTranscript"></textarea><br>
+            <input type="file" name="video", accept="video/ogg" id="video"><br>
+            <input name="base64Encoding" hidden value=""/>
+            <input type="submit" id="videoModalSubmit">
+        </form>
+    </div>
+
+</div>
+<script>
+    function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function () {
+            document.newVideoSegmentForm.base64Encoding.value = reader.result;
+
+        }
+    }
+
+    function handleFileSelect(evt) {
+        var files = evt.target.files;
+        getBase64(files[0])
+    }
+
+    document.getElementById('video').addEventListener('change', handleFileSelect, false);
+</script>
 </body>
 </html>
