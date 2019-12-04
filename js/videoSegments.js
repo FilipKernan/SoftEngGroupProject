@@ -107,6 +107,27 @@ function deletePlaylist(id) {
     };
 }
 
+function getClipInPlayList() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", true);
+    xhr.send();
+    console.log("sent");
+    xhr.onloadend = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            json = JSON.parse(xhr.responseText);
+            console.log(json.list);
+            for (var i = 0; i < json.list.length; i++) {
+                clipUrl= json.list[i].url;
+                clipCharacter= json.list[i].character;
+                clipTranscript = json.list[i].transcript;
+                appendVideoClip(clipUrl, clipTranscript, clipCharacter);
+            }
+        }
+        preparelibrarySlider();
+    };
+}
+
 function appendVideoToPlaylist(playlistID, videoID) {
     var data = {};
     data["playlistID"] = playlistID;
@@ -122,15 +143,7 @@ function appendVideoToPlaylist(playlistID, videoID) {
             if (xhr.status == 200) {
                 console.log ("XHR:" + xhr.responseText);
                 $('.list#Library2').children().remove();
-                getVideoSegments();
-                // var js = JSON.parse(xhr.responseText);
-                // var status = js["statusCode"];
-                // if(status != 200){
-                //     alert("Error: " + status + "\n" + js["error"]);
-                // }else{
-                //     $('.list#Playlist').children().remove();
-                //     getPlaylists();
-                // }
+                getClipInPlayList();
 
 
             } else {

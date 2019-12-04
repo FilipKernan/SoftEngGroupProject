@@ -45,7 +45,7 @@ $(document).ready(function () {
     $('body').on('click', 'div.edit_playlist', function (e) {
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         console.log("Go edit...");
-        window.location.href = "edit.html";
+        window.location.href = "edit.html?playlistID=" + id;
 
     });
 
