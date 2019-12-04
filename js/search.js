@@ -19,7 +19,7 @@ function search(response, character, transcript) {
             var hasResult = false;
 
             for (i = 0; i < json.list.length; i++) {
-                if (character && json.list[i].character.toLowerCase() === character && !transcript) {
+                if (character && json.list[i].character.toLowerCase().includes(character) && !transcript) {
                     console.log(json.list[i].UUID);
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
                     hasResult = true;
@@ -33,7 +33,7 @@ function search(response, character, transcript) {
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
                     hasResult = true;
 
-                } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase() === character) {
+                } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
                     console.log(json.list[i].UUID);
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
                     hasResult = true;
