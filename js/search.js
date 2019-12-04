@@ -32,6 +32,8 @@ function search(response, character, transcript) {
 
                 } else if (!transcript && !character) {
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
+                    hasResult = true;
+
                 } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase() === character) {
                     console.log(json.list[i].UUID);
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
