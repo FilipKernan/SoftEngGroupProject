@@ -1,12 +1,15 @@
 $(document).ready(function () {
+    var playlistID =getUrlVars()["playlistID"];
+    console.log("playlistID: " + playlistID);
     getVideoSegments();
+    getClipInPlayList()
 
 
-    appendVideoClip("test.ogg", "", "");
-    appendVideoClip("test.ogg", "", "");
-    appendVideoClip("test.ogg", "", "");
-    appendVideoClip("test.ogg", "", "");
-    appendVideoClip("test.ogg", "", "");
+    // appendVideoClip("test.ogg", "", "");
+    // appendVideoClip("test.ogg", "", "");
+    // appendVideoClip("test.ogg", "", "");
+    // appendVideoClip("test.ogg", "", "");
+    // appendVideoClip("test.ogg", "", "");
 
     var $item2 = $('div.library2'), //Cache your DOM selector
         visible2 = 4, //Set the number of items that will be visible
@@ -14,6 +17,13 @@ $(document).ready(function () {
         endIndex2 = $item2.length - visible2; //End index
 
 
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
 // slide video clips to the left one and update the state of the controls
     $('div#arrowRL2').click(function () {
         if (index2 < endIndex2) {
@@ -43,17 +53,16 @@ $(document).ready(function () {
     });
 });
 
-
-// $('body').on('click', 'div.add_video', function (e) {
-//     console.log("adding...");
-//     var target = $(e.target).parent().parent().parent();
-//     addVideoClip(target.url, target.transcript, target.character);
-//     preparelibrarySlider()
-// });
+$('body').on('click', 'div.add_video', function (e) {
+    console.log("adding...");
+    var target = $(e.target).parent().parent().parent();
+    appendVideoToPlaylist(playlistId, target.videoID);
+    //preparelibrarySlider()
+});
 
 // adds a new video clip to the end of the slider
 function addVideoClip(url, transcript, character) {
-    var clip = $("<div class='item library'>\n" +
+    var clip = $("<div class='item library' >\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +

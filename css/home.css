@@ -49,3 +49,7 @@
 .delete_video:hover{
     cursor: pointer;
 }
+
+.delete_playlist:hover{
+    cursor: pointer;
+}

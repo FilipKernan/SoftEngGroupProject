@@ -7,10 +7,9 @@ $(document).ready(function () {
     });
 });
 
-
 function search(response, character, transcript) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     xhr.send();
     xhr.onloadend = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -20,7 +19,7 @@ function search(response, character, transcript) {
             var hasResult = false;
 
             for (i = 0; i < json.list.length; i++) {
-                if (character && json.list[i].character.toLowerCase() === character && !transcript) {
+                if (character && json.list[i].character.toLowerCase().includes(character) && !transcript) {
                     console.log(json.list[i].UUID);
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
                     hasResult = true;
@@ -32,7 +31,9 @@ function search(response, character, transcript) {
 
                 } else if (!transcript && !character) {
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
-                } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase() === character) {
+                    hasResult = true;
+
+                } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
                     console.log(json.list[i].UUID);
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
                     hasResult = true;

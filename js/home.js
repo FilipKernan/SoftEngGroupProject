@@ -30,6 +30,23 @@ $(document).ready(function () {
         console.log("deleting...");
         var target = $(e.target).parent().parent().parent();
         target.remove();
+        preparelibrarySlider()
+    });
+
+    $('body').on('click', 'div.delete_playlist', function (e) {
+        var id = $((e.target.parentElement.parentElement).parentElement).context.id;
+        if( deletePlaylist(id)) {
+            console.log("deleting...");
+            $('.list#Playlist').children().remove();
+            getPlaylists();
+        }
+    });
+
+    $('body').on('click', 'div.edit_playlist', function (e) {
+        var id = $((e.target.parentElement.parentElement).parentElement).context.id;
+        console.log("Go edit...");
+        window.location.href = "edit.html?playlistID=" + id;
+
     });
 
     /*
@@ -62,8 +79,8 @@ function addVideoClip(url, transcript, character) {
     $("#Library").append(clip);
 }
 
-function addPlaylist(url, name) {
- var playlist = $("<div class='item playlist'>\n" +
+function addPlaylist(url, name, id) {
+ var playlist = $("<div class='item playlist' id=\'" + id + "\'>\n" +
      "                            <a>"+name+"</a>\n" +
      "                            <br>\n" +
      "                            <img src=\""+url+"\"\n" +
