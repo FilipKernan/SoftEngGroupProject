@@ -37,8 +37,10 @@ $(document).ready(function () {
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         if( deletePlaylist(id)) {
             console.log("deleting...");
-            var target = $(e.target).parent().parent().parent();
-            target.remove();
+            $('.list#Playlist').children().remove();
+            getPlaylists();
+            //var target = $(e.target).parent().parent().parent();
+            //target.remove();
         }
     });
 
