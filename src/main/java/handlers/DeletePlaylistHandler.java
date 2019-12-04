@@ -26,7 +26,7 @@ public class DeletePlaylistHandler implements RequestHandler<DeletePlaylistReque
             if(success){
                 response = new DeletePlaylistResponse(id, 200);
             } else {
-                response = new DeletePlaylistResponse(id, 409);
+                response = new DeletePlaylistResponse(409, "No Playlist with this ID exists");
             }
 
         } catch (Exception e) {
