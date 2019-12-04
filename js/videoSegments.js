@@ -43,7 +43,6 @@ function getPlaylists() {
 function createPlaylist(name) {
     var data = {};
     data["name"] = name;
-    debugger;
     var js = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/create", true);
