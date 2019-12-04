@@ -44,6 +44,13 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('click', 'div.edit_playlist', function (e) {
+        var id = $((e.target.parentElement.parentElement).parentElement).context.id;
+        console.log("Go edit...");
+        window.location.href = "edit.html";
+
+    });
+
     /*
     addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", "test1");
     addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", "test2");

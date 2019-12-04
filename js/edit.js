@@ -47,7 +47,7 @@ $(document).ready(function () {
 // $('body').on('click', 'div.add_video', function (e) {
 //     console.log("adding...");
 //     var target = $(e.target).parent().parent().parent();
-//     addVideoClip(target.url, target.transcript, target.character);
+//     appendVideoToPlaylist(target.videoID, );
 //     preparelibrarySlider()
 // });
 
