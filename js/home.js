@@ -28,9 +28,9 @@ $(document).ready(function () {
 
     $('body').on('click', 'div.delete_video', function (e) {
         console.log("deleting...");
-
         var target = $(e.target).parent().parent().parent();
         target.remove();
+        preparelibrarySlider()
     });
 
     $('body').on('click', 'div.delete_playlist', function (e) {
@@ -102,7 +102,6 @@ function openModal() {
     var modal = document.getElementById("newPlaylist");
     modal.style.display = "block";
 }
-
 
 function closeModal() {
     var modal = document.getElementById("newPlaylist");

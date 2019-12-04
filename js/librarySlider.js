@@ -1,5 +1,3 @@
-var $item, visible, index, endindex;
-
 function preparelibrarySlider() {
     var $item = $('div.library'), //Cache your DOM selector
         visible = 4, //Set the number of items that will be visible
@@ -66,4 +64,62 @@ function preparelibrarySlider() {
         }
     });
 
+    // slide video clips and update the state of the controls based on mouse wheel input
+    $('#Library').bind('mousewheel', function(e){
+        if(e.originalEvent.wheelDelta /120 > 0) {
+            console.log('scrolling up !');
+            if (index > 0) {
+                index--;
+                $item.animate({'left': '+=25.1%'});//Set width of your div here
+                if (index === 0) {
+                    $('div#arrowLL').css("color", "red");
+                }
+                if (index !== endIndex) {
+                    $('div#arrowRL').css("color", "black");
+                }
+            }
+        }
+        else{
+            console.log('scrolling down !');
+            if (index < endIndex) {
+                index++;
+                $item.animate({'left': '-=25.1%'});//Set width of your div here
+                if (index === endIndex) {
+                    $('div#arrowRL').css("color", "red");
+                }
+                if (index !== 0) {
+                    $('div#arrowLL').css("color", "black");
+                }
+            }
+        }
+    });
+
+    $('#Library2').bind('mousewheel', function(e){
+        if(e.originalEvent.wheelDelta /120 > 0) {
+            console.log('scrolling up !');
+            if (index2 > 0) {
+                index2--;
+                $item2.animate({'left': '+=25.1%'});//Set width of your div here
+                if (index2 === 0) {
+                    $('div#arrowLL2').css("color", "red");
+                }
+                if (index2 !== endIndex2) {
+                    $('div#arrowRL2').css("color", "black");
+                }
+            }
+        }
+        else{
+            console.log('scrolling down !');
+            if (index2 < endIndex2) {
+                index2++;
+                $item2.animate({'left': '-=25.1%'});//Set width of your div here
+                if (index2 === endIndex2) {
+                    $('div#arrowRL2').css("color", "red");
+                }
+                if (index2 !== 0) {
+                    $('div#arrowLL2').css("color", "black");
+                }
+            }
+        }
+    });
 }
