@@ -20,7 +20,6 @@ function getVideoSegments() {
     };
 }
 
-
 function getPlaylists() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
@@ -53,12 +52,12 @@ function createPlaylist(name) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("status:" + xhr.status);
             if (xhr.status == 200) {
-                console.log ("XHR:" + xhr.responseText);
+                console.log("XHR:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var status = js["statusCode"];
-                if(status != 200){
+                if (status != 200) {
                     alert("Error: " + status + "\n" + js["error"]);
-                }else{
+                } else {
                     $('.list#Playlist').children().remove();
                     getPlaylists();
                 }
@@ -68,9 +67,8 @@ function createPlaylist(name) {
                 console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var err = js["response"];
-                alert (err);
+                alert(err);
             }
-
         }
     };
 }
@@ -88,12 +86,12 @@ function deletePlaylist(id) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log("status:" + xhr.status);
             if (xhr.status === 200) {
-                console.log ("XHR:" + xhr.responseText);
+                console.log("XHR:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var status = js["statusCode"];
-                if(status !== 200){
+                if (status !== 200) {
                     alert("Error: " + status + "\n" + js["error"]);
-                }else{
+                } else {
                     $('.list#Playlist').children().remove();
                     getPlaylists();
                 }
@@ -102,10 +100,9 @@ function deletePlaylist(id) {
                 console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var err = js["response"];
-                alert (err);
+                alert(err);
                 return false;
             }
-
         }
     };
 }
