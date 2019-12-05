@@ -76,3 +76,39 @@ function closeModal() {
     thirdPartyURL.value = "";
     modal.style.display = "none";
 }
+
+function registerThirdPartySite(url, add) {
+    var data = {};
+    data["url"] = url;
+    data["addTPS"] = add;
+    var js = JSON.stringify(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
+    xhr.send(js);
+    console.log("sent");
+    xhr.onloadend = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("status:" + xhr.status);
+            if (xhr.status == 200) {
+                var js = JSON.parse(xhr.responseText);
+                var status = js["statusCode"];
+                if (status != 200) {
+                    alert("Error: " + status + "\n" + js["error"]);
+                }else {
+                    $('#remoteSites').children().remove();
+                }
+
+            } else {
+                console.log("actual:" + xhr.responseText);
+                var js = JSON.parse(xhr.responseText);
+                var err = js["response"];
+                alert (err);
+            }
+        }
+        preparelibrary2Slider();
+    };
+}
+
+function getThirdPartySites() {
+
+}
