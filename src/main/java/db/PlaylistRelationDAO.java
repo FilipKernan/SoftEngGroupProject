@@ -1,6 +1,7 @@
 package db;
 
 import model.Playlist;
+import model.VideoSegment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,9 +51,9 @@ public class PlaylistRelationDAO {
         }
     }
 
-    public List<String> getVidSegsInPlaylist(String plID) throws Exception{
+    public List<VideoSegment> getVidSegsInPlaylist(String plID) throws Exception{
 
-        ArrayList<String> vidSegs = new ArrayList<>();
+        ArrayList<String> vidSegIDs = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID =?;");
             ps.setString(1,  plID);
@@ -60,15 +61,38 @@ public class PlaylistRelationDAO {
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-                vidSegs.add(resultSet.getString("videoID"));
+                vidSegIDs.add(resultSet.getString("videoID"));
             }
             resultSet.close();
             statement.close();
-            return vidSegs;
+
+            List<VideoSegment> vids = new ArrayList<>();
+            for (String id: vidSegIDs) {
+                ps = conn.prepareStatement("SELECT * FROM video WHERE videoID =?;");
+                ps.setString(1,  id);
+                statement = conn.createStatement();
+                resultSet = ps.executeQuery();
+                while (resultSet.next()) {
+                    vids.add(generateVideoSegment(resultSet));
+                }
+                resultSet.close();
+                statement.close();
+            }
+
+            return vids;
 
         } catch (Exception e) {
             throw new Exception("Failed in getting books: " + e.getMessage());
         }
+    }
+
+    public VideoSegment generateVideoSegment(ResultSet resultSet) throws Exception {
+        String UUID = resultSet.getString("videoID");
+        String character = resultSet.getString("character");
+        String videoUrl = resultSet.getString("videoUrl");
+        String transcript = resultSet.getString("transcript");
+
+        return new VideoSegment(videoUrl, UUID, transcript, character);
     }
 
 }
