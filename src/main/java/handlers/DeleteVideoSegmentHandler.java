@@ -40,8 +40,8 @@ public class DeleteVideoSegmentHandler implements RequestHandler<DeleteVideoSegm
                 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
                 logger.log("attach to S3 succeed");
             }
-            //TODO
-            s3.deleteObject("NAME OF THE BUCKET", "NAME OF THE KEY");
+            s3.deleteObject("3733mothproject", "videoSegments/" + input.getID() + ".ogg");
+
 
             boolean success = deleteVideoSegment(id);
 
