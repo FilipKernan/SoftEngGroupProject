@@ -13,7 +13,8 @@ function getVideoSegments() {
                 url = json.list[i].url;
                 transcript = json.list[i].transcript;
                 character = json.list[i].character;
-                addVideoClip(url, transcript, character);
+                videoId = json.list[i].UUID;
+                addVideoClip(url, transcript, character, videoId);
             }
         }
         preparelibrarySlider();

@@ -51,18 +51,19 @@ $(document).ready(function () {
             }
         }
     });
-});
 
-$('body').on('click', 'div.add_video', function (e) {
-    console.log("adding...");
-    var target = $(e.target).parent().parent().parent();
-    appendVideoToPlaylist(playlistId, target.videoID);
-    //preparelibrarySlider()
+    $('body').on('click', 'div.add_video', function (e) {
+        console.log("adding...");
+        var target = $(e.target.parentElement.parentElement.parentElement);
+        console.log(target);
+        appendVideoToPlaylist(playlistID, target.context.id);
+        preparelibrarySlider()
+    });
 });
 
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character) {
-    var clip = $("<div class='item library' >\n" +
+function addVideoClip(url, transcript, character, id) {
+    var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
