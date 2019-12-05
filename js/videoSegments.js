@@ -126,7 +126,8 @@ function getClipInPlayList(id) {
                 clipUrl= json.list[i].url;
                 clipCharacter= json.list[i].character;
                 clipTranscript = json.list[i].transcript;
-                appendVideoClip(clipUrl, clipTranscript, clipCharacter);
+                clipId = json.list[i].UUID;
+                appendVideoClip(clipUrl, clipTranscript, clipCharacter, clipId);
             }
         }
         preparelibrary2Slider();
@@ -140,6 +141,35 @@ function appendVideoToPlaylist(playlistID, videoID) {
     var js = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/append", true);
+    xhr.send(js);
+    console.log("sent");
+    xhr.onloadend = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("status:" + xhr.status);
+            if (xhr.status == 200) {
+                console.log ("XHR:" + xhr.responseText);
+                $('.list#Library2').children().remove();
+                getClipInPlayList(playlistID);
+
+            } else {
+                console.log("actual:" + xhr.responseText);
+                var js = JSON.parse(xhr.responseText);
+                var err = js["response"];
+                alert (err);
+            }
+        }
+        preparelibrary2Slider();
+    };
+}
+
+function removeVideoFromPlaylist(playlistID, videoID) {
+    var data = {};
+    data["playlistID"] = playlistID;
+    data["videoID"] = videoID;
+    console.log(data);
+    var js = JSON.stringify(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/deleteSegment", true);
     xhr.send(js);
     console.log("sent");
     xhr.onloadend = function () {
