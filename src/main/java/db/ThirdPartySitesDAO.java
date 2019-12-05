@@ -49,7 +49,7 @@ public class ThirdPartySitesDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO thirdPartyLibrary (siteID,url) values(?,?,?);");
+            ps = conn.prepareStatement("INSERT INTO thirdPartyLibrary (siteID,url) values(?,?);");
             ps.setString(1,  tps.getID());
             ps.setString(2,  tps.getUrl());
             ps.execute();
