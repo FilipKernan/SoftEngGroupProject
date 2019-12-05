@@ -107,10 +107,14 @@ function deletePlaylist(id) {
     };
 }
 
-function getClipInPlayList() {
+function getClipInPlayList(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", true);
-    xhr.send();
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", true);
+    var data = {};
+    data["plID"] = id;
+    var js = JSON.stringify(data);
+    console.log(js);
+    xhr.send(js);
     console.log("sent");
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
