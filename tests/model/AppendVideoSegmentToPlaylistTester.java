@@ -1,5 +1,6 @@
 package model;
 
+import db.PlaylistDAO;
 import db.PlaylistRelationDAO;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,13 +35,13 @@ public class AppendVideoSegmentToPlaylistTester {
 
             //Get all video segments associated with pl1
             System.out.println("Attempting to get all video segments with pl1 id");
-            List<String> vidSegs1 = plrDAO.getVidSegsInPlaylist(pl1.getID());
+            List<VideoSegment> vidSegs1 = plrDAO.getVidSegsInPlaylist(pl1.getID());
 
             //Print out all the vid segs
             System.out.println("\nAfter Append Segment");
             System.out.println("Print out all of the video segments");
-            for (String vid:vidSegs1) {
-                System.out.println("Video Segment with ID " + vid);
+            for (VideoSegment vid:vidSegs1) {
+                System.out.println("Video Segment with ID " + vid.UUID);
             }
 
             //Try to delete the video segment associated with that playlist
@@ -52,8 +53,8 @@ public class AppendVideoSegmentToPlaylistTester {
             //Print out all the vid segs
             System.out.println("\n\nPrint out all of the video segments");
             System.out.println("After Delete");
-            for (String vid:vidSegs1) {
-                System.out.println("Video Segment with ID " + vid);
+            for (VideoSegment vid:vidSegs1) {
+                System.out.println("Video Segment with ID " + vid.UUID);
             }
 
         } catch (Exception e){
