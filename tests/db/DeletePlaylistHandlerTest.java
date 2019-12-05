@@ -22,4 +22,17 @@ public class DeletePlaylistHandlerTest extends LambdaTest {
         DeletePlaylistResponse deleteResp = new DeletePlaylistHandler().handleRequest(delete, createContext("detele"));
         Assert.assertEquals(200, deleteResp.statusCode);
     }
+
+    @Test
+    public void testDeletePlaylist2(){
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testName2");
+        CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
+        Assert.assertEquals(200, resp.statusCode);
+
+        //delete the playlist created
+        DeletePlaylistRequest delete = new DeletePlaylistRequest();
+        delete.setId(resp.playlist.getID());
+        DeletePlaylistResponse deleteResp = new DeletePlaylistHandler().handleRequest(delete, createContext("detele"));
+        Assert.assertEquals(200, deleteResp.statusCode);
+    }
 }
