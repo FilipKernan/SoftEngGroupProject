@@ -26,6 +26,13 @@ $(document).ready(function () {
         appendVideoToPlaylist(playlistID, target.context.id);
         //preparelibrarySlider();
     });
+
+    $('button.play').click(function () {
+        var playlistID =getUrlVars()["playlistID"];
+        console.log("Go edit...");
+        window.location.href = "play.html?playlistID=" + playlistID;
+
+    });
 });
 
 // adds a new video clip to the end of the slider
