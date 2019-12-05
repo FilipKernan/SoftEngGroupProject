@@ -22,10 +22,10 @@ public class ThirdPartySitesDAO {
         }
     }
 
-    public boolean deleteThirdPartySite(ThirdPartySite tps) throws Exception {
+    public boolean deleteThirdPartySite(String url) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM thirdPartyLibrary WHERE siteID = ?;");
-            ps.setString(1, tps.getID());
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM thirdPartyLibrary WHERE url = ?;");
+            ps.setString(1, url);
             int numAffected = ps.executeUpdate();
             ps.close();
 
