@@ -147,9 +147,15 @@ function appendVideoToPlaylist(playlistID, videoID) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("status:" + xhr.status);
             if (xhr.status == 200) {
-                console.log ("XHR:" + xhr.responseText);
-                $('.list#Library2').children().remove();
-                getClipInPlayList(playlistID);
+                var js = JSON.parse(xhr.responseText);
+                var status = js["statusCode"];
+                if (status != 200) {
+                    alert("Error: " + status + "\n" + js["error"]);
+                }else {
+                    console.log("XHR:" + xhr.responseText);
+                    $('.list#Library2').children().remove();
+                    getClipInPlayList(playlistID);
+                }
 
             } else {
                 console.log("actual:" + xhr.responseText);
