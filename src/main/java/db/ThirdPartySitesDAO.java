@@ -32,7 +32,7 @@ public class ThirdPartySitesDAO {
             return (numAffected == 1);
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert constant: " + e.getMessage());
+            throw new Exception("Failed to delete thirdPartySite: " + e.getMessage());
         }
     }
 
@@ -49,14 +49,14 @@ public class ThirdPartySitesDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO Constants (siteID,url) values(?,?,?);");
+            ps = conn.prepareStatement("INSERT INTO thirdPartyLibrary (siteID,url) values(?,?,?);");
             ps.setString(1,  tps.getID());
             ps.setString(2,  tps.getUrl());
             ps.execute();
             return true;
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert constant: " + e.getMessage());
+            throw new Exception("Failed to insert into thirdPartyLibrary: " + e.getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ public class ThirdPartySitesDAO {
                 try{
                     createThirdPartySite(resultSet, allTPS);
                 } catch (Exception e) {
-                    throw new Exception("Failed in adding playlists: " + e.getMessage());
+                    throw new Exception("Failed in adding third party sites: " + e.getMessage());
                 }
             }
             resultSet.close();
