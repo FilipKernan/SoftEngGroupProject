@@ -27,6 +27,15 @@ $(document).ready(function () {
         //preparelibrarySlider();
     });
 
+    $('body').on('click', 'div.remove_clip', function (e) {
+        console.log("removing...");
+        var target = $(e.target.parentElement.parentElement.parentElement);
+        console.log(target);
+        //target.remove();
+        removeVideoFromPlaylist(playlistID, target.context.id);
+        //preparelibrarySlider();
+    });
+
     $('button.play').click(function () {
         var playlistID =getUrlVars()["playlistID"];
         console.log("Go edit...");
@@ -55,8 +64,8 @@ function addVideoClip(url, transcript, character, id) {
     $("#Library").append(clip);
 }
 
-function appendVideoClip(url) {
-    var clip = $("<div class='item library2'>\n" +
+function appendVideoClip(url, transcript, character, id) {
+    var clip = $("<div class='item library2' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +

@@ -33,3 +33,6 @@
 .play {
     position: absolute;
 }
+.remove_clip:hover{
+    cursor: pointer;
+}
