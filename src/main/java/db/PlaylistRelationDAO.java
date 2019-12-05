@@ -55,7 +55,7 @@ public class PlaylistRelationDAO {
 
         ArrayList<String> vidSegIDs = new ArrayList<>();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID =?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlistRelation WHERE playlistID =? ORDER BY timestamp;");
             ps.setString(1,  plID);
             Statement statement = conn.createStatement();
             ResultSet resultSet = ps.executeQuery();
