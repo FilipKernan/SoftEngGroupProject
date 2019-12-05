@@ -2,11 +2,11 @@ $(document).ready(function () {
     var playlistID =getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
     getVideoSegments();
-    getClipInPlayList()
+    getClipInPlayList(playlistID);
 
 
-    appendVideoClip("test.ogg", "", "");
-    appendVideoClip("test.ogg", "", "");
+    //appendVideoClip("test.ogg", "", "");
+    //appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
