@@ -129,7 +129,7 @@ function getClipInPlayList(id) {
                 appendVideoClip(clipUrl, clipTranscript, clipCharacter);
             }
         }
-        preparelibrarySlider();
+        preparelibrary2Slider();
     };
 }
 
@@ -148,16 +148,15 @@ function appendVideoToPlaylist(playlistID, videoID) {
             if (xhr.status == 200) {
                 console.log ("XHR:" + xhr.responseText);
                 $('.list#Library2').children().remove();
-                getClipInPlayList();
-
+                getClipInPlayList(playlistID);
 
             } else {
-                console.log("actual:" + xhr.responseText)
+                console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var err = js["response"];
                 alert (err);
             }
-
         }
+        preparelibrary2Slider();
     };
 }

@@ -4,17 +4,11 @@ $(document).ready(function () {
     getVideoSegments();
     getClipInPlayList(playlistID);
 
-
     //appendVideoClip("test.ogg", "", "");
     //appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
-
-    var $item2 = $('div.library2'), //Cache your DOM selector
-        visible2 = 4, //Set the number of items that will be visible
-        index2 = 0, //Starting index
-        endIndex2 = $item2.length - visible2; //End index
 
 
     function getUrlVars() {
@@ -24,40 +18,13 @@ $(document).ready(function () {
         });
         return vars;
     }
-// slide video clips to the left one and update the state of the controls
-    $('div#arrowRL2').click(function () {
-        if (index2 < endIndex2) {
-            index2++;
-            $item2.animate({'left': '-=25.1%'}); //Set width of div here
-            if (index2 === endIndex2) {
-                $('div#arrowRL2').css("color", "red");
-            }
-            if (index2 !== 0) {
-                $('div#arrowLL2').css("color", "black");
-            }
-        }
-    });
-
-// slide video clips to the right one and update the state of the controls
-    $('div#arrowLL2').click(function () {
-        if (index2 > 0) {
-            index2--;
-            $item2.animate({'left': '+=25.1%'}); //Set width of div here
-            if (index2 === 0) {
-                $('div#arrowLL2').css("color", "red");
-            }
-            if (index2 !== endIndex2) {
-                $('div#arrowRL2').css("color", "black");
-            }
-        }
-    });
 
     $('body').on('click', 'div.add_video', function (e) {
         console.log("adding...");
         var target = $(e.target.parentElement.parentElement.parentElement);
         console.log(target);
         appendVideoToPlaylist(playlistID, target.context.id);
-        preparelibrarySlider()
+        //preparelibrarySlider();
     });
 });
 
@@ -81,7 +48,7 @@ function addVideoClip(url, transcript, character, id) {
     $("#Library").append(clip);
 }
 
-function appendVideoClip(url, transcript, character) {
+function appendVideoClip(url) {
     var clip = $("<div class='item library2'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
