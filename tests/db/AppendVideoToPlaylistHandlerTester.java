@@ -11,7 +11,7 @@ public class AppendVideoToPlaylistHandlerTester extends LambdaTest{
     @Test
     public void testDeletePlaylist(){
         //create a playlist
-        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testName");
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testAppend");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 

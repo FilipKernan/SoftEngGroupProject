@@ -56,7 +56,7 @@ public class CreatePlaylistHandlerTest extends LambdaTest{
     }
     @Test
     public void testCreatePlaylist(){
-        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testName1");
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testCreate");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 

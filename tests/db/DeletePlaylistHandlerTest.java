@@ -13,7 +13,7 @@ public class DeletePlaylistHandlerTest extends LambdaTest {
 
     @Test
     public void testDeletePlaylist(){
-        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testName1");
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testDelete");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 
@@ -25,7 +25,7 @@ public class DeletePlaylistHandlerTest extends LambdaTest {
 
     @Test
     public void testDeletePlaylist2(){
-        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testName2");
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testDetele2");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 
