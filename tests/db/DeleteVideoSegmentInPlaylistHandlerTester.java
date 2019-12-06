@@ -3,15 +3,18 @@ package db;
 import handlers.AppendVideoSegmentToPlaylistHandler;
 import handlers.CreatePlaylistHandler;
 import handlers.DeletePlaylistHandler;
+import handlers.DeleteVideoSegmentInPlaylistHandler;
 import http.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AppendVideoToPlaylistHandlerTester extends LambdaTest{
+
+public class DeleteVideoSegmentInPlaylistHandlerTester extends LambdaTest{
+
     @Test
-    public void testAppendVideoToPlaylist(){
+    public void testDeleteVideoInPlaylist(){
         //create a playlist
-        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testAppend");
+        CreatePlaylistRequest cpr = new CreatePlaylistRequest("testDeleteVSInPlaylist");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 
@@ -20,15 +23,15 @@ public class AppendVideoToPlaylistHandlerTester extends LambdaTest{
         AppendVideoToPlaylistResponse appendResp = new AppendVideoSegmentToPlaylistHandler().handleRequest(append, createContext("append"));
         Assert.assertEquals(200, appendResp.statusCode);
 
-        //append a video that already existed in the playlist
-        AppendVideoToPlaylistRequest append2 = new AppendVideoToPlaylistRequest(resp.playlist.getID(), "111111111111111111111111111111111111");
-        AppendVideoToPlaylistResponse appendResp2 = new AppendVideoSegmentToPlaylistHandler().handleRequest(append2, createContext("append"));
-        Assert.assertEquals(403, appendResp2.statusCode);
+        //delete the video appended in the playlist
+        DeleteVideoSegmentInPlaylistRequest deleteVSInPL = new DeleteVideoSegmentInPlaylistRequest(resp.playlist.getID(), appendResp.videoID);
+        DeleteVideoSegmentInPlaylistResponse deleteVSInPLResp = new DeleteVideoSegmentInPlaylistHandler().handleRequest(deleteVSInPL, createContext("deleteVSInPL"));
+        Assert.assertEquals(200, deleteVSInPLResp.statusCode);
+
 
         //delete the playlist created
         DeletePlaylistRequest delete = new DeletePlaylistRequest(resp.playlist.getID());
         DeletePlaylistResponse deleteResp = new DeletePlaylistHandler().handleRequest(delete, createContext("detele"));
         Assert.assertEquals(200, deleteResp.statusCode);
     }
-
 }
