@@ -30,8 +30,9 @@
 
 /* Edit playlist icon*/
 .edit_playlist {
-    position: fixed;
+    position: absolute;
     margin: 5px;
+    float: left;
 }
 
 /* delete playlist icon*/
