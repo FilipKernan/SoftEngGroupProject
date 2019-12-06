@@ -54,6 +54,11 @@ public class VideoSegmentDAO {
     }
 
 
+    public VideoSegment generateVideoSegment(String character, String transcript, String id, String url) throws Exception {
+
+
+        return new VideoSegment(url, id, transcript, character);
+    }
     public VideoSegment generateVideoSegment(ResultSet resultSet) throws Exception {
         String UUID = resultSet.getString("videoID");
         String character = resultSet.getString("character");
@@ -63,5 +68,14 @@ public class VideoSegmentDAO {
         return new VideoSegment(videoUrl, UUID, transcript, character);
     }
 
+    public void addVideoSegment(VideoSegment newVideoSegment) {
+        try {
+            PreparedStatement ps =conn.prepareStatement("INSERT INTO video (id, character, trascript, url, ifMarked, ifLocal) values(?, ?, ?, ?, 0, 1)");
+            ps.setString(1, newVideoSegment.UUID);
 
+
+        } catch (Exception e){
+
+        }
+    }
 }
