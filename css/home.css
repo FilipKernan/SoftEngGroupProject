@@ -6,6 +6,7 @@
 /* edit and delete controls -- makes them hidden by default*/
 .controls {
     display: none;
+    width: 100%;
 }
 
 /* The Modal (background) */

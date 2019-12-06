@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    getVideoSegments();
+    loading();
+    getVideoSegments().then(doneLoading);
 // Load 5 video clips
 
 

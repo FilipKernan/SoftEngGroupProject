@@ -1,6 +1,7 @@
 $(document).ready(function () {
+    loading();
     getVideoSegments();
-    getPlaylists();
+    getPlaylists().then(doneLoading);
 
     // Get the modal
     var modal = document.getElementById("newPlaylist");
@@ -34,11 +35,14 @@ $(document).ready(function () {
     });
 
     $('body').on('click', 'div.delete_playlist', function (e) {
+        loading();
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         if( deletePlaylist(id)) {
             console.log("deleting...");
             $('.list#Playlist').children().remove();
-            getPlaylists();
+            getPlaylists().then(doneLoading);
+        } else {
+            doneLoading();
         }
     });
 
@@ -112,8 +116,9 @@ function openModal() {
 function closeModal() {
     var modal = document.getElementById("newPlaylist");
     var playlistNameField = document.getElementById("playlistNameField");
-    if(playlistNameField.value != ""){
-        createPlaylist(playlistNameField.value);
+    if(playlistNameField.value !== ""){
+        loading();
+        createPlaylist(playlistNameField.value).then(doneLoading);
         console.log("Created a new playlist.");
     }
 

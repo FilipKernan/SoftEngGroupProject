@@ -1,5 +1,5 @@
 // gets all video segments from AWS and creates library entries for each of them
-function getVideoSegments() {
+async function getVideoSegments() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     xhr.send();
@@ -21,7 +21,7 @@ function getVideoSegments() {
     };
 }
 
-function getPlaylists() {
+async function getPlaylists() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
     xhr.send();
@@ -41,7 +41,7 @@ function getPlaylists() {
     };
 }
 
-function createPlaylist(name) {
+async function createPlaylist(name) {
     var data = {};
     data["name"] = name;
     var js = JSON.stringify(data);
@@ -74,7 +74,7 @@ function createPlaylist(name) {
     };
 }
 
-function deletePlaylist(id) {
+async function deletePlaylist(id) {
     var data = {};
     data["id"] = id;
     var js = JSON.stringify(data);
@@ -108,7 +108,7 @@ function deletePlaylist(id) {
     };
 }
 
-function getClipInPlayList(id) {
+async function getClipInPlayList(id) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", true);
     var data = {};
@@ -134,7 +134,7 @@ function getClipInPlayList(id) {
     };
 }
 
-function appendVideoToPlaylist(playlistID, videoID) {
+async function appendVideoToPlaylist(playlistID, videoID) {
     var data = {};
     data["playlistID"] = playlistID;
     data["videoID"] = videoID;
@@ -168,7 +168,7 @@ function appendVideoToPlaylist(playlistID, videoID) {
     };
 }
 
-function removeVideoFromPlaylist(playlistID, videoID) {
+async function removeVideoFromPlaylist(playlistID, videoID) {
     var data = {};
     data["playlistID"] = playlistID;
     data["videoID"] = videoID;

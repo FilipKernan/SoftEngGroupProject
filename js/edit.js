@@ -1,8 +1,9 @@
 $(document).ready(function () {
+    loading();
     var playlistID =getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
-    getVideoSegments();
     getClipInPlayList(playlistID);
+    getVideoSegments().then(doneLoading);
 
     //appendVideoClip("test.ogg", "", "");
     //appendVideoClip("test.ogg", "", "");
@@ -20,25 +21,27 @@ $(document).ready(function () {
     }
 
     $('body').on('click', 'div.add_video', function (e) {
+        loading();
         console.log("adding...");
         var target = $(e.target.parentElement.parentElement.parentElement);
         console.log(target);
-        appendVideoToPlaylist(playlistID, target.context.id);
+        appendVideoToPlaylist(playlistID, target.context.id).then(doneLoading);
         //preparelibrarySlider();
     });
 
     $('body').on('click', 'div.remove_clip', function (e) {
+        loading();
         console.log("removing...");
         var target = $(e.target.parentElement.parentElement.parentElement);
         console.log(target);
         //target.remove();
-        removeVideoFromPlaylist(playlistID, target.context.id);
+        removeVideoFromPlaylist(playlistID, target.context.id).then(doneLoading);
         //preparelibrarySlider();
     });
 
     $('button.play').click(function () {
         var playlistID =getUrlVars()["playlistID"];
-        console.log("Go edit...");
+        console.log("Go play...");
         window.location.href = "play.html?playlistID=" + playlistID;
 
     });
