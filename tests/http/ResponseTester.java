@@ -56,6 +56,15 @@ public class ResponseTester {
     }
 
     @Test
+    public void createVideoSegment(){
+        CreateVideoSegmentResponce response = new CreateVideoSegmentResponce("videoID", 200);
+        CreateVideoSegmentResponce response2 = new CreateVideoSegmentResponce(403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
+    @Test
     public void getAllPlaylists(){
         List<Playlist> playlists = new ArrayList<>();
         GetAllPlaylistsResponse response = new GetAllPlaylistsResponse(playlists, 200);
@@ -90,9 +99,11 @@ public class ResponseTester {
         List<VideoSegment> vids = new ArrayList<>();
         LocalVideoSegmentsResponse response = new LocalVideoSegmentsResponse(vids, 200);
         LocalVideoSegmentsResponse response2 = new LocalVideoSegmentsResponse(403, "Bad things happened");
+        LocalVideoSegmentsResponse response3 = new LocalVideoSegmentsResponse(null, 200);
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
+        System.out.println(response3.toString());
     }
 
     @Test
