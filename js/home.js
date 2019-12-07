@@ -6,19 +6,12 @@ $(document).ready(function () {
     // Get the modal
     var modal = document.getElementById("playlistModalSubmit");
 
-    var submit = document.getElementById("modalSubmit");
 
 // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
 
-    submit.onclick = function () {
-        modal.style.display = "none";
-    };
+
 
 // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
@@ -37,7 +30,7 @@ $(document).ready(function () {
     $('body').on('click', 'div.delete_playlist', function (e) {
         loading();
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
-        if( deletePlaylist(id)) {
+        if( deletePlaylist( id)) {
             console.log("deleting...");
             $('.list#Playlist').children().remove();
             getPlaylists().then(doneLoading);
@@ -70,7 +63,7 @@ function addVideoClip(url, transcript, character) {
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +
-        "                                <div class=\"delete_playlist\" style=\"top: 0\">\n" +
+        "                                <div class=\"delete_video\" style=\"top: 0\">\n" +
         "                                    <i class=\"material-icons\">\n" +
         "                                        close\n" +
         "                                    </i>\n" +
@@ -95,7 +88,7 @@ function addPlaylist(url, name, id) {
      "                                        edit\n" +
      "                                    </i>\n" +
      "                                </div>\n" +
-     "                                <div class=\"delete_playlist\" onclick='deletePlaylistModal(\"" + name + "\",\""+ id +"\")'>\n" +
+     "                                <div class=\"delete_playlist\" >\n" +
      "                                    <i class=\"material-icons\">\n" +
      "                                        close\n" +
      "                                    </i>\n" +
@@ -107,56 +100,31 @@ function addPlaylist(url, name, id) {
 }
 
 // When the user clicks on the button, open the modal
-function openModal() {
-    var modal = document.getElementById("newPlaylist");
+function openModal(id) {
+    var modal = document.getElementById(id);
     modal.style.display = "block";
 }
 
 
-function closeModal() {
-    var modal = document.getElementById("newPlaylist");
-    var playlistNameField = document.getElementById("playlistNameField");
-    if(playlistNameField.value !== ""){
-        loading();
-        createPlaylist(playlistNameField.value).then(doneLoading);
-        console.log("Created a new playlist.");
+function closeModal(id) {
+    var modal = document.getElementById(id);
+
+    if (id == "newPlaylist") {
+        var playlistNameField = document.getElementById("playlistNameField");
+        if (playlistNameField.value !== "") {
+            loading();
+            createPlaylist(playlistNameField.value).then(doneLoading);
+            console.log("Created a new playlist.");
+        }
+        playlistNameField.value = "";
+
     }
 
-playlistNameField.value = "";
     modal.style.display = "none";
 }
 
-function deletePlaylistModal(name, playlistID) {
-    console.log(name);
-    var modal = "<div class='modal-content'>" +
-        "               <span class=\"close\" onclick='closeModal(\"deletePlaylist\")'>&times;</span>" +
-        "               Do you want to delete " + name + "?<br/>" +
-        "               <button onclick='deletePlaylist(" + playlistID + "); closeModal(\"deletePlaylist\")'>delete</button> " +
-        "           </div>";
 
 
-    document.getElementById("deletePlaylist").innerHTML = modal;
-    openModal("deletePlaylist");
-
-}
-
-function deletePlaylist(playlistID) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/delete", true);
-    xhr.send(JSON.stringify("{ 'playlistID': " + playlistID + "}"));//put json in here
-    //console.log("sent");
-    xhr.onloadend = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            json = JSON.parse(xhr.responseText);
-            console.log(json);
-            if(json.list.id == playlistID  && json.responseText != '200') {
-                $("#Playlist").empty();
-                getPlaylists();
-            }
-
-        }
-    };
-}
 
 
 function newSegment() {

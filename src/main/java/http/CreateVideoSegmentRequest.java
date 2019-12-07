@@ -57,6 +57,7 @@ public class CreateVideoSegmentRequest {
         this.id = id;
         this.character = character;
         this.transcript = transcript;
+        this.name = name;
     }
 
     public CreateVideoSegmentRequest() {
