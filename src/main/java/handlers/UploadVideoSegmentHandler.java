@@ -31,24 +31,26 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
         CreateVideoSegmentResponce responce;
 
+        String id = UUID.randomUUID().toString();
+
         try {
             byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
-            if (createVideoSegment(req, encoded)) {
-                responce = new CreateVideoSegmentResponce(req.id, 200);
+            if (createVideoSegment(req, encoded, id)) {
+                responce = new CreateVideoSegmentResponce(id, 200);
             } else {
-                responce = new CreateVideoSegmentResponce(req.id, 422);
+                responce = new CreateVideoSegmentResponce(id, 422);
             }
 
 
         } catch (Exception e) {
-            responce = new CreateVideoSegmentResponce(400, "Unable to create video segment: " + req.id + " (" + e.getMessage() + ")");
+            responce = new CreateVideoSegmentResponce(400, "Unable to create video segment: " + req.name + " (" + e.getMessage() + ")");
         }
 
 
         return responce;
     }
 
-    private boolean createVideoSegment(CreateVideoSegmentRequest req, byte[] encoded) {
+    private boolean createVideoSegment(CreateVideoSegmentRequest req, byte[] encoded, String id) {
         if (logger != null) { logger.log("in create Video Segment"); }
 
         if (s3 == null) {
@@ -61,8 +63,6 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         ObjectMetadata omd = new ObjectMetadata();
         omd.setContentLength(encoded.length);
 
-        String id = UUID.randomUUID().toString();
-
         PutObjectResult res = s3.putObject(new PutObjectRequest("3733mothproject", "videoSegments/" + id + ".ogg", bais, omd));
 
         String url = "https://3733mothproject.s3.us-east-2.amazonaws.com/videoSegments/" + id ;
@@ -70,16 +70,11 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         VideoSegmentDAO db = new VideoSegmentDAO();
         try {
             VideoSegment newVideoSegment = db.generateVideoSegment(req.character, req.transcript, id, url);
-            db.addVideoSegment(newVideoSegment);
+            return db.addVideoSegment(newVideoSegment);
         } catch (Exception e) {
             logger.log("could not generate new video segment: " + e.getMessage());
+            return false;
         }
-
-
-
-        return true;
-
     }
-
 
 }
