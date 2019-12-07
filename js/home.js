@@ -21,10 +21,15 @@ $(document).ready(function () {
     };
 
     $('body').on('click', 'div.delete_video', function (e) {
-        console.log("deleting...");
-        var target = $(e.target).parent().parent().parent();
-        target.remove();
-        preparelibrarySlider()
+        loading();
+        var id = $((e.target.parentElement.parentElement).parentElement).context.id;
+        console.log(id);
+        if(deleteVideo(id)) {
+            console.log("deleting...");
+            getVideoSegments().then(doneLoading);
+        } else {
+            doneLoading();
+        }
     });
 
     $('body').on('click', 'div.delete_playlist', function (e) {
@@ -56,8 +61,8 @@ $(document).ready(function () {
 
 //<source src=\""+url+"\" type=\"video/ogg\">\n" +
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character) {
-    var clip = $("                        <div class='item library'>\n" +
+function addVideoClip(url, transcript, character, id) {
+    var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
@@ -143,7 +148,7 @@ function newSegment() {
     var js = JSON.stringify(data);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/add", true);
+    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/add", true);
 
     xhr.send(js);
 
@@ -155,7 +160,7 @@ function newSegment() {
                 $("#Library").empty();
                 getVideoSegments();
             } else {
-                console.log("actual:" + xhr.responseText)
+                console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var err = js["response"];
                 alert (err);

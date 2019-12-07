@@ -108,6 +108,28 @@ async function deletePlaylist(id) {
     preparelibrary2Slider();
 }
 
+async function deleteVideo(id) {
+    var data = {};
+    data["id"] = id;
+    var js = JSON.stringify(data);
+    let result = await makeRequest("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/delete", js);
+    console.log(result.statusText);
+    var js = JSON.parse(result.statusText);
+    if (result.status === 200) {
+        if (js["statusCode"] !== 200) {
+            alert("Error: " + status + "\n" + js["error"]);
+        }else {
+            $('.list#Library').children().remove();
+            await getVideoSegments();
+        }
+    } else {
+        console.log("actual:" + result.statusText);
+        var err = js["error"];
+        alert (err);
+    }
+    preparelibrary2Slider();
+}
+
 async function getClipInPlayList(id) {
     var data = {};
     data["plID"] = id;
