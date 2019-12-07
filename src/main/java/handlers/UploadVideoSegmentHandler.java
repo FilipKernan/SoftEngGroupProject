@@ -63,7 +63,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
         String id = UUID.randomUUID().toString();
 
-        PutObjectResult res = s3.putObject(new PutObjectRequest("3733mothproject", "videoSegments/" + id, bais, omd));
+        PutObjectResult res = s3.putObject(new PutObjectRequest("3733mothproject", "videoSegments/" + id + ".ogg", bais, omd));
 
         String url = "https://3733mothproject.s3.us-east-2.amazonaws.com/videoSegments/" + id ;
 
