@@ -70,6 +70,35 @@ public class RequestsTester {
     }
 
     @Test
+    public void createVideoSegment(){
+        String base64EncodedValue = "value";
+        String id = "id";
+        String character = "character";
+        String transcript = "transcript";
+        String name = "name";
+
+
+
+        CreateVideoSegmentRequest req = new CreateVideoSegmentRequest(base64EncodedValue, id, character, transcript, name);
+        CreateVideoSegmentRequest req2 = new CreateVideoSegmentRequest();
+
+        req2.setBase64Encodedvalue(base64EncodedValue);
+        req2.setId(id);
+        req2.setCharacter(character);
+        req2.setTranscript(transcript);
+        req2.setName(name);
+
+        Assert.assertEquals(req.getBase64Encodedvalue(), req2.getBase64Encodedvalue());
+        Assert.assertEquals(req.getId(), req2.getId());
+        Assert.assertEquals(req.getCharacter(), req2.getCharacter());
+        Assert.assertEquals(req.getTranscript(), req2.getTranscript());
+        Assert.assertEquals(req.getName(), req2.getName());
+
+        System.out.println(req.toString());
+
+    }
+
+    @Test
     public void getAllPlaylist(){
         GetAllPlaylistRequest req = new GetAllPlaylistRequest();
         System.out.println(req.toString());
