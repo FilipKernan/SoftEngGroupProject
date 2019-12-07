@@ -174,25 +174,40 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     data["videoID"] = videoID;
     console.log(data);
     var js = JSON.stringify(data);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/deleteSegment", true);
-    xhr.send(js);
-    console.log("sent");
-    xhr.onloadend = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log("status:" + xhr.status);
-            if (xhr.status == 200) {
-                console.log ("XHR:" + xhr.responseText);
-                $('.list#Library2').children().remove();
-                getClipInPlayList(playlistID);
-
-            } else {
-                console.log("actual:" + xhr.responseText);
-                var js = JSON.parse(xhr.responseText);
-                var err = js["response"];
-                alert (err);
-            }
+    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/deleteSegment", js);
+    console.log(result.statusText);
+    var js = JSON.parse(result.statusText);
+    if (result.status === 200) {
+        if (js["statusCode"] !== 200) {
+            alert("Error: " + status + "\n" + js["error"]);
+        }else {
+            console.log("XHR:" + result.statusText);
+            $('.list#Library2').children().remove();
+            getClipInPlayList(playlistID);
         }
-        preparelibrary2Slider();
-    };
+    } else {
+        console.log("actual:" + result.statusText);
+        var err = js["error"];
+        alert (err);
+    }
+    preparelibrary2Slider();
+}
+
+function makeRequest(method, url, js) {
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.onload = function () {
+            resolve({
+                status: this.status,
+                statusText: xhr.response});
+        };
+        xhr.onerror = function () {
+            resolve({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send(js);
+    });
 }
