@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loading();
     getVideoSegments().then(doneLoading);
+    populateThirdParties();
 // Load 5 video clips
 
 
@@ -94,25 +95,43 @@ function openDeleteModal(name, url) {
 }
 
 function populateThirdParties() {
-    $("#thirdPartyList").empty();
 
+    var data = {};
+    js = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "", true);
-    xhr.send()
+    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/get", true);
+    console.log("sending api request");
+    xhr.send(js);
 
     xhr.onloadend = function () {
         var json = JSON.parse(xhr.responseText);
-        for (var i = 0; i < json.list.length; i++){
-            var name = json.list[i].name;
-            var url = json.list[i].url;
-            addThirdParty(name, url);
+        console.log(json);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("status:" + json["statusCode"]) ;
+            if (xhr.status == 200) {
+                if (json["statusCode"] != 200 ){
+                    alert("Error: " + status + "\n" + json["error"]);
+                } else {
+                    $("#thirdPartyList").empty();
+                    for (var i = 0; i < json.list.length; i++){
+                        var name = json.list[i].ID;
+                        var url = json.list[i].url;
+                        console.log(url);
+                        addThirdParty(name, url);
+                    }
+                }
+
+            }
+
+
+
         }
     }
 
 }
 
 function addThirdParty(name, url) {
-    var thirdParty = $("<li><img src=\"../assets/error.png\" class=\"icon\" onclick=\"openDeleteModal(" + name +")\">" +
+    var thirdParty = $("<li><img src=\"../assets/error.png\" class=\"icon\" onclick=\"openDeleteModal('" + name +"')\">" +
         "               <i style=\"display: none\">" + url + "</i>" + name + "</li>");
     $("#thirdPartyList").append(thirdParty);
 }
@@ -121,7 +140,7 @@ function handleAddThirdParty() {
     var form = document.newParty;
 
     var data = {};
-    data["name"] = form.thirdPartyNameField.value;
+    data["ID"] = form.thirdPartyNameField.value;
     data["url"] = form.thirdPartyURLField.value;
     data["addTPS"] = true;
     // get form data
@@ -132,7 +151,7 @@ function handleAddThirdParty() {
     var json = JSON.stringify(data);
 
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
+    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/register", true);
     xhr.send(json);
 
     xhr.onloadend = function () {
@@ -159,13 +178,13 @@ function handleAddThirdParty() {
 function handleDelete(name, url) {
 
     var data = {};
-    data["name"] = name;
+    data["ID"] = name;
     data["url"] = url;
     data["addTPS"] = false;
     var json = JSON.stringify(data);
 
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
+    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/register", true);
     xhr.send(json);
     xhr.onloadend = function () {
 

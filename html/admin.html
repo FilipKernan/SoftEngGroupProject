@@ -8,10 +8,12 @@
     <meta charset="UTF-8">
     <title>Admin</title>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src="../js/constants.js"></script>
     <script src="../js/admin.js"></script>
     <script src="../js/librarySlider.js"></script>
     <script src="../js/videoSegments.js"></script>
     <script src="../js/loadIndicator.js"></script>
+
 
 </head>
 <body>
@@ -63,7 +65,7 @@
         <span class="close">&times;</span>
         <form name= "newParty" onsubmit="closeModal(); handleAddThirdParty(); return false;">
             Third party name: <br>
-            <input name="thirdPartyNameField" type="text" id="thirdPartyNameField"><br>
+            <input name="thirdPartyNameField" type="text" style="display: none;" value="" id="thirdPartyNameField"><br>
             Third party URL<br>
             <input name="thirdPartyURLField" type="text" id="thirdPartyURLField"><br>
             <input type="submit" id="modalSubmit">
