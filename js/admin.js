@@ -115,7 +115,7 @@ function addThirdParty(name, url) {
 
 function handleAddThirdParty() {
     var form = document.newParty;
-    
+
     var data = {};
     data["name"] = form.thirdPartyNameField.value;
     data["url"] = form.thirdPartyURLField.value;
