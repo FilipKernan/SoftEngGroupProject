@@ -55,10 +55,9 @@ public class VideoSegmentDAO {
 
 
     public VideoSegment generateVideoSegment(String character, String transcript, String id, String url) throws Exception {
-
-
         return new VideoSegment(url, id, transcript, character);
     }
+
     public VideoSegment generateVideoSegment(ResultSet resultSet) throws Exception {
         String UUID = resultSet.getString("videoID");
         String character = resultSet.getString("character");
@@ -68,14 +67,38 @@ public class VideoSegmentDAO {
         return new VideoSegment(videoUrl, UUID, transcript, character);
     }
 
-    public void addVideoSegment(VideoSegment newVideoSegment) {
+    public boolean addVideoSegment(VideoSegment newVideoSegment) throws Exception {
         try {
-            PreparedStatement ps =conn.prepareStatement("INSERT INTO video (id, character, trascript, url, ifMarked, ifLocal) values(?, ?, ?, ?, 0, 1)");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM video WHERE videoID = ?;");
             ps.setString(1, newVideoSegment.UUID);
+            ResultSet resultSet = ps.executeQuery();
+
+            // already present?
+            while (resultSet.next()) {
+                VideoSegment c = generateVideoSegment(resultSet);
+                resultSet.close();
+                return false;
+            }
+
+//            ps =conn.prepareStatement("INSERT INTO video (videoID,character,transcript,videoURL,ifMarked,ifLocal) values(?,?,?,?,'0','1');");
+//            ps =conn.prepareStatement("INSERT INTO video (videoID, character,transcript,videoURL,ifMarked,ifLocal) values(?,'character','transcript','url','0','1');");
+            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoURL`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', '1');");
+//            ps =conn.prepareStatement("INSERT INTO video WHERE videoID=? AND character=? AND transcript=? AND url=? AND ifMarker=? AND ifLocal=?;");
+            ps.setString(1, newVideoSegment.UUID);
+            ps.setString(2, newVideoSegment.character);
+            ps.setString(3, newVideoSegment.transcript);
+            ps.setString(4, newVideoSegment.url);
+//            ps.setInt(5, 0);
+//            ps.setInt(6, 0);
+
+            ps.execute();
+            ps.close();
+
+            return true;
 
 
         } catch (Exception e){
-
+            throw new Exception("Failed in getting books: " + e.getMessage());
         }
     }
 }

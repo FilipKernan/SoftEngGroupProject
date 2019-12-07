@@ -31,8 +31,11 @@ public class RegisterThirdPartySitesHandler implements RequestHandler<RegisterTh
                     response = new RegisterThirdPartyResponse(req.getUrl(), 422, "Unable to add library");
                 }
             } else {
-                dao.deleteThirdPartySite(req.getUrl());
-                response = new RegisterThirdPartyResponse(req.getUrl() + " deleted", 200);
+                if(dao.deleteThirdPartySite(req.getUrl())){
+                    response = new RegisterThirdPartyResponse(req.getUrl() + " deleted", 200);
+                } else {
+                    response = new RegisterThirdPartyResponse(req.getUrl(), 422, "Unable to add library");
+                }
             }
         } catch (Exception e) {
             response = new RegisterThirdPartyResponse(req.getUrl(), 403, e.getMessage());
