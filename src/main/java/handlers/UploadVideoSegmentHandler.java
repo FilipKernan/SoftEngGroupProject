@@ -65,7 +65,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
         PutObjectResult res = s3.putObject(new PutObjectRequest("3733mothproject", "videoSegments/" + id + ".ogg", bais, omd));
 
-        String url = "https://3733mothproject.s3.us-east-2.amazonaws.com/videoSegments/" + id ;
+        String url = "https://3733mothproject.s3.us-east-2.amazonaws.com/videoSegments/" + id + ".ogg" ;
 
         VideoSegmentDAO db = new VideoSegmentDAO();
         try {
