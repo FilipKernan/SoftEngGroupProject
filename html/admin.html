@@ -63,8 +63,7 @@
 
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form name= "newParty" onsubmit="closeModal(); handleAddThirdParty(); return false;">
-            Third party name: <br>
+        <form name= "newParty" onsubmit=" handleAddThirdParty(); closeModal(); return false;">
             <input name="thirdPartyNameField" type="text" style="display: none;" value="" id="thirdPartyNameField"><br>
             Third party URL<br>
             <input name="thirdPartyURLField" type="text" id="thirdPartyURLField"><br>

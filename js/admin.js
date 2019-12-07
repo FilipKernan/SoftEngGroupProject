@@ -87,6 +87,7 @@ function closeModal() {
 function openDeleteModal(name, url) {
     var modal = document.getElementById("deleteThirdParty");
     modal.style.display = "block";
+    console.log("deleting: "  + url);
     $("#thirdParty").empty().append(name);
     $('#deleteButton').click(function () {
         handleDelete(name, url);
@@ -131,25 +132,25 @@ function populateThirdParties() {
 }
 
 function addThirdParty(name, url) {
-    var thirdParty = $("<li><img src=\"../assets/error.png\" class=\"icon\" onclick=\"openDeleteModal('" + name +"')\">" +
-        "               <i style=\"display: none\">" + url + "</i>" + name + "</li>");
+    var thirdParty = $("<li><img src=\"../assets/error.png\" class=\"icon\" onclick=\"openDeleteModal('" + name +"', '"+ url +"')\">" +
+        "               URL: <i>" + url + "</i>   " + name + "</li>");
     $("#thirdPartyList").append(thirdParty);
 }
 
 function handleAddThirdParty() {
     var form = document.newParty;
-
     var data = {};
-    data["ID"] = form.thirdPartyNameField.value;
-    data["url"] = form.thirdPartyURLField.value;
+    data["ID"] = $("input[name=thirdPartyNameField]").val();
+    data["url"] = $("input[name=thirdPartyURLField]").val();
     data["addTPS"] = true;
+    //console.log("url value is: " + $("input[name=thirdPartyURLField]").val());
     // get form data
     // create json
     // make api call
     // on endload add the li to the list
 
     var json = JSON.stringify(data);
-
+    //console.log(json);
     xhr = new XMLHttpRequest();
     xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/register", true);
     xhr.send(json);
