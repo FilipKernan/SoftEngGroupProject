@@ -4,9 +4,9 @@ $(document).ready(function () {
     getPlaylists().then(doneLoading);
 
     // Get the modal
-    var modal = document.getElementById("newPlaylist");
-    var submit = document.getElementById("modalSubmit");
+    var modal = document.getElementById("playlistModalSubmit");
 
+    var submit = document.getElementById("modalSubmit");
 
 // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -70,7 +70,7 @@ function addVideoClip(url, transcript, character) {
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +
-        "                                <div class=\"delete_video\" style=\"top: 0\">\n" +
+        "                                <div class=\"delete_playlist\" style=\"top: 0\">\n" +
         "                                    <i class=\"material-icons\">\n" +
         "                                        close\n" +
         "                                    </i>\n" +
@@ -95,7 +95,7 @@ function addPlaylist(url, name, id) {
      "                                        edit\n" +
      "                                    </i>\n" +
      "                                </div>\n" +
-     "                                <div class=\"delete_playlist\">\n" +
+     "                                <div class=\"delete_playlist\" onclick='deletePlaylistModal(\"" + name + "\",\""+ id +"\")'>\n" +
      "                                    <i class=\"material-icons\">\n" +
      "                                        close\n" +
      "                                    </i>\n" +
@@ -125,3 +125,74 @@ function closeModal() {
 playlistNameField.value = "";
     modal.style.display = "none";
 }
+
+function deletePlaylistModal(name, playlistID) {
+    console.log(name);
+    var modal = "<div class='modal-content'>" +
+        "               <span class=\"close\" onclick='closeModal(\"deletePlaylist\")'>&times;</span>" +
+        "               Do you want to delete " + name + "?<br/>" +
+        "               <button onclick='deletePlaylist(" + playlistID + "); closeModal(\"deletePlaylist\")'>delete</button> " +
+        "           </div>";
+
+
+    document.getElementById("deletePlaylist").innerHTML = modal;
+    openModal("deletePlaylist");
+
+}
+
+function deletePlaylist(playlistID) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/delete", true);
+    xhr.send(JSON.stringify("{ 'playlistID': " + playlistID + "}"));//put json in here
+    //console.log("sent");
+    xhr.onloadend = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            json = JSON.parse(xhr.responseText);
+            console.log(json);
+            if(json.list.id == playlistID  && json.responseText != '200') {
+                $("#Playlist").empty();
+                getPlaylists();
+            }
+
+        }
+    };
+}
+
+
+function newSegment() {
+    var form = document.newVideoSegmentForm;
+
+    var data = {};
+    data["character"] = form.character.value;
+
+    var segments = document.newVideoSegmentForm.base64Encoding.value.split(',');
+    data["base64EncodedValue"] = segments[1];
+
+    data["transcript"] = form.transcript.value;
+
+    data["id"] = "";
+
+    var js = JSON.stringify(data);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/add", true);
+
+    xhr.send(js);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+                $("#Library").empty();
+                getVideoSegments();
+            } else {
+                console.log("actual:" + xhr.responseText)
+                var js = JSON.parse(xhr.responseText);
+                var err = js["response"];
+                alert (err);
+            }
+        }
+    }
+}
+

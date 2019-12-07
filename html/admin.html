@@ -45,10 +45,10 @@
     <header>
         Allowed Remote Sites
     </header>
-    <ul id="remoteSites">
-        <li><img src="../assets/error.png" class="icon" onclick="">Site 1</li>
+    <ul id="thirdPartyList">
+        <li><img src="../assets/error.png" class="icon" onclick="openDeleteModal('Site 1')"><i style="display: none">url</i>Site 1</li>
     </ul>
-    <button onclick="openModal()"><img src="../assets/plus.png" class="icon"> Add New Site</button>
+    <button onclick="openModal('newPartyModel')"><img src="../assets/plus.png" class="icon"> Add New Site</button>
 </section>
 
 <footer>
@@ -61,13 +61,24 @@
 
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form onsubmit="closeModal(); return false;">
+        <form name= "newParty" onsubmit="closeModal(); handleAddThirdParty(); return false;">
             Third party name: <br>
-            <input type="text" id="thirdPartyNameField"><br>
+            <input name="thirdPartyNameField" type="text" id="thirdPartyNameField"><br>
             Third party URL<br>
-            <input type="text" id="thirdPartyURLField"><br>
+            <input name="thirdPartyURLField" type="text" id="thirdPartyURLField"><br>
             <input type="submit" id="modalSubmit">
         </form>
+    </div>
+
+</div>
+
+
+<div class="modal" id="deleteThirdParty">
+
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        Do you want to remove <i id="thirdParty"></i> <br>
+        <button>Delete</button>
     </div>
 
 </div>

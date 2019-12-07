@@ -23,13 +23,13 @@ async function getVideoSegments() {
 
 async function getPlaylists() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
+    xhr.open("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", true);
     xhr.send();
     console.log("sent");
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            json = JSON.parse(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
             console.log(json.list);
             for (var i = 0; i < json.list.length; i++) {
                 playlistName = json.list[i].name;

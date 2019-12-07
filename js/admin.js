@@ -64,8 +64,8 @@ function addVideoClip(url) {
 }
 
 // When the user clicks on the button, open the modal
-function openModal() {
-    var modal = document.getElementById("newPartyModel");
+function openModal(id) {
+    var modal = document.getElementById(id);
     modal.style.display = "block";
 }
 
@@ -76,17 +76,62 @@ function closeModal() {
     var thirdPartyURL = document.getElementById("thirdPartyURLField");
     thirdPartyURL.value = "";
     modal.style.display = "none";
+    var modal = document.getElementById("deleteThirdParty");
+    modal.style.display = "none";
+
+
 }
 
-function registerThirdPartySite(url, add) {
-    var data = {};
-    data["url"] = url;
-    data["addTPS"] = add;
-    var js = JSON.stringify(data);
+
+function openDeleteModal(name, url) {
+    var modal = document.getElementById("deleteThirdParty");
+    modal.style.display = "block";
+    $("#thirdParty").empty().append(name);
+    $("#deleteThirdParty").getElementsByTagName("button").item(0).onclick = handleDelete(name, url);
+}
+
+function populateThirdParties() {
+    $("#thirdPartyList").empty();
+
     var xhr = new XMLHttpRequest();
+    xhr.open("GET", "", true);
+    xhr.send()
+
+    xhr.onloadend = function () {
+        var json = JSON.parse(xhr.responseText);
+        for (var i = 0; i < json.list.length; i++){
+            var name = json.list[i].name;
+            var url = json.list[i].url;
+            addThirdParty(name, url);
+        }
+    }
+
+}
+
+function addThirdParty(name, url) {
+    var thirdParty = $("<li><img src=\"../assets/error.png\" class=\"icon\" onclick=\"openDeleteModal(" + name +")\">" +
+        "               <i style=\"display: none\">" + url + "</i>" + name + "</li>");
+    $("#thirdPartyList").append(thirdParty);
+}
+
+function handleAddThirdParty() {
+    var form = document.newParty;
+
+    var data = {};
+    data["name"] = form.thirdPartyNameField.value;
+    data["url"] = form.thirdPartyURLField.value;
+    data["addTPS"] = true;
+    // get form data
+    // create json
+    // make api call
+    // on endload add the li to the list
+
+    var json = JSON.stringify(data);
+
+    xhr = new XMLHttpRequest();
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
-    xhr.send(js);
-    console.log("sent");
+    xhr.send(json);
+
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("status:" + xhr.status);
@@ -95,8 +140,6 @@ function registerThirdPartySite(url, add) {
                 var status = js["statusCode"];
                 if (status != 200) {
                     alert("Error: " + status + "\n" + js["error"]);
-                }else {
-                    $('#remoteSites').children().remove();
                 }
 
             } else {
@@ -105,11 +148,24 @@ function registerThirdPartySite(url, add) {
                 var err = js["response"];
                 alert (err);
             }
-        }
-        preparelibrary2Slider();
-    };
+        populateThirdParties();
+    }
+
 }
 
-function getThirdPartySites() {
+function handleDelete(name, url) {
+
+    var data = {};
+    data["name"] = name;
+    data["url"] = url;
+    data["addTPS"] = false;
+    var json = JSON.stringify(data);
+
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
+    xhr.send(json);
+    xhr.onloadend = function () {
+        $("i:contains(url)").parentElement.remove();
+    }
 
 }

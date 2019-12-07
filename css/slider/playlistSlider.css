@@ -41,3 +41,7 @@
     margin: 5px;
     right: 0;
 }
+
+.delete_playlist:hover {
+    cursor: pointer;
+}
