@@ -87,7 +87,10 @@ function openDeleteModal(name, url) {
     var modal = document.getElementById("deleteThirdParty");
     modal.style.display = "block";
     $("#thirdParty").empty().append(name);
-    $("#deleteThirdParty").getElementsByTagName("button").item(0).onclick = handleDelete(name, url);
+    $('#deleteButton').click(function () {
+        handleDelete(name, url);
+        closeModal("deleteThirdParty");
+    });
 }
 
 function populateThirdParties() {
@@ -146,13 +149,13 @@ function handleAddThirdParty() {
                 console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
                 var err = js["response"];
-                alert (err);
+                alert(err);
             }
-        populateThirdParties();
+            populateThirdParties();
+        }
+
     }
-
 }
-
 function handleDelete(name, url) {
 
     var data = {};
@@ -165,7 +168,25 @@ function handleDelete(name, url) {
     xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty", true);
     xhr.send(json);
     xhr.onloadend = function () {
-        $("i:contains(url)").parentElement.remove();
+
+        console.log(name)
+
+        if (xhr.status == 200) {
+            var js = JSON.parse(xhr.responseText);
+            console.log(js);
+            var status = js["statusCode"];
+            if (status != 200) {
+                alert("Error: " + status + "\n" + js["error"]);
+            } else {
+                $("li:contains(" + name + ")").remove();
+            }
+
+        } else {
+            console.log("actual:" + xhr.responseText);
+            var js = JSON.parse(xhr.responseText);
+            var err = js["response"];
+            alert(err);
+        }
     }
 
 }

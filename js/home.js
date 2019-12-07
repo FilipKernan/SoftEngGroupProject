@@ -9,12 +9,9 @@ $(document).ready(function () {
     var submit = document.getElementById("modalSubmit");
 
 // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
+
 
     submit.onclick = function () {
         modal.style.display = "none";
@@ -107,22 +104,26 @@ function addPlaylist(url, name, id) {
 }
 
 // When the user clicks on the button, open the modal
-function openModal() {
-    var modal = document.getElementById("newPlaylist");
+function openModal(id) {
+    var modal = document.getElementById(id);
     modal.style.display = "block";
 }
 
 
-function closeModal() {
-    var modal = document.getElementById("newPlaylist");
-    var playlistNameField = document.getElementById("playlistNameField");
-    if(playlistNameField.value !== ""){
-        loading();
-        createPlaylist(playlistNameField.value).then(doneLoading);
-        console.log("Created a new playlist.");
+function closeModal(id) {
+    var modal = document.getElementById(id);
+
+    if (id == "newPlaylist") {
+        var playlistNameField = document.getElementById("playlistNameField");
+        if (playlistNameField.value !== "") {
+            loading();
+            createPlaylist(playlistNameField.value).then(doneLoading);
+            console.log("Created a new playlist.");
+        }
+        playlistNameField.value = "";
+
     }
 
-playlistNameField.value = "";
     modal.style.display = "none";
 }
 
