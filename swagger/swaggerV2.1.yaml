@@ -451,7 +451,7 @@ definitions:
     - name
     - transcript
     - character
-    - bsae64-encoded Value
+    - base64-encoded Value
     properties:
       name:
         type: string

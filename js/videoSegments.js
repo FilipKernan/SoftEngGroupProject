@@ -29,7 +29,7 @@ function getPlaylists() {
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            json = JSON.parse(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
             console.log(json.list);
             for (var i = 0; i < json.list.length; i++) {
                 playlistName = json.list[i].name;

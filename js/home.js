@@ -118,6 +118,7 @@ function deletePlaylist(playlistID) {
             json = JSON.parse(xhr.responseText);
             console.log(json);
             if(json.list.id == playlistID  && json.responseText != '200') {
+                $("#Playlist").empty();
                 getPlaylists();
             }
 
@@ -130,10 +131,10 @@ function newSegment() {
     var form = document.newVideoSegmentForm;
 
     var data = {};
-    date["character"] = form.character.value;
+    data["character"] = form.character.value;
 
     var segments = document.newVideoSegmentForm.base64Encoding.value.split(',');
-    date["base64EncodedValue"] = segments[1];
+    data["base64EncodedValue"] = segments[1];
 
     data["transcript"] = form.transcript.value;
 
@@ -142,7 +143,7 @@ function newSegment() {
     var js = JSON.stringify(data);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "url", true);
+    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/add", true);
 
     xhr.send(js);
 
@@ -151,6 +152,7 @@ function newSegment() {
         console.log(xhr.request);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
+                $("#Library").empty();
                 getVideoSegments();
             } else {
                 console.log("actual:" + xhr.responseText)
