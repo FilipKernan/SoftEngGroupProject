@@ -39,8 +39,8 @@ public class ThirdPartySitesDAO {
 
     public boolean addThirdPartySite(ThirdPartySite tps) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM thirdPartyLibrary WHERE siteID = ?;");
-            ps.setString(1, tps.getID());
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM thirdPartyLibrary WHERE url = ?;");
+            ps.setString(1, tps.getUrl());
             ResultSet resultSet = ps.executeQuery();
 
             // already present?
