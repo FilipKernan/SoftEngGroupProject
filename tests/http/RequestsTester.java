@@ -138,6 +138,22 @@ public class RequestsTester {
 
     }
 
+    @Test
+    public void markSegmentRequest(){
+        MarkSegmentRequest req = new MarkSegmentRequest();
+        MarkSegmentRequest req2 = new MarkSegmentRequest("id", false);
+        MarkSegmentRequest req3 = new MarkSegmentRequest("id", true);
+
+        req.setId("id");
+        req.setMakeMarked(false);
+
+        Assert.assertEquals(req.getID(), req2.getID());
+        Assert.assertEquals(req.isMakeMarked(), req2.isMakeMarked());
+        Assert.assertTrue(req3.isMakeMarked());
+        System.out.println(req.toString());
+
+    }
+
 
 
 

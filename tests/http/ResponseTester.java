@@ -115,6 +115,15 @@ public class ResponseTester {
         System.out.println(response2.toString());
     }
 
+    @Test
+    public void markSegmentResponse(){
+        MarkSegmentResponse response = new MarkSegmentResponse("id", 200);
+        MarkSegmentResponse response2 = new MarkSegmentResponse(403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
 
 
 
