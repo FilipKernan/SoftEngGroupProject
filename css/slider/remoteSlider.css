@@ -1,0 +1,43 @@
+/* Right arrow*/
+#arrowRRemote {
+    background: yellow;
+    width: 1.5%;
+    height: 50px;
+    float: right;
+    cursor: pointer;
+    margin-top: 55.5px;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: #000;
+    padding-top: 25px;
+}
+
+/* Left arrow*/
+#arrowLRemote {
+    margin-top: 55.5px;
+    background: yellow;
+    width: 1.5%;
+    height: 50px;
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    color: red;
+    padding-top: 25px;
+}
+
+.remote {
+    height: 215px;
+}
+
+.add_video {
+    position: absolute;
+    margin: 5px;
+    right: 0;
+}
+
+.add_video:hover{
+    cursor: pointer;
+}
