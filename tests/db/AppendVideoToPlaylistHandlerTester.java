@@ -1,8 +1,6 @@
 package db;
 
-import handlers.AppendVideoSegmentToPlaylistHandler;
-import handlers.CreatePlaylistHandler;
-import handlers.DeletePlaylistHandler;
+import handlers.*;
 import http.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,8 +13,12 @@ public class AppendVideoToPlaylistHandlerTester extends LambdaTest{
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
 
+        CreateVideoSegmentRequest cvs = new CreateVideoSegmentRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName0", "TestTranscript");
+        CreateVideoSegmentResponce uploadResp = new UploadVideoSegmentHandler().handleRequest(cvs, createContext("Upload"));
+        Assert.assertEquals(200, uploadResp.statusCode);
+
         //append a video to the playlist created
-        AppendVideoToPlaylistRequest append = new AppendVideoToPlaylistRequest(resp.playlist.getID(), "111111111111111111111111111111111111");
+        AppendVideoToPlaylistRequest append = new AppendVideoToPlaylistRequest(resp.playlist.getID(), uploadResp.videoID);
         AppendVideoToPlaylistResponse appendResp = new AppendVideoSegmentToPlaylistHandler().handleRequest(append, createContext("append"));
         Assert.assertEquals(200, appendResp.statusCode);
 
@@ -29,6 +31,11 @@ public class AppendVideoToPlaylistHandlerTester extends LambdaTest{
         DeletePlaylistRequest delete = new DeletePlaylistRequest(resp.playlist.getID());
         DeletePlaylistResponse deleteResp = new DeletePlaylistHandler().handleRequest(delete, createContext("detele"));
         Assert.assertEquals(200, deleteResp.statusCode);
+
+        //delete the video segment upload
+        DeleteVideoSegmentRequest dvs = new DeleteVideoSegmentRequest(uploadResp.videoID);
+        DeleteVideoSegmentResponse dvsr = new DeleteVideoSegmentHandler().handleRequest(dvs, createContext("deleteVS"));
+        Assert.assertEquals(200, dvsr.statusCode);
     }
 
 }
