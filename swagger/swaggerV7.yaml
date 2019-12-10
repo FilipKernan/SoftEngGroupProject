@@ -34,7 +34,7 @@ paths:
       parameters:
         - in: body
           required: false
-          schma:
+          schema:
             $ref: '#/definitions/PageRequest'
         responces:
           200:
@@ -43,8 +43,6 @@ paths:
               $ref: '#/definitions/PageResonce'
           400:
             description: Error
-
-
   /playlist/getSegments:
     post:
       summary: will return the video segments in a playlist
