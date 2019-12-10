@@ -11,7 +11,7 @@ public class LambdaTest {
      * @param apiCall      An arbitrary string to identify which API is being called.
      * @return
      */
-    Context createContext(String apiCall) {
+    public Context createContext(String apiCall) {
         TestContext ctx = new TestContext();
         ctx.setFunctionName(apiCall);
         return ctx;

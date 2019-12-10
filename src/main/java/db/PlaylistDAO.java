@@ -41,7 +41,7 @@ public class PlaylistDAO {
             //UPDATE `innodb`.`playlist` SET `playlistName` = 'TESTTEST4' WHERE (`playlistID` = 'TESTTEST4');
             PreparedStatement psName = conn.prepareStatement("UPDATE playlist SET `playlistName` = ? WHERE `playlistID` = ?;");
             psName.setString(1, newName);
-            psName.setString(1, id);
+            psName.setString(2, id);
 //            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
 //            psVideos.setString(1, id);
             int numAffected = psName.executeUpdate();
