@@ -57,7 +57,7 @@ public class VideoSegmentDAO {
         List<VideoSegment> localSegments = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            String query = "SELECT * FROM video WHERE ifMarked = 0";
+            String query = "SELECT * FROM video WHERE ifMarked = 0 AND ifLocal = 1";
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {

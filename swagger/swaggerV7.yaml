@@ -33,18 +33,17 @@ paths:
         - application/json
       parameters:
         - in: body
+          name: PageRequest
           required: false
-          schma:
+          schema:
             $ref: '#/definitions/PageRequest'
-        responces:
-          200:
-            description: url recived
-            schema:
-              $ref: '#/definitions/PageResonce'
-          400:
-            description: Error
-
-
+      responses:
+        200:
+          description: url recived
+          schema:
+            $ref: '#/definitions/PageResonce'
+        400:
+          description: Error
   /playlist/getSegments:
     post:
       summary: will return the video segments in a playlist
@@ -154,6 +153,8 @@ paths:
       responses:
         200:
           description: Video Segments returned
+          schema:
+            $ref: '#/definitions/GetUnmarkedVideoSegmentsResponse'
         400:
           description: Error
         404:
@@ -358,16 +359,16 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: UploadVideoSegmentRequest
+          name: UploadLocalVideoSegmentRequest
           description: Requests to upload a new local video segment
           required: false
           schema:
-            $ref: '#/definitions/UploadVideoSegmentRequest'
+            $ref: '#/definitions/UploadLocalVideoSegmentRequest'
       responses:
         200:
           description: item created
           schema:
-            $ref: '#/definitions/UploadVideoSegmentResponse'
+            $ref: '#/definitions/UploadLocalVideoSegmentResponse'
         400:
           description: invalid input, object invalid
         404:
@@ -382,7 +383,6 @@ paths:
         - videoSegment
       summary: Uploads a new local video segment to the library
       description: Uploads Video Segment
-      operationId: uploadVideoSegment
       consumes:
         - application/json
       produces:
@@ -454,9 +454,9 @@ definitions:
       - segmentID
     properties:
       playlistId:
-        type: String
+        type: string
       segmentId:
-        type: String
+        type: string
   DeleteSegmentInPLResponce:
     required:
       - id
@@ -514,7 +514,7 @@ definitions:
     properties:
       name:
         type: string
-  UploadVideoSegmentLocalRequest:
+  UploadLocalVideoSegmentRequest:
     required:
       - name
       - transcript
@@ -528,7 +528,7 @@ definitions:
       character:
         type: string
       base64-encoded Value:
-        type:
+        type: string
   UploadVideoSegmentRequest:
     required:
       - name
@@ -547,7 +547,7 @@ definitions:
       tpsURL:
         type: string
       base64-encoded Value:
-        type:
+        type: string
       isLocal:
         type: boolean
   DeleteVideoSegmentRequest:
@@ -594,13 +594,13 @@ definitions:
     properties:
       id:
         type: string
-  UploadVideoSegmentLocalResponse:
+  UploadVideoSegmentResponse:
     required:
       - id
     properties:
       id:
         type: string
-  UploadVideoSegmentResponse:
+  UploadLocalVideoSegmentResponse:
     required:
       - id
     properties:
@@ -638,7 +638,7 @@ definitions:
       - VideoSegmentURLs
     properties:
       VideoSegmentURLs:
-        type: String
+        type: string
   GetUnmarkedVideoSegmentsRequest:
     type: object
     properties:
@@ -646,19 +646,30 @@ definitions:
         type: boolean
   GetUnmarkedVideoSegmentsResponse:
     required:
-      - VideoSegmentURLs
+      - segments
     properties:
-      VideoSegmentURLs:
-        type: String
+      segments:
+        type: array
+        items:
+          $ref: '#/definitions/segments'
+  segments:
+    type: object
+    properties:
+      url:
+        type: string
+      character:
+        type: string
+      text:
+        type: string
   PageRequest:
     required:
       - page
     properties:
       page:
-        type: String
+        type: string
   PageResonce:
     required:
       - url
     properties:
       url:
-        type: String
+        type: string
