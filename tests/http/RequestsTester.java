@@ -44,6 +44,20 @@ public class RequestsTester {
     }
 
     @Test
+    public void renamePlaylist(){
+        RenamePlaylistRequest req = new RenamePlaylistRequest();
+        RenamePlaylistRequest req2 = new RenamePlaylistRequest("id", "newName");
+
+        req.setId("id");
+        req.setNewName("newName");
+
+        Assert.assertEquals(req.getID(), req2.getID());
+        Assert.assertEquals(req.getNewName(), req2.getNewName());
+
+        System.out.println(req.toString());
+    }
+
+    @Test
     public void deleteVideoSegmentInPlaylist(){
         DeleteVideoSegmentInPlaylistRequest req = new DeleteVideoSegmentInPlaylistRequest();
         DeleteVideoSegmentInPlaylistRequest req2 = new DeleteVideoSegmentInPlaylistRequest("playlistID", "videoID");
@@ -70,7 +84,7 @@ public class RequestsTester {
     }
 
     @Test
-    public void createVideoSegment(){
+    public void createLocalVideoSegment(){
         String base64EncodedValue = "value";
         String id = "id";
         String character = "character";
@@ -99,6 +113,41 @@ public class RequestsTester {
     }
 
     @Test
+    public void createVideoSegment(){
+        String base64EncodedValue = "value";
+        String id = "id";
+        String character = "character";
+        String transcript = "transcript";
+        String name = "name";
+
+
+
+        CreateVideoSegmentRequest req = new CreateVideoSegmentRequest(base64EncodedValue, id, character, transcript, name, true, null);
+        CreateVideoSegmentRequest req2 = new CreateVideoSegmentRequest();
+        CreateVideoSegmentRequest req3 = new CreateVideoSegmentRequest(base64EncodedValue, id, character, transcript, name, false, "tpsURL");
+
+        req2.setBase64Encodedvalue(base64EncodedValue);
+        req2.setId(id);
+        req2.setCharacter(character);
+        req2.setTranscript(transcript);
+        req2.setName(name);
+        req2.setLocal(true);
+        req2.setTpsURL(null);
+
+        Assert.assertEquals(req.getBase64Encodedvalue(), req2.getBase64Encodedvalue());
+        Assert.assertEquals(req.getId(), req2.getId());
+        Assert.assertEquals(req.getCharacter(), req2.getCharacter());
+        Assert.assertEquals(req.getTranscript(), req2.getTranscript());
+        Assert.assertEquals(req.getName(), req2.getName());
+        Assert.assertEquals(req.isLocal(), req2.isLocal());
+        Assert.assertEquals(req.getTpsURL(), req2.getTpsURL());
+
+        System.out.println(req.toString());
+        System.out.println(req3.toString());
+
+    }
+
+    @Test
     public void getAllPlaylist(){
         GetAllPlaylistRequest req = new GetAllPlaylistRequest();
         System.out.println(req.toString());
@@ -119,6 +168,18 @@ public class RequestsTester {
     @Test
     public void getThirdPartySites(){
         GetThirdPartySitesRequest req = new GetThirdPartySitesRequest();
+        System.out.println(req.toString());
+    }
+
+    @Test
+    public void getLocalVideoSegments(){
+        GetLocalVideoSegmentsRequest req = new GetLocalVideoSegmentsRequest();
+        System.out.println(req.toString());
+    }
+
+    @Test
+    public void getUnmarkedVideoSegments(){
+        GetUnmarkedVideoSegmentsRequest req = new GetUnmarkedVideoSegmentsRequest();
         System.out.println(req.toString());
     }
 
