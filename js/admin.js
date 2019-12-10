@@ -30,25 +30,30 @@ $(document).ready(function () {
     };
 
     $('body').on('click', 'i.material-icons.mark', function (e) {
+        var id = $(e.target.parentElement.parentElement).context.id;
         console.log("marking");
-        var target = $(e.target);
-        target.replaceWith("<i class=\"material-icons marked\" style=\"top: 0\">\n" +
+        console.log(id);
+        $(e.target).replaceWith("<i class=\"material-icons marked\" style=\"top: 0\">\n" +
             "                            radio_button_checked\n" +
             "                        </i>")
+        markVideoSegment(id, true);
+
     });
 
     $('body').on('click', 'i.material-icons.marked', function (e) {
+        var id = $(e.target.parentElement.parentElement).context.id;
         console.log("unmarking");
-        var target = $(e.target);
-        target.replaceWith("<i class=\"material-icons mark\" style=\"top: 0\">\n" +
+        console.log(id);
+        $(e.target).replaceWith("<i class=\"material-icons mark\" style=\"top: 0\">\n" +
             "                            radio_button_unchecked\n" +
             "                        </i>")
+        markVideoSegment(id, false);
     });
 });
 
 // Creates a new video clip in the slider
-function addVideoClip(url) {
-    var clip = $("<div class='item library'>\n" +
+function addVideoClip(url, transcript, character, id) {
+    var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
@@ -210,3 +215,30 @@ function handleDelete(name, url) {
     }
 
 }
+
+function markVideoSegment(id, ifmark){
+    var data = {};
+    data["id"] = id;
+    data["makeMarked"] = ifmark;
+    var json = JSON.stringify(data);
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/Mark", true);
+    xhr.send(json);
+
+    xhr.onloadend = function () {
+
+        console.log(name)
+
+        if (xhr.status == 200) {
+            var js = JSON.parse(xhr.responseText);
+            console.log(js);
+
+        } else {
+            console.log("actual:" + xhr.responseText);
+            var js = JSON.parse(xhr.responseText);
+            var err = js["response"];
+            alert(err);
+        }
+    }
+}
+
