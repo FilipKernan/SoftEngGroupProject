@@ -36,6 +36,25 @@ public class PlaylistDAO {
         }
     }
 
+    public boolean renamePlaylist(String id, String newName) throws Exception {
+        try {
+            //UPDATE `innodb`.`playlist` SET `playlistName` = 'TESTTEST4' WHERE (`playlistID` = 'TESTTEST4');
+            PreparedStatement psName = conn.prepareStatement("UPDATE playlist SET `playlistName` = ? WHERE `playlistID` = ?;");
+            psName.setString(1, newName);
+            psName.setString(1, id);
+//            PreparedStatement psVideos = conn.prepareStatement("DELETE FROM playlistRelation WHERE playlistID = ?;");
+//            psVideos.setString(1, id);
+            int numAffected = psName.executeUpdate();
+            psName.close();
+//            psVideos.close();
+
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert constant: " + e.getMessage());
+        }
+    }
+
     public boolean createPlaylist(Playlist playlist) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlist WHERE playlistName = ?;");
