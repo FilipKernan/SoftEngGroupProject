@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PlaylistRelationDAO</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">db</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PlaylistRelationDAO (db)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlaylistRelationDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.8%
+  </span>
+  <span class="absValue">
+    (43/ 49)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package db;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import model.Playlist;
+<i>4</i>&nbsp;import model.VideoSegment;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.sql.Connection;
+<i>7</i>&nbsp;import java.sql.PreparedStatement;
+<i>8</i>&nbsp;import java.sql.ResultSet;
+<i>9</i>&nbsp;import java.sql.Statement;
+<i>10</i>&nbsp;import java.util.ArrayList;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class PlaylistRelationDAO {
+<i>14</i>&nbsp;    //data access object
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    Connection conn;
+<i>17</i>&nbsp;
+<b class="fc"><i>18</i>&nbsp;    public PlaylistRelationDAO() {</b>
+<i>19</i>&nbsp;        try  {
+<b class="fc"><i>20</i>&nbsp;            conn = DatabaseUtil.connect();</b>
+<b class="nc"><i>21</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>22</i>&nbsp;            conn = null;</b>
+<b class="fc"><i>23</i>&nbsp;        }</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public boolean deleteVidSegInPlaylist(String playlistID, String videoID) throws Exception {
+<i>27</i>&nbsp;        try {
+<b class="fc"><i>28</i>&nbsp;            PreparedStatement psName = conn.prepareStatement(&quot;DELETE FROM playlistRelation WHERE playlistID=? AND videoID=?;&quot;);</b>
+<b class="fc"><i>29</i>&nbsp;            psName.setString(1, playlistID);</b>
+<b class="fc"><i>30</i>&nbsp;            psName.setString(2, videoID);</b>
+<b class="fc"><i>31</i>&nbsp;            int numAffected = psName.executeUpdate();</b>
+<b class="fc"><i>32</i>&nbsp;            psName.close();</b>
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;            return (numAffected &gt;= 1);</b>
+<i>35</i>&nbsp;
+<b class="nc"><i>36</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>37</i>&nbsp;            throw new Exception(&quot;Failed to insert constant: &quot; + e.getMessage());</b>
+<i>38</i>&nbsp;        }
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public boolean appendVideoSegmentToPlaylist(String playlistID, String videoID) throws Exception {
+<i>42</i>&nbsp;        try {
+<b class="fc"><i>43</i>&nbsp;            PreparedStatement ps = conn.prepareStatement(&quot;INSERT INTO playlistRelation (playlistID,videoID) values(?,?);&quot;);</b>
+<b class="fc"><i>44</i>&nbsp;            ps.setString(1,  playlistID);</b>
+<b class="fc"><i>45</i>&nbsp;            ps.setString(2,  videoID);</b>
+<b class="fc"><i>46</i>&nbsp;            ps.execute();</b>
+<b class="fc"><i>47</i>&nbsp;            return true;</b>
+<i>48</i>&nbsp;
+<b class="fc"><i>49</i>&nbsp;        } catch (Exception e) {</b>
+<b class="fc"><i>50</i>&nbsp;            throw new Exception(&quot;Failed to insert constant: &quot; + e.getMessage());</b>
+<i>51</i>&nbsp;        }
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public List&lt;VideoSegment&gt; getVidSegsInPlaylist(String plID) throws Exception{
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;        ArrayList&lt;String&gt; vidSegIDs = new ArrayList&lt;&gt;();</b>
+<i>57</i>&nbsp;        try {
+<b class="fc"><i>58</i>&nbsp;            PreparedStatement ps = conn.prepareStatement(&quot;SELECT * FROM playlistRelation WHERE playlistID =? ORDER BY timestamp;&quot;);</b>
+<b class="fc"><i>59</i>&nbsp;            ps.setString(1,  plID);</b>
+<b class="fc"><i>60</i>&nbsp;            Statement statement = conn.createStatement();</b>
+<b class="fc"><i>61</i>&nbsp;            ResultSet resultSet = ps.executeQuery();</b>
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;            while (resultSet.next()) {</b>
+<b class="fc"><i>64</i>&nbsp;                vidSegIDs.add(resultSet.getString(&quot;videoID&quot;));</b>
+<i>65</i>&nbsp;            }
+<b class="fc"><i>66</i>&nbsp;            resultSet.close();</b>
+<b class="fc"><i>67</i>&nbsp;            statement.close();</b>
+<i>68</i>&nbsp;
+<b class="fc"><i>69</i>&nbsp;            List&lt;VideoSegment&gt; vids = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>70</i>&nbsp;            for (String id: vidSegIDs) {</b>
+<b class="fc"><i>71</i>&nbsp;                ps = conn.prepareStatement(&quot;SELECT * FROM video WHERE videoID =?;&quot;);</b>
+<b class="fc"><i>72</i>&nbsp;                ps.setString(1,  id);</b>
+<b class="fc"><i>73</i>&nbsp;                statement = conn.createStatement();</b>
+<b class="fc"><i>74</i>&nbsp;                resultSet = ps.executeQuery();</b>
+<b class="fc"><i>75</i>&nbsp;                while (resultSet.next()) {</b>
+<b class="fc"><i>76</i>&nbsp;                    vids.add(generateVideoSegment(resultSet));</b>
+<i>77</i>&nbsp;                }
+<b class="fc"><i>78</i>&nbsp;                resultSet.close();</b>
+<b class="fc"><i>79</i>&nbsp;                statement.close();</b>
+<b class="fc"><i>80</i>&nbsp;            }</b>
+<i>81</i>&nbsp;
+<b class="fc"><i>82</i>&nbsp;            return vids;</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>85</i>&nbsp;            throw new Exception(&quot;Failed in getting books: &quot; + e.getMessage());</b>
+<i>86</i>&nbsp;        }
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public VideoSegment generateVideoSegment(ResultSet resultSet) throws Exception {
+<b class="fc"><i>90</i>&nbsp;        String UUID = resultSet.getString(&quot;videoID&quot;);</b>
+<b class="fc"><i>91</i>&nbsp;        String character = resultSet.getString(&quot;character&quot;);</b>
+<b class="fc"><i>92</i>&nbsp;        String videoUrl = resultSet.getString(&quot;videoUrl&quot;);</b>
+<b class="fc"><i>93</i>&nbsp;        String transcript = resultSet.getString(&quot;transcript&quot;);</b>
+<i>94</i>&nbsp;
+<b class="fc"><i>95</i>&nbsp;        return new VideoSegment(videoUrl, UUID, transcript, character);</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-10 14:11</div>
+</div>
+</body>
+</html>

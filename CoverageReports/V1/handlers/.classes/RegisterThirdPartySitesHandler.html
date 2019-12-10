@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RegisterThirdPartySitesHandler</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">handlers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RegisterThirdPartySitesHandler (handlers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RegisterThirdPartySitesHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (13/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package handlers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.amazonaws.services.lambda.runtime.Context;
+<i>4</i>&nbsp;import com.amazonaws.services.lambda.runtime.LambdaLogger;
+<i>5</i>&nbsp;import com.amazonaws.services.lambda.runtime.RequestHandler;
+<i>6</i>&nbsp;import db.ThirdPartySitesDAO;
+<i>7</i>&nbsp;import http.GetThirdPartySitesResponse;
+<i>8</i>&nbsp;import http.RegisterThirdPartyRequest;
+<i>9</i>&nbsp;import http.RegisterThirdPartyResponse;
+<i>10</i>&nbsp;import model.ThirdPartySite;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.util.List;
+<i>13</i>&nbsp;import java.util.UUID;
+<i>14</i>&nbsp;
+<b class="fc"><i>15</i>&nbsp;public class RegisterThirdPartySitesHandler implements RequestHandler&lt;RegisterThirdPartyRequest, RegisterThirdPartyResponse&gt; {</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public LambdaLogger logger;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    @Override
+<i>20</i>&nbsp;    public RegisterThirdPartyResponse handleRequest(RegisterThirdPartyRequest req, Context context){
+<b class="fc"><i>21</i>&nbsp;        ThirdPartySitesDAO dao = new ThirdPartySitesDAO();</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;        RegisterThirdPartyResponse response;
+<i>24</i>&nbsp;        try{
+<b class="fc"><i>25</i>&nbsp;            String uniqueID = UUID.randomUUID().toString();</b>
+<b class="fc"><i>26</i>&nbsp;            ThirdPartySite tps = new ThirdPartySite(req.getUrl(), uniqueID);</b>
+<b class="fc"><i>27</i>&nbsp;            if(req.isAddTPS()){</b>
+<b class="fc"><i>28</i>&nbsp;                if(dao.addThirdPartySite(tps)) {</b>
+<b class="fc"><i>29</i>&nbsp;                    response = new RegisterThirdPartyResponse(req.getUrl() + &quot; added&quot;, 200);</b>
+<i>30</i>&nbsp;                } else {
+<b class="fc"><i>31</i>&nbsp;                    response = new RegisterThirdPartyResponse(req.getUrl(), 422, &quot;Unable to add library&quot;);</b>
+<i>32</i>&nbsp;                }
+<i>33</i>&nbsp;            } else {
+<b class="fc"><i>34</i>&nbsp;                if(dao.deleteThirdPartySite(req.getUrl())){</b>
+<b class="fc"><i>35</i>&nbsp;                    response = new RegisterThirdPartyResponse(req.getUrl() + &quot; deleted&quot;, 200);</b>
+<i>36</i>&nbsp;                } else {
+<b class="fc"><i>37</i>&nbsp;                    response = new RegisterThirdPartyResponse(req.getUrl(), 422, &quot;Unable to add library&quot;);</b>
+<i>38</i>&nbsp;                }
+<i>39</i>&nbsp;            }
+<b class="nc"><i>40</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>41</i>&nbsp;            response = new RegisterThirdPartyResponse(req.getUrl(), 403, e.getMessage());</b>
+<b class="fc"><i>42</i>&nbsp;        }</b>
+<b class="fc"><i>43</i>&nbsp;        return response;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-10 14:11</div>
+</div>
+</body>
+</html>
