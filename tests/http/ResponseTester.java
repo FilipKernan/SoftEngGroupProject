@@ -38,6 +38,15 @@ public class ResponseTester {
     }
 
     @Test
+    public void renamePlaylist(){
+        RenamePlaylistResponse response = new RenamePlaylistResponse("playlistID", 200);
+        RenamePlaylistResponse response2 = new RenamePlaylistResponse(403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
+    @Test
     public void deleteVideoSegmentInPlaylist(){
         DeleteVideoSegmentInPlaylistResponse response = new DeleteVideoSegmentInPlaylistResponse("videoID", 200);
         DeleteVideoSegmentInPlaylistResponse response2 = new DeleteVideoSegmentInPlaylistResponse(403, "Bad things happened");
@@ -56,9 +65,18 @@ public class ResponseTester {
     }
 
     @Test
-    public void createVideoSegment(){
+    public void createVideoSegmentLocal(){
         CreateVideoSegmentLocalResponse response = new CreateVideoSegmentLocalResponse("videoID", 200);
         CreateVideoSegmentLocalResponse response2 = new CreateVideoSegmentLocalResponse(403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
+    @Test
+    public void createVideoSegment(){
+        CreateVideoSegmentResponse response = new CreateVideoSegmentResponse("videoID", 200);
+        CreateVideoSegmentResponse response2 = new CreateVideoSegmentResponse(403, "Bad things happened");
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
@@ -107,9 +125,30 @@ public class ResponseTester {
     }
 
     @Test
+    public void getUnmarkedVideoSegmentsRequest(){
+        List<VideoSegment> vids = new ArrayList<>();
+        GetUnmarkedVideoSegmentsResponse response = new GetUnmarkedVideoSegmentsResponse(vids, 200);
+        GetUnmarkedVideoSegmentsResponse response2 = new GetUnmarkedVideoSegmentsResponse(403, "Bad things happened");
+        GetUnmarkedVideoSegmentsResponse response3 = new GetUnmarkedVideoSegmentsResponse(null, 200);
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+        System.out.println(response3.toString());
+    }
+
+    @Test
     public void registerThirdPartyResponse(){
-        RegisterThirdPartyResponse response = new RegisterThirdPartyResponse("playlistID", 200);
+        RegisterThirdPartyResponse response = new RegisterThirdPartyResponse("url", 200);
         RegisterThirdPartyResponse response2 = new RegisterThirdPartyResponse("url", 403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
+    @Test
+    public void pageRedirectResponse(){
+        PageRedirectResponse response = new PageRedirectResponse("url", 200);
+        PageRedirectResponse response2 = new PageRedirectResponse(403, "Bad things happened");
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
