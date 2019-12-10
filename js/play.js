@@ -1,6 +1,8 @@
 var index = 0;
 var list;
+var playlistID;
 $(document).ready(function () {
+    console.log(playlistID);
     var playlistID = getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
     list = listClipsInPlaylist(playlistID);

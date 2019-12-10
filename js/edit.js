@@ -90,6 +90,11 @@ function appendVideoClip(url, transcript, character, id) {
     $("#Library2").append(clip);
 }
 
+function setPlaylistId(id) {
+    playlistID = id;
+}
+
+
 function goToHome() {
     data = {};
     data["page"] = "home.html";

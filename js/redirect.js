@@ -7,6 +7,7 @@ async function redirect(js, url) {
             alert("Error: " + status + "\n" + js["error"]);
             return window.location.href;
         } else {
+            setPlaylistId(resultJs.data);
             return resultJs.url;
         }
     } else {
