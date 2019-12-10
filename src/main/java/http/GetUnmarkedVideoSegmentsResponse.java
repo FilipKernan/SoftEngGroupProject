@@ -5,19 +5,19 @@ import model.VideoSegment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalVideoSegmentsResponse {
+public class GetUnmarkedVideoSegmentsResponse {
 
     public final List<VideoSegment> list;
     public final int statusCode;
     public final String error;
 
-    public LocalVideoSegmentsResponse(int statusCode, String error) {
+    public GetUnmarkedVideoSegmentsResponse(int statusCode, String error) {
         this.list = new ArrayList<>();
         this.statusCode = statusCode;
         this.error = error;
     }
 
-    public LocalVideoSegmentsResponse(List<VideoSegment> list, int statusCode) {
+    public GetUnmarkedVideoSegmentsResponse(List<VideoSegment> list, int statusCode) {
         this.list = list;
         this.statusCode = statusCode;
         this.error = "";

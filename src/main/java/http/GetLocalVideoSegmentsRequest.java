@@ -1,7 +1,7 @@
 package http;
 
-public class LocalVideoSegmentsRequest {
-    public LocalVideoSegmentsRequest() {
+public class GetLocalVideoSegmentsRequest {
+    public GetLocalVideoSegmentsRequest() {
 
     }
 

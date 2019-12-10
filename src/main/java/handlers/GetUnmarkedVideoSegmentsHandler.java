@@ -4,28 +4,28 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import db.VideoSegmentDAO;
-import http.GetLocalVideoSegmentsResponse;
-import http.GetLocalVideoSegmentsRequest;
+import http.GetUnmarkedVideoSegmentsRequest;
+import http.GetUnmarkedVideoSegmentsResponse;
 import model.VideoSegment;
 
 import java.util.List;
 
-public class GetLocalVideoSegmentsHandler implements RequestHandler<GetLocalVideoSegmentsRequest, GetLocalVideoSegmentsResponse> {
+public class GetUnmarkedVideoSegmentsHandler implements RequestHandler<GetUnmarkedVideoSegmentsRequest, GetUnmarkedVideoSegmentsResponse> {
     public LambdaLogger logger;
 
     @Override
-    public GetLocalVideoSegmentsResponse handleRequest(GetLocalVideoSegmentsRequest getLocalVideoSegmentsRequest, Context context) {
+    public GetUnmarkedVideoSegmentsResponse handleRequest(GetUnmarkedVideoSegmentsRequest getLocalVideoSegmentsRequest, Context context) {
 
         logger = context.getLogger();
 
-        logger.log("Handling localVideoSegment lambda");
+        logger.log("Handling GetUnmarkedVideoSegments lambda");
 
-        GetLocalVideoSegmentsResponse response;
+        GetUnmarkedVideoSegmentsResponse response;
         try {
             List<VideoSegment> list = getVideoSegments();
-            response = new GetLocalVideoSegmentsResponse(list, 200);
+            response = new GetUnmarkedVideoSegmentsResponse(list, 200);
         } catch (Exception e) {
-            response = new GetLocalVideoSegmentsResponse(403, e.getMessage());
+            response = new GetUnmarkedVideoSegmentsResponse(403, e.getMessage());
         }
 
 
@@ -38,6 +38,6 @@ public class GetLocalVideoSegmentsHandler implements RequestHandler<GetLocalVide
 
         VideoSegmentDAO dao = new VideoSegmentDAO();
 
-        return dao.getLocalVideoSegments();
+        return dao.getUnmarkedVideoSegments();
     }
 }

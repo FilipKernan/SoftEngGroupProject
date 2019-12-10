@@ -97,9 +97,9 @@ public class ResponseTester {
     @Test
     public void getLocalVideoSegments(){
         List<VideoSegment> vids = new ArrayList<>();
-        LocalVideoSegmentsResponse response = new LocalVideoSegmentsResponse(vids, 200);
-        LocalVideoSegmentsResponse response2 = new LocalVideoSegmentsResponse(403, "Bad things happened");
-        LocalVideoSegmentsResponse response3 = new LocalVideoSegmentsResponse(null, 200);
+        GetLocalVideoSegmentsResponse response = new GetLocalVideoSegmentsResponse(vids, 200);
+        GetLocalVideoSegmentsResponse response2 = new GetLocalVideoSegmentsResponse(403, "Bad things happened");
+        GetLocalVideoSegmentsResponse response3 = new GetLocalVideoSegmentsResponse(null, 200);
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
