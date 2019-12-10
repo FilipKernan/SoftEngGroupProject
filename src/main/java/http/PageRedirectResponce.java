@@ -1,8 +1,10 @@
 package http;
 
+import java.net.URL;
+
 public class PageRedirectResponce {
 
-    String url;
+    URL url;
     int statusCode;
     String error;
 
@@ -12,13 +14,13 @@ public class PageRedirectResponce {
         this.error = error;
     }
 
-    public PageRedirectResponce(String url, int statusCode) {
+    public PageRedirectResponce(URL url, int statusCode) {
         this.url = url;
         this.statusCode = statusCode;
     }
 
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 
@@ -31,7 +33,7 @@ public class PageRedirectResponce {
 
     }
 
-    public void setUrl(String url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 

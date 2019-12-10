@@ -2,6 +2,8 @@ package handlers;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.document.Page;
@@ -9,12 +11,15 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import http.PageRedirectRequest;
 import http.PageRedirectResponce;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 
 import javax.swing.plaf.synth.Region;
+import java.net.URL;
 
 public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, PageRedirectResponce> {
 
@@ -22,24 +27,38 @@ public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, 
 
     @Override
     public PageRedirectResponce handleRequest(PageRedirectRequest pageRedirectRequest, Context context) {
-
-        String url = generatePresignedURL(pageRedirectRequest.getPage());
-        if (!url.isEmpty()) {
-            PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);
-            return pageRedirectResponce;
-        } else {
-            PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, "could not create URL");
-            return pageRedirectResponce;
+        logger = context.getLogger();
+        try {
+            URL url = generatePresignedURL(pageRedirectRequest.getPage());
+            if (!url.toString().isEmpty()) {
+                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);
+                return pageRedirectResponce;
+            } else {
+                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, "could not create URL");
+                return pageRedirectResponce;
+            }
+        } catch (Exception e) {
+            logger.log("a problem happened it geneatating the url");
+            logger.log(e.getMessage());
         }
+        return null;
+
     }
 
-    public String generatePresignedURL(String page){
+    public URL generatePresignedURL(String page) throws Exception{
+
         Regions region = Regions.US_EAST_2;
         String bucketName = "3733mothproject";
         String objectName = "html/" + page;
-        String url = "";
+        URL url = null;
         try {
-            AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).withCredentials(new ProfileCredentialsProvider()).build();
+            AWSCredentialsProvider awsCredentialsProvider = new DefaultAWSCredentialsProviderChain();
+
+            AmazonS3 s3Client =AmazonS3ClientBuilder.standard()
+                    .withRegion(region)
+                    .withCredentials(awsCredentialsProvider)
+                    .build();
+;
 
             java.util.Date exparationDate = new java.util.Date();
             long expTimeMillis = exparationDate.getTime();
@@ -50,7 +69,7 @@ public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, 
             logger.log("Generating presigned URL");
 
             GeneratePresignedUrlRequest presignedRequest = new GeneratePresignedUrlRequest(bucketName, objectName).withMethod(HttpMethod.GET).withExpiration(exparationDate);
-            url = s3Client.generatePresignedUrl(presignedRequest).toString();
+            url = s3Client.generatePresignedUrl(presignedRequest);
 
 
 
