@@ -1,24 +1,26 @@
 package http;
 
-public class PageRedirectResponse {
+import java.net.URL;
 
-    String url;
+public class PageRedirectResponce {
+
+    URL url;
     int statusCode;
     String error;
 
 
-    public PageRedirectResponse(int statusCode, String error) {
+    public PageRedirectResponce(int statusCode, String error) {
         this.statusCode = statusCode;
         this.error = error;
     }
 
-    public PageRedirectResponse(String url, int statusCode) {
+    public PageRedirectResponce(URL url, int statusCode) {
         this.url = url;
         this.statusCode = statusCode;
     }
 
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 
@@ -31,7 +33,7 @@ public class PageRedirectResponse {
 
     }
 
-    public void setUrl(String url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 
