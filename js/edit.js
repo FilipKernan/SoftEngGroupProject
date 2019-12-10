@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loading();
     var playlistID =getUrlVars()["playlistID"];
+    getPlaylistName(playlistID);
     console.log("playlistID: " + playlistID);
     getClipInPlayList(playlistID);
     getVideoSegments().then(doneLoading);
@@ -49,6 +50,13 @@ $(document).ready(function () {
         var js = JSON.stringify(data);
         window.location.href =  getRedirect(js, "url");
 
+    });
+
+    $('form.name').submit(function () {
+        var name = $("input[name=playlistName]").val();
+        console.log(name);
+        loading();
+        renamePlaylist(playlistID, name).then(doneLoading);
     });
 });
 
