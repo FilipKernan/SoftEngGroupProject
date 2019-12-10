@@ -56,3 +56,13 @@ function next() {
     video.load();
     video.play();
 }
+
+async function goToHome() {
+    data = {};
+    data["page"] = "home.html";
+    js = JSON.stringify(data);
+
+    window.location.href = await redirect(js, "url").then(function (value) {
+
+    });
+}
