@@ -10,14 +10,14 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import db.VideoSegmentDAO;
-import http.CreateVideoSegmentRequest;
-import http.CreateVideoSegmentResponce;
+import http.CreateVideoSegmentLocalRequest;
+import http.CreateVideoSegmentLocalResponse;
 import model.VideoSegment;
 
 import java.io.ByteArrayInputStream;
 import java.util.UUID;
 
-public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegmentRequest, CreateVideoSegmentResponce> {
+public class CreateVideoSegmentLocalHandler implements RequestHandler<CreateVideoSegmentLocalRequest, CreateVideoSegmentLocalResponse> {
 
 
     LambdaLogger logger;
@@ -25,32 +25,32 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
     private AmazonS3 s3 = null;
 
     @Override
-    public CreateVideoSegmentResponce handleRequest(CreateVideoSegmentRequest req, Context context) {
+    public CreateVideoSegmentLocalResponse handleRequest(CreateVideoSegmentLocalRequest req, Context context) {
         logger = context.getLogger();
         logger.log(req.toString());
 
-        CreateVideoSegmentResponce responce;
+        CreateVideoSegmentLocalResponse responce;
 
         String id = UUID.randomUUID().toString();
 
         try {
             byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
             if (createVideoSegment(req, encoded, id)) {
-                responce = new CreateVideoSegmentResponce(id, 200);
+                responce = new CreateVideoSegmentLocalResponse(id, 200);
             } else {
-                responce = new CreateVideoSegmentResponce(id, 422);
+                responce = new CreateVideoSegmentLocalResponse(id, 422);
             }
 
 
         } catch (Exception e) {
-            responce = new CreateVideoSegmentResponce(400, "Unable to create video segment: " + req.name + " (" + e.getMessage() + ")");
+            responce = new CreateVideoSegmentLocalResponse(400, "Unable to create video segment: " + req.name + " (" + e.getMessage() + ")");
         }
 
 
         return responce;
     }
 
-    private boolean createVideoSegment(CreateVideoSegmentRequest req, byte[] encoded, String id) {
+    private boolean createVideoSegment(CreateVideoSegmentLocalRequest req, byte[] encoded, String id) {
         if (logger != null) { logger.log("in create Video Segment"); }
 
         if (s3 == null) {
@@ -70,7 +70,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         VideoSegmentDAO db = new VideoSegmentDAO();
         try {
             VideoSegment newVideoSegment = db.generateVideoSegment(req.character, req.transcript, id, url);
-            return db.addVideoSegment(newVideoSegment);
+            return db.addVideoSegmentLocal(newVideoSegment);
         } catch (Exception e) {
             logger.log("could not generate new video segment: " + e.getMessage());
             return false;

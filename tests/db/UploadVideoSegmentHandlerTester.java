@@ -1,9 +1,9 @@
 package db;
 
 import handlers.DeleteVideoSegmentHandler;
-import handlers.UploadVideoSegmentHandler;
-import http.CreateVideoSegmentRequest;
-import http.CreateVideoSegmentResponce;
+import handlers.CreateVideoSegmentLocalHandler;
+import http.CreateVideoSegmentLocalRequest;
+import http.CreateVideoSegmentLocalResponse;
 import http.DeleteVideoSegmentRequest;
 import http.DeleteVideoSegmentResponse;
 import org.junit.Assert;
@@ -13,13 +13,13 @@ public class UploadVideoSegmentHandlerTester extends LambdaTest{
 
     @Test
     public void testUpload() {
-        CreateVideoSegmentRequest cvs = new CreateVideoSegmentRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName", "TestTranscript");
-        CreateVideoSegmentResponce resp = new UploadVideoSegmentHandler().handleRequest(cvs, createContext("Upload"));
+        CreateVideoSegmentLocalRequest cvs = new CreateVideoSegmentLocalRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName", "TestTranscript");
+        CreateVideoSegmentLocalResponse resp = new CreateVideoSegmentLocalHandler().handleRequest(cvs, createContext("Upload"));
         Assert.assertEquals(200, resp.statusCode);
 
         //test repetitive input of character and transcript
-        CreateVideoSegmentRequest cvsR = new CreateVideoSegmentRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter", "TestName", "TestTranscript");
-        CreateVideoSegmentResponce respR = new UploadVideoSegmentHandler().handleRequest(cvsR, createContext("Upload"));
+        CreateVideoSegmentLocalRequest cvsR = new CreateVideoSegmentLocalRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter", "TestName", "TestTranscript");
+        CreateVideoSegmentLocalResponse respR = new CreateVideoSegmentLocalHandler().handleRequest(cvsR, createContext("Upload"));
         Assert.assertEquals(422, respR.statusCode);
 
         DeleteVideoSegmentRequest dvs = new DeleteVideoSegmentRequest(resp.videoID);

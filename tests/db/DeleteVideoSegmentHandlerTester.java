@@ -1,9 +1,9 @@
 package db;
 
 import handlers.DeleteVideoSegmentHandler;
-import handlers.UploadVideoSegmentHandler;
-import http.CreateVideoSegmentRequest;
-import http.CreateVideoSegmentResponce;
+import handlers.CreateVideoSegmentLocalHandler;
+import http.CreateVideoSegmentLocalRequest;
+import http.CreateVideoSegmentLocalResponse;
 import http.DeleteVideoSegmentRequest;
 import http.DeleteVideoSegmentResponse;
 import org.junit.Assert;
@@ -14,8 +14,8 @@ public class DeleteVideoSegmentHandlerTester extends LambdaTest{
     @Test
     public void testDeleteVS(){
 
-        CreateVideoSegmentRequest cvs = new CreateVideoSegmentRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName0", "TestTranscript");
-        CreateVideoSegmentResponce resp = new UploadVideoSegmentHandler().handleRequest(cvs, createContext("Upload"));
+        CreateVideoSegmentLocalRequest cvs = new CreateVideoSegmentLocalRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName0", "TestTranscript");
+        CreateVideoSegmentLocalResponse resp = new CreateVideoSegmentLocalHandler().handleRequest(cvs, createContext("Upload"));
         Assert.assertEquals(200, resp.statusCode);
 
         DeleteVideoSegmentRequest dvs = new DeleteVideoSegmentRequest(resp.videoID);

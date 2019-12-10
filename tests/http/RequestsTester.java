@@ -79,8 +79,8 @@ public class RequestsTester {
 
 
 
-        CreateVideoSegmentRequest req = new CreateVideoSegmentRequest(base64EncodedValue, id, character, transcript, name);
-        CreateVideoSegmentRequest req2 = new CreateVideoSegmentRequest();
+        CreateVideoSegmentLocalRequest req = new CreateVideoSegmentLocalRequest(base64EncodedValue, id, character, transcript, name);
+        CreateVideoSegmentLocalRequest req2 = new CreateVideoSegmentLocalRequest();
 
         req2.setBase64Encodedvalue(base64EncodedValue);
         req2.setId(id);

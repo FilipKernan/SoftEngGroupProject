@@ -1,6 +1,6 @@
 package http;
 
-public class CreateVideoSegmentRequest {
+public class CreateVideoSegmentLocalRequest {
 
 
 
@@ -9,25 +9,6 @@ public class CreateVideoSegmentRequest {
     public String character;
     public String transcript;
     public String name;
-    public boolean isLocal;
-
-    public String getTpsURL() {
-        return tpsURL;
-    }
-
-    public void setTpsURL(String tpsURL) {
-        this.tpsURL = tpsURL;
-    }
-
-    public String tpsURL;
-
-    public boolean isLocal() {
-        return isLocal;
-    }
-
-    public void setLocal(boolean local) {
-        isLocal = local;
-    }
 
 
     public void setBase64Encodedvalue(String base64Encodedvalue) {
@@ -71,17 +52,15 @@ public class CreateVideoSegmentRequest {
         return transcript;
     }
 
-    public CreateVideoSegmentRequest(String base64Encodedvalue, String id, String character, String transcript, String name, boolean isLocal, String tpsURL) {
+    public CreateVideoSegmentLocalRequest(String base64Encodedvalue, String id, String character, String transcript, String name) {
         this.base64EncodedValue = base64Encodedvalue;
         this.id = id;
         this.character = character;
         this.transcript = transcript;
         this.name = name;
-        this.isLocal = isLocal;
-        this.tpsURL = tpsURL;
     }
 
-    public CreateVideoSegmentRequest() {
+    public CreateVideoSegmentLocalRequest() {
     }
 
 

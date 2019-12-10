@@ -16,8 +16,8 @@ public class DeleteVideoSegmentInPlaylistHandlerTester extends LambdaTest{
         Assert.assertEquals(200, resp.statusCode);
 
         //upload video segment
-        CreateVideoSegmentRequest cvs = new CreateVideoSegmentRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName0", "TestTranscript");
-        CreateVideoSegmentResponce uploadResp = new UploadVideoSegmentHandler().handleRequest(cvs, createContext("Upload"));
+        CreateVideoSegmentLocalRequest cvs = new CreateVideoSegmentLocalRequest("VGVzdERlbGV0ZQ==", "000000000000000000000000000000000001", "TestCharacter","TestName0", "TestTranscript");
+        CreateVideoSegmentLocalResponse uploadResp = new CreateVideoSegmentLocalHandler().handleRequest(cvs, createContext("Upload"));
         Assert.assertEquals(200, uploadResp.statusCode);
 
         //append a video to the playlist created

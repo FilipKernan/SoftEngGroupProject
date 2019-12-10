@@ -57,8 +57,8 @@ public class ResponseTester {
 
     @Test
     public void createVideoSegment(){
-        CreateVideoSegmentResponce response = new CreateVideoSegmentResponce("videoID", 200);
-        CreateVideoSegmentResponce response2 = new CreateVideoSegmentResponce(403, "Bad things happened");
+        CreateVideoSegmentLocalResponse response = new CreateVideoSegmentLocalResponse("videoID", 200);
+        CreateVideoSegmentLocalResponse response2 = new CreateVideoSegmentLocalResponse(403, "Bad things happened");
 
         System.out.println(response.toString());
         System.out.println(response2.toString());

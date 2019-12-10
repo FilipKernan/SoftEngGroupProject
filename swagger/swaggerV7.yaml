@@ -1,0 +1,646 @@
+---
+swagger: "2.0"
+info:
+  description: Soft Eng API
+  version: "7.0"
+  title: Moth API V7
+  contact:
+    name: Moth
+    email: cvieira@wpi.edu
+host: virtserver.swaggerhub.com
+basePath: /Self4114/SoftEngReal/1.0
+tags:
+  - name: participants
+    description: Regular users of the website
+  - name: library
+    description: Actions that deal with the Library class
+  - name: playlist
+    description: Actions that deal with the Playlist class
+  - name: videoSegment
+    description: Actions that deal with the VideoSegments class
+  - name: administrators
+    description: Administrators of the website
+schemes:
+  - https
+paths:
+  /playlist/getSegments:
+    post:
+      summary: will return the video segments in a playlist
+      description: will present the video segments of a playlist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: SegmentRequest
+          required: false
+          schema:
+            $ref: '#/definitions/SegmentRequest'
+      responses:
+        200:
+          description: segments received
+          schema:
+            $ref: '#/definitions/SegmentResponce'
+        400:
+          description: Error
+        404:
+          description: Element not found
+  /playlist/deleteSegment:
+    post:
+      summary: delete a video segment in a playlist
+      description: a video segment is deleted from the playlist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: DeleteSegmentInPLRequest
+          required: false
+          schema:
+            $ref: '#/definitions/DeleteSegmentInPLRequest'
+      responses:
+        200:
+          description: the segment is deleted
+          schema:
+            $ref: '#/definitions/DeleteSegmentInPLResponce'
+        400:
+          description: Error
+        404:
+          description: Element not found
+        409:
+          description: the video segment doesn't exist
+  /videoSegment/Mark:
+    post:
+      tags:
+        - administrators
+      summary: will set marked status for video segment
+      description: will set marked status for video segment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: MarkSegmentRequest
+          required: false
+          schema:
+            $ref: '#/definitions/MarkSegmentRequest'
+      responses:
+        200:
+          description: segment set to Marked state in SegmentMark
+        400:
+          description: Error
+        404:
+          description: Element not found
+  /videoSegment/get:
+    post:
+      summary: Will return all video segments, only local if specified
+      description: Will return all video segments, only local if specified
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: GetVideoSegmentRequest
+          required: false
+          schema:
+            $ref: '#/definitions/GetVideoSegmentsRequest'
+      responses:
+        200:
+          description: Video Segments returned
+        400:
+          description: Error
+        404:
+          description: Element not found
+  /videoSegment/search:
+    post:
+      tags:
+        - participants
+        - library
+      summary: Search video segments with transcript or character or both
+      description: Searchs Video Segment
+      operationID: searchVideoSegment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: SearchVideoSegmentRequest
+          description: Requests to search video segments with charater or transcript or both
+          required: false
+          schema:
+            $ref: '#/definitions/SearchVideoSegmentRequest'
+      responses:
+        200:
+          description: searched video segments
+          schema:
+            $ref: '#/definitions/SearchVideoSegmentResponse'
+        400:
+          description: invalid input
+        404:
+          description: Element not found
+
+  /admin/thirdParty/register:
+    post:
+      tags:
+        - administrators
+      summary: will set registered state for third party site
+      description: will set registered state for third party site
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: ThirdParty
+          required: false
+          schema:
+            $ref: '#/definitions/RegisterThirdPartyRequest'
+      responses:
+        200:
+          description: party registered or unregistered
+          schema:
+            $ref: '#/definitions/RegisterThirdPartyResponse'
+        400:
+          description: Error
+        404:
+          description: Element not found
+  /admin/thirdParty/get:
+    post:
+      tags:
+        - administrators
+      summary: Will get all third party sites registered
+      description: Will get all third party sites registered
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        200:
+          description: Returned all third party sites
+          schema:
+            $ref: '#/definitions/GetThirdPartyResponse'
+        400:
+          description: Error
+        404:
+          description: Element not found
+  /playlist/get:
+    get:
+      tags:
+        - participants
+        - library
+        - playlist
+      summary: Returns all playlists created so far
+      description: Returns all playlists that have been created so far.
+      operationId: searchInventory
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        200:
+          description: List of matching videos returned
+          schema:
+            $ref: '#/definitions/ReturnPlaylistsResponse'
+        400:
+          description: No playlists exist?
+        404:
+          description: Element not found
+  /playlist/create:
+    post:
+      tags:
+        - participants
+        - playlist
+        - library
+      summary: Creates a new playlist to add to the library
+      description: Creates a new playlist
+      operationId: createPlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: CreatePlaylistRequest
+          description: Requests to create a new playlist with a name of the user's choosing
+          required: false
+          schema:
+            $ref: '#/definitions/CreatePlaylistRequest'
+      responses:
+        200:
+          description: item created
+          schema:
+            $ref: '#/definitions/CreatePlaylistResponse'
+        400:
+          description: invalid input, object invalid
+        404:
+          description: Element not found
+        409:
+          description: a playlist with the same name already exits
+  /playlist/append:
+    post:
+      tags:
+        - participants
+        - playlist
+      summary: Appends a video segment to the end of a playlist
+      description: Appends a video segment to the end of the playlist that is currently being edited.
+      operationId: AddVideoSegmentToPlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: AppendVideoSegmentToPlaylistRequest
+          description: Requests to append video segment to end of a playlist
+          required: false
+          schema:
+            $ref: '#/definitions/AppendVideoSegmentToPlaylistRequest'
+      responses:
+        200:
+          description: video segment appended to end of a playlist
+          schema:
+            $ref: '#/definitions/AppendVideoSegmentToPlaylistResponse'
+        400:
+          description: invalid input
+        404:
+          description: Element not found
+        409:
+          description: A playlist with playlistName does not exist or video segment with videoSegmentID does not exist
+  /playlist/delete:
+    post:
+      tags:
+        - participants
+        - playlist
+        - library
+      summary: Deleted a playlist from the library
+      description: A playlist is deleted from the library
+      operationId: deletePlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: DeletePlaylistRequest
+          description: Requests to delete a playlist from the library
+          required: false
+          schema:
+            $ref: '#/definitions/DeletePlaylistRequest'
+      responses:
+        200:
+          description: playlist removed
+        400:
+          description: invalid input
+        404:
+          description: Element not found
+        409:
+          description: a playlist with that name doesn't exist
+  /playlist/rename:
+    post:
+      tags:
+        - participants
+        - playlist
+      summary: Rename a playlist from the library
+      description: A playlist in the library has its name changed to a new string
+      operationId: renamePlaylist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: RenamePlaylistRequest
+          description: Requests to rename a playlists
+          required: false
+          schema:
+            $ref: '#/definitions/RenamePlaylistRequest'
+      responses:
+        200:
+          description: playlist renamed
+          schema:
+            $ref: '#/definitions/RenamePlaylistResponse'
+        400:
+          description: invalid input
+        404:
+          description: Element not found
+        409:
+          description: a playlist with that name doesn't exist
+  /videoSegment/addLocal:
+    post:
+      tags:
+        - participants
+        - library
+        - videoSegment
+      summary: Uploads a new local video segment to the library
+      description: Uploads Video Segment
+      operationId: uploadVideoSegment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: UploadVideoSegmentRequest
+          description: Requests to upload a new local video segment
+          required: false
+          schema:
+            $ref: '#/definitions/UploadVideoSegmentRequest'
+      responses:
+        200:
+          description: item created
+          schema:
+            $ref: '#/definitions/UploadVideoSegmentResponse'
+        400:
+          description: invalid input, object invalid
+        404:
+          description: Element not found
+        409:
+          description: File conflict
+  /videoSegment/add:
+    post:
+      tags:
+        - participants
+        - library
+        - videoSegment
+      summary: Uploads a new local video segment to the library
+      description: Uploads Video Segment
+      operationId: uploadVideoSegment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: UploadVideoSegmentRequest
+          description: Requests to upload a new local video segment
+          required: false
+          schema:
+            $ref: '#/definitions/UploadVideoSegmentRequest'
+      responses:
+        200:
+          description: item created
+          schema:
+            $ref: '#/definitions/UploadVideoSegmentResponse'
+        400:
+          description: invalid input, object invalid
+        404:
+          description: Element not found
+        409:
+          description: File conflict
+  /videoSegment/delete:
+    post:
+      tags:
+        - participants
+        - library
+        - videoSegment
+      summary: Delete a local video segment from the library
+      description: Deletes a local Video Segment
+      operationId: removeVideoSegment
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: DeleteVideoSegmentRequest
+          description: Requests to delete a local video segment
+          required: false
+          schema:
+            $ref: '#/definitions/DeleteVideoSegmentRequest'
+      responses:
+        200:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        404:
+          description: Element not found
+definitions:
+  SegmentRequest:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  SegmentResponce:
+    required:
+      - id
+      - url
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+  DeleteSegmentInPLRequest:
+    required:
+      - playlistId
+      - segmentID
+    properties:
+      playlistId:
+        type: String
+      segmentId:
+        type: String
+  DeleteSegmentInPLResponce:
+    required:
+      - id
+      - url
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+  SearchVideoSegmentRequest:
+    required:
+      - transcript
+      - character
+    properties:
+      transcript:
+        type: string
+      character:
+        type: string
+  SearchVideoSegmentResponse:
+    required:
+      - transcript
+      - character
+    properties:
+      transcript:
+        type: string
+      character:
+        type: string
+  MarkSegmentRequest:
+    required:
+      - makeMarked
+      - id
+    properties:
+      id:
+        type: string
+      makeMarked:
+        type: boolean
+  RegisterThirdPartyRequest:
+    required:
+      - addTPS
+      - url
+    properties:
+      url:
+        type: string
+      addTPS:
+        type: boolean
+  RegisterThirdPartyResponse:
+    required:
+      - addTPS
+      - url
+    properties:
+      url:
+        type: string
+      addTPS:
+        type: boolean
+  GetThirdPartyResponse:
+    required:
+      - ThirdPartySites
+    properties:
+      Playlists:
+        type: array
+        items:
+          $ref: '#/definitions/GetThirdPartyRequestSites'
+  GetThirdPartyRequestSites:
+    type: object
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+  CreatePlaylistRequest:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+  UploadVideoSegmentLocalRequest:
+    required:
+      - name
+      - transcript
+      - character
+      - base64-encoded Value
+    properties:
+      name:
+        type: string
+      transcript:
+        type: string
+      character:
+        type: string
+      base64-encoded Value:
+        type:
+  UploadVideoSegmentRequest:
+    required:
+      - name
+      - transcript
+      - character
+      - base64-encoded Value
+      - isLocal
+      - tpsURL
+    properties:
+      name:
+        type: string
+      transcript:
+        type: string
+      character:
+        type: string
+      tpsURL:
+        type: string
+      base64-encoded Value:
+        type:
+      isLocal:
+        type: boolean
+  DeleteVideoSegmentRequest:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  AppendVideoSegmentToPlaylistRequest:
+    required:
+      - playlistID
+      - videoID
+    properties:
+      videoID:
+        type: string
+      playlistID:
+        type: string
+  DeletePlaylistRequest:
+    required:
+      - id
+      - newName
+    properties:
+      id:
+        type: string
+      newName:
+        type: string
+  RenamePlaylistRequest:
+    required:
+      - playlistID
+    properties:
+      playlistID:
+        type: string
+  ReturnPlaylistsResponse:
+    required:
+      - Playlists
+    properties:
+      Playlists:
+        type: array
+        items:
+          $ref: '#/definitions/ReturnPlaylistsResponsePlaylists'
+  CreatePlaylistResponse:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  UploadVideoSegmentLocalResponse:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  UploadVideoSegmentResponse:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  AppendVideoSegmentToPlaylistResponse:
+    required:
+      - playlistID
+      - videoID
+    properties:
+      videoID:
+        type: string
+      playlistID:
+        type: string
+  RenamePlaylistResponse:
+    required:
+      - playlistID
+    properties:
+      playlistID:
+        type: string
+  ReturnPlaylistsResponsePlaylists:
+    type: object
+    properties:
+      id:
+        type: string
+      urlURL:
+        type: string
+  GetVideoSegmentsRequest:
+    type: object
+    properties:
+      onlyLocal:
+        type: boolean
+  GetVideoSegmentsResponse:
+    required:
+      - VideoSegmentURLs
+    properties:
+      VideoSegmentURLs:
+        type: String

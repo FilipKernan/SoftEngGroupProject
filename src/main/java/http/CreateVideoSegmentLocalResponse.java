@@ -1,12 +1,12 @@
 package http;
 
-public class CreateVideoSegmentResponce {
+public class CreateVideoSegmentLocalResponse {
 
     public final String videoID;
     public final int statusCode;
     public final String error;
 
-    public CreateVideoSegmentResponce(String videoID, int statusCode) {
+    public CreateVideoSegmentLocalResponse(String videoID, int statusCode) {
         this.videoID = videoID;
         this.statusCode = statusCode;
         this.error = "";
@@ -14,7 +14,7 @@ public class CreateVideoSegmentResponce {
     }
 
 
-    public CreateVideoSegmentResponce(int statusCode, String error) {
+    public CreateVideoSegmentLocalResponse(int statusCode, String error) {
         this.error = error;
         this.statusCode = statusCode;
         this.videoID = "";

@@ -115,7 +115,7 @@ public class VideoSegmentDAO {
         return new VideoSegment(videoUrl, UUID, transcript, character);
     }
 
-    public boolean addVideoSegment(VideoSegment newVideoSegment) throws Exception {
+    public boolean addVideoSegmentLocal(VideoSegment newVideoSegment) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM video WHERE videoID = ?;");
             ps.setString(1, newVideoSegment.UUID);
@@ -145,6 +145,34 @@ public class VideoSegmentDAO {
             return true;
 
 
+        } catch (Exception e){
+            throw new Exception("Failed in getting books: " + e.getMessage());
+        }
+    }
+
+    public boolean addVideoSegment(VideoSegment newVideoSegment, int isLocal) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM video WHERE videoID = ?;");
+            ps.setString(1, newVideoSegment.UUID);
+            ResultSet resultSet = ps.executeQuery();
+
+            // already present?
+            while (resultSet.next()) {
+                VideoSegment c = generateVideoSegment(resultSet);
+                resultSet.close();
+                return false;
+            }
+
+            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoURL`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', ?);");
+            ps.setString(1, newVideoSegment.UUID);
+            ps.setString(2, newVideoSegment.character);
+            ps.setString(3, newVideoSegment.transcript);
+            ps.setString(4, newVideoSegment.url);
+            ps.setInt(5, isLocal);
+            ps.execute();
+            ps.close();
+
+            return true;
         } catch (Exception e){
             throw new Exception("Failed in getting books: " + e.getMessage());
         }
