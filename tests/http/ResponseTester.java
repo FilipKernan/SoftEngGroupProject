@@ -5,6 +5,7 @@ import model.ThirdPartySite;
 import model.VideoSegment;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,8 +148,9 @@ public class ResponseTester {
 
     @Test
     public void pageRedirectResponse(){
-        PageRedirectResponse response = new PageRedirectResponse("url", 200);
-        PageRedirectResponse response2 = new PageRedirectResponse(403, "Bad things happened");
+        URL url = null;
+        PageRedirectResponce response = new PageRedirectResponce(url, 200);
+        PageRedirectResponce response2 = new PageRedirectResponce(403, "Bad things happened");
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
