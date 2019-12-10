@@ -23,6 +23,28 @@ tags:
 schemes:
   - https
 paths:
+  /redirect:
+    post:
+      summary: will return the presigned url of the page that is requested
+      description: will present the prsigned url for a page
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          required: false
+          schma:
+            $ref: '#/definitions/PageRequest'
+        responces:
+          200:
+            description: url recived
+            schema:
+              $ref: '#/definitions/PageResonce'
+          400:
+            description: Error
+
+
   /playlist/getSegments:
     post:
       summary: will return the video segments in a playlist
@@ -627,4 +649,16 @@ definitions:
       - VideoSegmentURLs
     properties:
       VideoSegmentURLs:
+        type: String
+  PageRequest:
+    required:
+      - page
+    properties:
+      page:
+        type: String
+  PageResonce:
+    required:
+      - url
+    properties:
+      url:
         type: String
