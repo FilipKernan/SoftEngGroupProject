@@ -19,23 +19,29 @@ function search(response, character, transcript) {
             var hasResult = false;
 
             for (i = 0; i < json.list.length; i++) {
+
+                try{
+                    ifMarked = json.list[i].ifMarked;
+                }catch(e){
+                    ifMarked = false;
+                }
                 if (character && json.list[i].character.toLowerCase().includes(character) && !transcript) {
                     console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
+                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
                     hasResult = true;
 
                 } else if (transcript && json.list[i].transcript.toLowerCase().includes(transcript) && !character) {
                     console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
+                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
                     hasResult = true;
 
                 } else if (!transcript && !character) {
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
+                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
                     hasResult = true;
 
                 } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
                     console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character);
+                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
                     hasResult = true;
                 }
             }

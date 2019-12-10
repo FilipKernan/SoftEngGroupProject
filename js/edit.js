@@ -61,7 +61,7 @@ $(document).ready(function () {
 });
 
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character, id) {
+function addVideoClip(url, transcript, character, id, ifMarked) {
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
