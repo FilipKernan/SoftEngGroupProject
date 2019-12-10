@@ -32,7 +32,8 @@ async function getVideoSegments() {
                 transcript = js.list[i].transcript;
                 character = js.list[i].character;
                 videoId = js.list[i].UUID;
-                addVideoClip(url, transcript, character, videoId);
+                ifMarked = js.list[i].ifMarked;
+                addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }
     } else {

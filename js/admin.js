@@ -52,14 +52,20 @@ $(document).ready(function () {
 });
 
 // Creates a new video clip in the slider
-function addVideoClip(url, transcript, character, id) {
+function addVideoClip(url, transcript, character, id, ifMarked) {
+    if(ifMarked){
+        icon = "radio_button_checked";
+    }else{
+        icon = "radio_button_unchecked";
+    }
+    console.log(ifMarked);
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +
         "                                <i class=\"material-icons mark\" style=\"top: 0\">\n" +
-        "                                    radio_button_unchecked\n" +
+        "                                   " + icon +"\n" +
         "                                </i>\n" +
         "                            </div>\n" +
         "                               <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
