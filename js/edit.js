@@ -42,7 +42,12 @@ $(document).ready(function () {
     $('button.play').click(function () {
         var playlistID =getUrlVars()["playlistID"];
         console.log("Go play...");
-        window.location.href = "play.html?playlistID=" + playlistID;
+
+
+        var data = {};
+        data["page"] = "play.html?playlistID=" + playlistID;
+        var js = JSON.stringify(data);
+        window.location.href =  getRedirect(js, "url");
 
     });
 });
@@ -84,3 +89,12 @@ function appendVideoClip(url, transcript, character, id) {
         "                        <a> </a>");
     $("#Library2").append(clip);
 }
+
+function goToHome() {
+    data = {};
+    data["page"] = "home.html";
+    js = JSON.stringify(data);
+
+    window.location.href = getRedirect(js, "url");
+}
+
