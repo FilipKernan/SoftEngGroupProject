@@ -94,10 +94,10 @@ paths:
           description: Error
         404:
           description: Element not found
-  /videoSegment/get:
+  /videoSegment/getLocal:
     post:
-      summary: Will return all video segments, only local if specified
-      description: Will return all video segments, only local if specified
+      summary: Will return all local video segments
+      description: Will return all local video segments
       consumes:
         - application/json
       produces:
@@ -107,7 +107,7 @@ paths:
           name: GetVideoSegmentRequest
           required: false
           schema:
-            $ref: '#/definitions/GetVideoSegmentsRequest'
+            $ref: '#/definitions/GetLocalVideoSegmentsRequest'
       responses:
         200:
           description: Video Segments returned
@@ -115,35 +115,27 @@ paths:
           description: Error
         404:
           description: Element not found
-  /videoSegment/search:
+  /videoSegment/getUnmarked:
     post:
-      tags:
-        - participants
-        - library
-      summary: Search video segments with transcript or character or both
-      description: Searchs Video Segment
-      operationID: searchVideoSegment
+      summary: Will return all unmarked video segments
+      description: Will return all unmarked video segments
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
         - in: body
-          name: SearchVideoSegmentRequest
-          description: Requests to search video segments with charater or transcript or both
+          name: GetVideoSegmentRequest
           required: false
           schema:
-            $ref: '#/definitions/SearchVideoSegmentRequest'
+            $ref: '#/definitions/GetUnmarkedVideoSegmentsRequest'
       responses:
         200:
-          description: searched video segments
-          schema:
-            $ref: '#/definitions/SearchVideoSegmentResponse'
+          description: Video Segments returned
         400:
-          description: invalid input
+          description: Error
         404:
           description: Element not found
-
   /admin/thirdParty/register:
     post:
       tags:
@@ -197,7 +189,6 @@ paths:
         - playlist
       summary: Returns all playlists created so far
       description: Returns all playlists that have been created so far.
-      operationId: searchInventory
       produces:
         - application/json
       parameters: []
@@ -453,24 +444,6 @@ definitions:
         type: string
       url:
         type: string
-  SearchVideoSegmentRequest:
-    required:
-      - transcript
-      - character
-    properties:
-      transcript:
-        type: string
-      character:
-        type: string
-  SearchVideoSegmentResponse:
-    required:
-      - transcript
-      - character
-    properties:
-      transcript:
-        type: string
-      character:
-        type: string
   MarkSegmentRequest:
     required:
       - makeMarked
@@ -633,12 +606,23 @@ definitions:
         type: string
       urlURL:
         type: string
-  GetVideoSegmentsRequest:
+  GetLocalVideoSegmentsRequest:
     type: object
     properties:
       onlyLocal:
         type: boolean
-  GetVideoSegmentsResponse:
+  GetLocalVideoSegmentsResponse:
+    required:
+      - VideoSegmentURLs
+    properties:
+      VideoSegmentURLs:
+        type: String
+  GetUnmarkedVideoSegmentsRequest:
+    type: object
+    properties:
+      onlyLocal:
+        type: boolean
+  GetUnmarkedVideoSegmentsResponse:
     required:
       - VideoSegmentURLs
     properties:
