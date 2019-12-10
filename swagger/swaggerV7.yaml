@@ -359,7 +359,7 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: UploadVideoSegmentRequest
+          name: UploadLocalVideoSegmentRequest
           description: Requests to upload a new local video segment
           required: false
           schema:
