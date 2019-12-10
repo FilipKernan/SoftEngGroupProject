@@ -2,8 +2,8 @@
 swagger: "2.0"
 info:
   description: Soft Eng API
-  version: "5.0"
-  title: Moth API V5
+  version: "6.0"
+  title: Moth API V6
   contact:
     name: Moth
     email: cvieira@wpi.edu
@@ -520,9 +520,12 @@ definitions:
         type: string
   DeletePlaylistRequest:
     required:
-      - playlistID
+      - id
+      - newName
     properties:
-      playlistID:
+      id:
+        type: string
+      newName:
         type: string
   RenamePlaylistRequest:
     required:
