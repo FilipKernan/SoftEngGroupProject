@@ -84,6 +84,18 @@ public class RequestsTester {
     }
 
     @Test
+    public void pageRedirect(){
+        PageRedirectRequest req = new PageRedirectRequest();
+        PageRedirectRequest req2 = new PageRedirectRequest("page");
+
+        req.setPage("page");
+
+        Assert.assertEquals(req.getPage(), req2.getPage());
+        System.out.println(req.toString());
+
+    }
+
+    @Test
     public void createLocalVideoSegment(){
         String base64EncodedValue = "value";
         String id = "id";

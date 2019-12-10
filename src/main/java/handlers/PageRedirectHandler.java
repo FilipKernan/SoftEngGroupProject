@@ -1,10 +1,8 @@
 package handlers;
 
 import com.amazonaws.HttpMethod;
-import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.document.Page;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -12,24 +10,22 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import http.PageRedirectRequest;
-import http.PageRedirectResponce;
+import http.PageRedirectResponse;
 
-import javax.swing.plaf.synth.Region;
-
-public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, PageRedirectResponce> {
+public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, PageRedirectResponse> {
 
     public LambdaLogger logger;
 
     @Override
-    public PageRedirectResponce handleRequest(PageRedirectRequest pageRedirectRequest, Context context) {
+    public PageRedirectResponse handleRequest(PageRedirectRequest pageRedirectRequest, Context context) {
 
         String url = generatePresignedURL(pageRedirectRequest.getPage());
         if (!url.isEmpty()) {
-            PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);
-            return pageRedirectResponce;
+            PageRedirectResponse pageRedirectResponse = new PageRedirectResponse(url, 200);
+            return pageRedirectResponse;
         } else {
-            PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, "could not create URL");
-            return pageRedirectResponce;
+            PageRedirectResponse pageRedirectResponse = new PageRedirectResponse(400, "could not create URL");
+            return pageRedirectResponse;
         }
     }
 

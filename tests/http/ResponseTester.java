@@ -138,8 +138,17 @@ public class ResponseTester {
 
     @Test
     public void registerThirdPartyResponse(){
-        RegisterThirdPartyResponse response = new RegisterThirdPartyResponse("playlistID", 200);
+        RegisterThirdPartyResponse response = new RegisterThirdPartyResponse("url", 200);
         RegisterThirdPartyResponse response2 = new RegisterThirdPartyResponse("url", 403, "Bad things happened");
+
+        System.out.println(response.toString());
+        System.out.println(response2.toString());
+    }
+
+    @Test
+    public void pageRedirectResponse(){
+        PageRedirectResponse response = new PageRedirectResponse("url", 200);
+        PageRedirectResponse response2 = new PageRedirectResponse(403, "Bad things happened");
 
         System.out.println(response.toString());
         System.out.println(response2.toString());
