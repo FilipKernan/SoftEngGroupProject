@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import db.VideoSegmentDAO;
 import http.GetUnmarkedVideoSegmentsRequest;
 import http.GetUnmarkedVideoSegmentsResponse;
+import model.Segment;
 import model.VideoSegment;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class GetUnmarkedVideoSegmentsHandler implements RequestHandler<GetUnmark
 
         GetUnmarkedVideoSegmentsResponse response;
         try {
-            List<VideoSegment> list = getVideoSegments();
-            response = new GetUnmarkedVideoSegmentsResponse(list, 200);
+            List<Segment> segments = getVideoSegments();
+            response = new GetUnmarkedVideoSegmentsResponse(segments, 200);
         } catch (Exception e) {
             response = new GetUnmarkedVideoSegmentsResponse(403, e.getMessage());
         }
@@ -33,7 +34,7 @@ public class GetUnmarkedVideoSegmentsHandler implements RequestHandler<GetUnmark
         return response;
     }
 
-    private List<VideoSegment> getVideoSegments() throws Exception{
+    private List<Segment> getVideoSegments() throws Exception{
         logger.log("getting Video Segments");
 
         VideoSegmentDAO dao = new VideoSegmentDAO();

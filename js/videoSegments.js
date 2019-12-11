@@ -1,6 +1,6 @@
 // gets all video segments from AWS and creates library entries for each of them
 async function getVideoSegments(create = true) {
-    let result = await makeRequest("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", "");
+    let result = await makeRequest("GET", "https://sy8zpxpp8b.execute-api.us-east-2.amazonaws.com/dev/videoSegment/getLocal", "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -13,7 +13,7 @@ async function getVideoSegments(create = true) {
                     transcript = js.list[i].transcript;
                     character = js.list[i].character;
                     videoId = js.list[i].UUID;
-                    ifMarked = js.list[i].ifMarked;
+                    ifMarked = js.list[i].isMarked;
                     addVideoClip(url, transcript, character, videoId, ifMarked);
                 }
             } else {
@@ -26,9 +26,7 @@ async function getVideoSegments(create = true) {
         var err = js["error"];
         alert (err);
     }
-    if(create) {
-        //preparelibrarySlider();
-    }
+    preparelibrarySlider();
 }
 
 async function getRemoteVideoSegments(remoteSites) {
@@ -266,7 +264,7 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     preparelibrary2Slider();
 }
 
-function makeRequest(method, url, js, apikey = null) {
+function makeRequest(method, url, js) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open(method, url);
