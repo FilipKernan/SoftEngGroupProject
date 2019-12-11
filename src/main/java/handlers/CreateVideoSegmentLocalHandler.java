@@ -43,7 +43,7 @@ public class CreateVideoSegmentLocalHandler implements RequestHandler<CreateVide
 
 
         } catch (Exception e) {
-            responce = new CreateVideoSegmentLocalResponse(400, "Unable to create video segment: " + req.name + " (" + e.getMessage() + ")");
+            responce = new CreateVideoSegmentLocalResponse(400, "Unable to create video segment:  (" + e.getMessage() + ")");
         }
 
 

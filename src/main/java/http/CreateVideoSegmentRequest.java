@@ -4,38 +4,15 @@ public class CreateVideoSegmentRequest {
 
 
 
-    public String base64EncodedValue;
-    public String id;
-    public String character;
-    public String transcript;
-    public String name;
-    public boolean isLocal;
-
-    public String getTpsURL() {
-        return tpsURL;
-    }
-
-    public void setTpsURL(String tpsURL) {
-        this.tpsURL = tpsURL;
-    }
-
+    private String base64EncodedValue;
+    private String character;
+    private String transcript;
+    private boolean isLocal;
     public String tpsURL;
-
-    public boolean isLocal() {
-        return isLocal;
-    }
-
-    public void setLocal(boolean local) {
-        isLocal = local;
-    }
 
 
     public void setBase64Encodedvalue(String base64Encodedvalue) {
         this.base64EncodedValue = base64Encodedvalue;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setCharacter(String character) {
@@ -46,21 +23,17 @@ public class CreateVideoSegmentRequest {
         this.transcript = transcript;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocal(boolean local) {
+        isLocal = local;
     }
 
-
-    public String getName() {
-        return name;
+    public void setTpsURL(String tpsURL) {
+        this.tpsURL = tpsURL;
     }
+
 
     public String getBase64Encodedvalue() {
         return base64EncodedValue;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getCharacter() {
@@ -71,12 +44,18 @@ public class CreateVideoSegmentRequest {
         return transcript;
     }
 
+    public String getTpsURL() {
+        return tpsURL;
+    }
+    public boolean isLocal() {
+        return isLocal;
+    }
+
+
     public CreateVideoSegmentRequest(String base64Encodedvalue, String id, String character, String transcript, String name, boolean isLocal, String tpsURL) {
         this.base64EncodedValue = base64Encodedvalue;
-        this.id = id;
         this.character = character;
         this.transcript = transcript;
-        this.name = name;
         this.isLocal = isLocal;
         this.tpsURL = tpsURL;
     }
