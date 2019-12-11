@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loading();
     var playlistID =getUrlVars()["playlistID"];
+    getPlaylistName(playlistID);
     console.log("playlistID: " + playlistID);
     getClipInPlayList(playlistID);
     getVideoSegments().then(doneLoading);
@@ -43,17 +44,20 @@ $(document).ready(function () {
         var playlistID =getUrlVars()["playlistID"];
         console.log("Go play...");
 
+        window.location.href =  "play.html?playlistID=" + playlistID;
 
-        var data = {};
-        data["page"] = "play.html?playlistID=" + playlistID;
-        var js = JSON.stringify(data);
-        window.location.href =  getRedirect(js, "url");
+    });
 
+    $('form.name').submit(function () {
+        var name = $("input[name=playlistName]").val();
+        console.log(name);
+        loading();
+        renamePlaylist(playlistID, name).then(doneLoading);
     });
 });
 
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character, id) {
+function addVideoClip(url, transcript, character, id, ifMarked) {
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +
@@ -90,11 +94,20 @@ function appendVideoClip(url, transcript, character, id) {
     $("#Library2").append(clip);
 }
 
+function setPlaylistId(id) {
+    playlistID = id;
+}
+
+
 function goToHome() {
     data = {};
     data["page"] = "home.html";
     js = JSON.stringify(data);
 
-    window.location.href = getRedirect(js, "url");
+    getRedirect(js, "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/redirect").then(function (x) {
+        console.log(x);
+    });
+
+    //window.location = getRedirect(js, "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/redirect");
 }
 

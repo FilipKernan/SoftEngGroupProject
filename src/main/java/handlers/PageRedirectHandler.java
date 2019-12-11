@@ -29,9 +29,22 @@ public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, 
     public PageRedirectResponce handleRequest(PageRedirectRequest pageRedirectRequest, Context context) {
         logger = context.getLogger();
         try {
-            URL url = generatePresignedURL(pageRedirectRequest.getPage());
+
+
+            String page, data;
+            String[] splitPage = pageRedirectRequest.getPage().split("\\?");
+            if (splitPage.length > 1) {
+                page = pageRedirectRequest.getPage().split("\\?")[0];
+                data = pageRedirectRequest.getPage().split("\\?")[1];
+            } else {
+                page = pageRedirectRequest.getPage();
+                data = "";
+            }
+
+
+            URL url = generatePresignedURL(page);
             if (!url.toString().isEmpty()) {
-                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);
+                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200, data);
                 return pageRedirectResponce;
             } else {
                 PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, "could not create URL");

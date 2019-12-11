@@ -1,6 +1,8 @@
 var index = 0;
 var list;
+var playlistID;
 $(document).ready(function () {
+    console.log(playlistID);
     var playlistID = getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
     list = listClipsInPlaylist(playlistID);
@@ -62,7 +64,7 @@ async function goToHome() {
     data["page"] = "home.html";
     js = JSON.stringify(data);
 
-    window.location.href = await redirect(js, "url").then(function (value) {
+    window.location = await redirect(js, "url").then(function (value) {
 
     });
 }

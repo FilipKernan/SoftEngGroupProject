@@ -47,11 +47,10 @@ $(document).ready(function () {
     $('body').on('click', 'div.edit_playlist', function (e) {
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         console.log("Go edit...");
-        var data = {};
-        data["page"] = "edit.html?playlistID=" + id;
-        js = JSON.stringify(data);
 
-        window.location.href = getRedirect(js, "url");
+
+        window.location.href = "edit.html?playlistID=" + id;
+
 
     });
 
@@ -65,7 +64,7 @@ $(document).ready(function () {
 
 //<source src=\""+url+"\" type=\"video/ogg\">\n" +
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character, id) {
+function addVideoClip(url, transcript, character, id, ifMarked) {
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +

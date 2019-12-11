@@ -32,7 +32,8 @@ async function getVideoSegments() {
                 transcript = js.list[i].transcript;
                 character = js.list[i].character;
                 videoId = js.list[i].UUID;
-                addVideoClip(url, transcript, character, videoId);
+                ifMarked = js.list[i].ifMarked;
+                addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }
     } else {
@@ -63,6 +64,47 @@ async function getPlaylists() {
         alert (err);
     }
     preparePlaylistSlider();
+}
+
+async function getPlaylistName(id) {
+    let result = await makeRequest("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", "");
+    console.log(result.statusText);
+    var js = JSON.parse(result.statusText);
+    if (result.status === 200) {
+        if (js["statusCode"] !== 200) {
+            alert("Error: " + status + "\n" + js["error"]);
+        }else {
+            for (var i = 0; i < js.list.length; i++) {
+                if (js.list[i].ID === id) {
+                    $("input[name=playlistName]").val(js.list[i].name);
+                    break;
+                }
+            }
+        }
+    } else {
+        console.log("actual:" + result.statusText);
+        var err = js["error"];
+        alert (err);
+    }
+}
+
+async function renamePlaylist(id, name) {
+    var data = {};
+    data["newName"] = name;
+    data["id"] = id;
+    var js = JSON.stringify(data);
+    let result = await makeRequest("POST", "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/playlist/rename", js);
+    console.log(result.statusText);
+    var js = JSON.parse(result.statusText);
+    if (result.status === 200) {
+        if (js["statusCode"] !== 200) {
+            alert("Error: " + status + "\n" + js["error"]);
+        }
+    } else {
+        console.log("actual:" + result.statusText);
+        var err = js["error"];
+        alert (err);
+    }
 }
 
 async function createPlaylist(name) {
