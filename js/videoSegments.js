@@ -1,4 +1,13 @@
 // gets all video segments from AWS and creates library entries for each of them
+import {
+    createPlaylist,
+    renamePlaylist,
+    getPlaylist,
+    getVideoSegment,
+    deletePlaylist,
+    deleteVideoSegment, getPlaylistSegments, appendPlaylist
+} from "./constants";
+
 async function getVideoSegments() {
     // var xhr = new XMLHttpRequest();
     // xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
@@ -20,7 +29,7 @@ async function getVideoSegments() {
     //     preparelibrarySlider();
     // };
 
-    let result = await makeRequest("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", "");
+    let result = await makeRequest("POST", getVideoSegment, "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -45,7 +54,7 @@ async function getVideoSegments() {
 }
 
 async function getPlaylists() {
-    let result = await makeRequest("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", "");
+    let result = await makeRequest("GET", getPlaylist, "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -67,7 +76,7 @@ async function getPlaylists() {
 }
 
 async function getPlaylistName(id) {
-    let result = await makeRequest("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", "");
+    let result = await makeRequest("GET", getPlaylist, "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -93,7 +102,7 @@ async function renamePlaylist(id, name) {
     data["newName"] = name;
     data["id"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/playlist/rename", js);
+    let result = await makeRequest("POST", renamePlaylist, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -111,7 +120,7 @@ async function createPlaylist(name) {
     var data = {};
     data["name"] = name;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/create", js);
+    let result = await makeRequest("POST", createPlaylist, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -132,7 +141,7 @@ async function deletePlaylist(id) {
     var data = {};
     data["id"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/delete", js);
+    let result = await makeRequest("POST", deletePlaylist, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -154,7 +163,7 @@ async function deleteVideo(id) {
     var data = {};
     data["id"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/delete", js);
+    let result = await makeRequest("POST", deleteVideoSegment, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -176,7 +185,7 @@ async function getClipInPlayList(id) {
     var data = {};
     data["plID"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", js);
+    let result = await makeRequest("POST", getPlaylistSegments, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -204,7 +213,7 @@ async function appendVideoToPlaylist(playlistID, videoID) {
     data["playlistID"] = playlistID;
     data["videoID"] = videoID;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/append", js);
+    let result = await makeRequest("POST", appendPlaylist, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -230,7 +239,7 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     data["videoID"] = videoID;
     console.log(data);
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/deleteSegment", js);
+    let result = await makeRequest("POST", deleteVideoSegment, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
