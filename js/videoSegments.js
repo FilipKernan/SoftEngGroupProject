@@ -1,25 +1,5 @@
 // gets all video segments from AWS and creates library entries for each of them
-async function getVideoSegments() {
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
-    // xhr.send();
-    // //console.log("sent");
-    // xhr.onloadend = function () {
-    //     if (xhr.readyState == XMLHttpRequest.DONE) {
-    //         //console.log("XHR:" + xhr.responseText);
-    //         json = JSON.parse(xhr.responseText);
-    //         //console.log(json.list);
-    //         for (var i = 0; i < json.list.length; i++) {
-    //             url = json.list[i].url;
-    //             transcript = json.list[i].transcript;
-    //             character = json.list[i].character;
-    //             videoId = json.list[i].UUID;
-    //             addVideoClip(url, transcript, character, videoId);
-    //         }
-    //     }
-    //     preparelibrarySlider();
-    // };
-
+async function getVideoSegments(create = true) {
     let result = await makeRequest("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
@@ -27,22 +7,59 @@ async function getVideoSegments() {
         if (js["statusCode"] !== 200) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
-            for (var i = 0; i < js.list.length; i++) {
-                url = js.list[i].url;
-                transcript = js.list[i].transcript;
-                character = js.list[i].character;
-                videoId = js.list[i].UUID;
-                ifMarked = js.list[i].ifMarked;
-                addVideoClip(url, transcript, character, videoId, ifMarked);
+            if(create) {
+                for (var i = 0; i < js.list.length; i++) {
+                    url = js.list[i].url;
+                    transcript = js.list[i].transcript;
+                    character = js.list[i].character;
+                    videoId = js.list[i].UUID;
+                    ifMarked = js.list[i].ifMarked;
+                    addVideoClip(url, transcript, character, videoId, ifMarked);
+                }
+            } else {
+                return js;
             }
+
         }
     } else {
         console.log("actual:" + result.statusText);
         var err = js["error"];
         alert (err);
     }
-    preparelibrarySlider();
+    if(create) {
+        //preparelibrarySlider();
+    }
 }
+
+async function getRemoteVideoSegments(remoteSites) {
+    for(index = 0; index < remoteSites.length; index++){
+        var keyIdx = remoteSites[index].indexOf("?apikey=");
+        var url = remoteSites[index].substring(0, keyIdx);
+        var api = remoteSites[index].substring(keyIdx+8);
+        let result = await makeRequest("GET", url, "", api);
+        var js = JSON.parse(result.statusText);
+        console.log(js);
+        if (result.status === 200) {
+            if (js["statusCode"] !== 200) {
+                alert("Error: " + status + "\n" + js["error"]);
+            }else {
+                    for (var i = 0; i < js.segments.length; i++) {
+                        url = js.segments[i].url;
+                        text = js.segments[i].text;
+                        character = js.segments[i].character;
+                        addVideoClip(url, text, character, "Remote", false);
+                    }
+            }
+        } else {
+            console.log("actual:" + result.statusText);
+            var err = js["error"];
+            alert (err);
+        }
+        //preparelibrarySlider();
+    }
+}
+
+
 
 async function getPlaylists() {
     let result = await makeRequest("GET", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/playlist/get", "");
@@ -249,10 +266,13 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     preparelibrary2Slider();
 }
 
-function makeRequest(method, url, js) {
+function makeRequest(method, url, js, apikey = null) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open(method, url);
+        if(apikey) {
+            xhr.setRequestHeader("x-api-key", apikey);
+        }
         xhr.onload = function () {
             resolve({
                 status: this.status,

@@ -4,7 +4,7 @@ $(document).ready(function () {
     getPlaylistName(playlistID);
     console.log("playlistID: " + playlistID);
     getClipInPlayList(playlistID);
-    getVideoSegments().then(doneLoading);
+    getVideoSegments().then(doneLoading).then(preparelibrarySlider);
 
     //appendVideoClip("test.ogg", "", "");
     //appendVideoClip("test.ogg", "", "");

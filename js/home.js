@@ -1,7 +1,8 @@
 $(document).ready(function () {
     loading();
     getVideoSegments();
-    getPlaylists().then(doneLoading);
+    getPlaylists();
+    getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]).then(doneLoading).then(preparelibrarySlider);
 
     // Get the modal
     var modal = document.getElementById("playlistModalSubmit");
