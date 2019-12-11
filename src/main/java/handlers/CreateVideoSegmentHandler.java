@@ -34,7 +34,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         String id = UUID.randomUUID().toString();
 
         try {
-            byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
+            byte[] encoded = java.util.Base64.getDecoder().decode(req.getBase64Encodedvalue());
             if (createVideoSegment(req, encoded, id)) {
                 responce = new CreateVideoSegmentResponse(id, 200);
             } else {
@@ -43,7 +43,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
 
         } catch (Exception e) {
-            responce = new CreateVideoSegmentResponse(400, "Unable to create video segment: " + req.name + " (" + e.getMessage() + ")");
+            responce = new CreateVideoSegmentResponse(400, "Unable to create video segment:  (" + e.getMessage() + ")");
         }
 
 
@@ -51,7 +51,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
     }
 
     private boolean createVideoSegment(CreateVideoSegmentRequest req, byte[] encoded, String id) {
-        if(req.isLocal){
+        if(req.isLocal()){
             if (logger != null) { logger.log("in create Video Segment"); }
 
             if (s3 == null) {
@@ -69,7 +69,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
             String url = "https://3733mothproject.s3.us-east-2.amazonaws.com/videoSegments/" + id + ".ogg" ;
             VideoSegmentDAO db = new VideoSegmentDAO();
             try {
-                VideoSegment newVideoSegment = db.generateVideoSegment(req.character, req.transcript, id, url);
+                VideoSegment newVideoSegment = db.generateVideoSegment(req.getCharacter(), req.getTranscript(), id, url);
                 return db.addVideoSegment(newVideoSegment, 1); //1 means it is local, 0 means it isn't
             } catch (Exception e) {
                 logger.log("could not generate new video segment: " + e.getMessage());
@@ -79,7 +79,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         } else {
             VideoSegmentDAO db = new VideoSegmentDAO();
             try {
-                VideoSegment newVideoSegment = db.generateVideoSegment(req.character, req.transcript, id, req.tpsURL);
+                VideoSegment newVideoSegment = db.generateVideoSegment(req.getCharacter(), req.getTranscript(), id, req.tpsURL);
                 return db.addVideoSegment(newVideoSegment, 0); //1 means it is local, 0 means it isn't
             } catch (Exception e) {
                 logger.log("could not generate new video segment: " + e.getMessage());
