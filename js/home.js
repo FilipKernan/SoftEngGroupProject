@@ -1,9 +1,9 @@
 $(document).ready(function () {
     loading();
-    getVideoSegments();
-    getPlaylists();
-    getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]).then(doneLoading).then(preparelibrarySlider);
-
+    let vids = getVideoSegments();
+    let playlists = getPlaylists();
+    let remote = getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]);
+    Promise.all([vids, playlists, remote]).then(preparelibrarySlider).then(doneLoading);
     // Get the modal
     var modal = document.getElementById("playlistModalSubmit");
 

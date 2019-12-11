@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('form.search').submit(function () {
         var character = $("input[name=character]").val().toLowerCase();
         var transcript = $("input[name=transcript]").val().toLowerCase();
-        searchHandler(null, character, transcript);
+        searchHandler(null, character, transcript).then(preparelibrarySlider);
 
     });
 });
@@ -23,16 +23,14 @@ async function searchHandler(response, character, transcript) {
         var url = remoteSites[index].substring(0, keyIdx);
         var api = remoteSites[index].substring(keyIdx+8);
         let result = await makeRequest("GET", url, "", api);
-        if(search(result, character, transcript)) {
-            hasResult = true;
-        }
+        //if(search(result, character, transcript)) {
+       //     hasResult = true;
+       // }
     }
 
-    Promise.all([local, remote]).then(function () {
+    await local.then(function () {
         if (!hasResult) {
             $("#Library").append("<p>no result found</p>");
-        } else {
-            preparelibrarySlider();
         }
     });
 
