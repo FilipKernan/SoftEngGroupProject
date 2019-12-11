@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loading();
     var playlistID =getUrlVars()["playlistID"];
+    getPlaylistName(playlistID);
     console.log("playlistID: " + playlistID);
     getClipInPlayList(playlistID);
     getVideoSegments().then(doneLoading);
@@ -46,10 +47,17 @@ $(document).ready(function () {
         window.location.href =  "play.html?playlistID=" + playlistID;
 
     });
+
+    $('form.name').submit(function () {
+        var name = $("input[name=playlistName]").val();
+        console.log(name);
+        loading();
+        renamePlaylist(playlistID, name).then(doneLoading);
+    });
 });
 
 // adds a new video clip to the end of the slider
-function addVideoClip(url, transcript, character, id) {
+function addVideoClip(url, transcript, character, id, ifMarked) {
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
         "                            <video controls class=\"video\">\n" +

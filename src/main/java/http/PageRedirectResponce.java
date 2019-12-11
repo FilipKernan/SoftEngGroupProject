@@ -6,7 +6,6 @@ public class PageRedirectResponce {
 
     URL url;
     int statusCode;
-    String data;
     String error;
 
 
@@ -15,44 +14,8 @@ public class PageRedirectResponce {
         this.error = error;
     }
 
-    public PageRedirectResponce(URL url, int statusCode, String data) {
+    public PageRedirectResponce(URL url, int statusCode) {
         this.url = url;
         this.statusCode = statusCode;
-        this.data = data;
-    }
-
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getError() {
-        return error;
-
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 }
