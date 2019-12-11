@@ -228,7 +228,7 @@ function markVideoSegment(id, ifmark){
     data["makeMarked"] = ifmark;
     var json = JSON.stringify(data);
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/Mark", true);
+    xhr.open("POST", "https://oo6dc5u0p7.execute-api.us-east-2.amazonaws.com/dev/videoSegment/Mark", true);
     xhr.send(json);
 
     xhr.onloadend = function () {

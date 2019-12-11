@@ -20,7 +20,7 @@ async function getVideoSegments() {
     //     preparelibrarySlider();
     // };
 
-    let result = await makeRequest("POST", "https://vhrvh0my7h.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", "");
+    let result = await makeRequest("GET", "https://sy8zpxpp8b.execute-api.us-east-2.amazonaws.com/dev/videoSegment/getLocal", "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -32,7 +32,9 @@ async function getVideoSegments() {
                 transcript = js.list[i].transcript;
                 character = js.list[i].character;
                 videoId = js.list[i].UUID;
-                ifMarked = js.list[i].ifMarked;
+                ifMarked = js.list[i].isMarked;
+                console.log(videoId);
+                console.log(ifMarked);
                 addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }

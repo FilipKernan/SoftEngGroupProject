@@ -112,8 +112,14 @@ public class VideoSegmentDAO {
         String character = resultSet.getString("character");
         String videoUrl = resultSet.getString("videoUrl");
         String transcript = resultSet.getString("transcript");
-        boolean isMarked = resultSet.getBoolean("ifMarked");
+        int mark = resultSet.getInt("ifMarked");
 
+        boolean isMarked;
+        if(mark == 1){
+            isMarked = true;
+        }else{
+            isMarked = false;
+        }
         return new VideoSegment(videoUrl, UUID, transcript, character, isMarked);
     }
 
