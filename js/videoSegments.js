@@ -26,7 +26,7 @@ async function getVideoSegments(create = true) {
         var err = js["error"];
         alert (err);
     }
-    preparelibrarySlider();
+    //preparelibrarySlider();
 }
 
 async function getRemoteVideoSegments(remoteSites) {
@@ -264,7 +264,7 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     preparelibrary2Slider();
 }
 
-function makeRequest(method, url, js) {
+function makeRequest(method, url, js, apikey = null) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open(method, url);
