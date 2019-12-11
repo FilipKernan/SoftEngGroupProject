@@ -116,7 +116,7 @@ paths:
         404:
           description: Element not found
   /videoSegment/getLocal:
-    post:
+    get:
       summary: Will return all local video segments
       description: Will return all local video segments
       consumes:
@@ -139,7 +139,7 @@ paths:
         404:
           description: Element not found
   /videoSegment/getUnmarked:
-    post:
+    get:
       summary: Will return all unmarked video segments
       description: Will return all unmarked video segments
       consumes:
