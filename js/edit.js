@@ -43,11 +43,7 @@ $(document).ready(function () {
         var playlistID =getUrlVars()["playlistID"];
         console.log("Go play...");
 
-
-        var data = {};
-        data["page"] = "play.html?playlistID=" + playlistID;
-        var js = JSON.stringify(data);
-        window.location.href =  getRedirect(js, "url");
+        window.location.href =  "play.html?playlistID=" + playlistID;
 
     });
 });
@@ -100,6 +96,10 @@ function goToHome() {
     data["page"] = "home.html";
     js = JSON.stringify(data);
 
-    window.location.href = getRedirect(js, "url");
+    getRedirect(js, "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/redirect").then(function (x) {
+        console.log(x);
+    });
+
+    //window.location = getRedirect(js, "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/redirect");
 }
 

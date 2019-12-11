@@ -47,11 +47,10 @@ $(document).ready(function () {
     $('body').on('click', 'div.edit_playlist', function (e) {
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         console.log("Go edit...");
-        var data = {};
-        data["page"] = "edit.html?playlistID=" + id;
-        js = JSON.stringify(data);
 
-        window.location.href = getRedirect(js, "url");
+
+        window.location.href = "edit.html?playlistID=" + id;
+
 
     });
 

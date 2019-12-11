@@ -64,7 +64,7 @@ async function goToHome() {
     data["page"] = "home.html";
     js = JSON.stringify(data);
 
-    window.location.href = await redirect(js, "url").then(function (value) {
+    window.location = await redirect(js, "url").then(function (value) {
 
     });
 }
