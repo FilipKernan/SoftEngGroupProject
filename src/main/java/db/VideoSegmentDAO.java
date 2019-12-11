@@ -1,5 +1,6 @@
 package db;
 
+import model.Segment;
 import model.VideoSegment;
 
 import java.sql.*;
@@ -53,15 +54,15 @@ public class VideoSegmentDAO {
         }
     }
 
-    public List<VideoSegment> getUnmarkedVideoSegments() throws Exception{
-        List<VideoSegment> localSegments = new ArrayList<>();
+    public List<Segment> getUnmarkedVideoSegments() throws Exception{
+        List<Segment> localSegments = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM video WHERE ifMarked = 0 AND ifLocal = 1";
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
-                VideoSegment v = generateVideoSegment(resultSet);
+                Segment v = generateVideoSegmentUnmarked(resultSet);
                 localSegments.add(v);
             }
             resultSet.close();
@@ -114,6 +115,14 @@ public class VideoSegmentDAO {
         boolean isMarked = resultSet.getBoolean("ifMarked");
 
         return new VideoSegment(videoUrl, UUID, transcript, character, isMarked);
+    }
+
+    public Segment generateVideoSegmentUnmarked(ResultSet resultSet) throws Exception {
+        String character = resultSet.getString("character");
+        String videoUrl = resultSet.getString("videoUrl");
+        String transcript = resultSet.getString("transcript");
+
+        return new Segment(videoUrl, character, transcript);
     }
 
     public boolean addVideoSegmentLocal(VideoSegment newVideoSegment) throws Exception {
