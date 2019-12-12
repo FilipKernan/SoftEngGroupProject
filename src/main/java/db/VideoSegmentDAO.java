@@ -150,7 +150,7 @@ public class VideoSegmentDAO {
 //            ps =conn.prepareStatement("INSERT INTO video WHERE videoID=? AND character=? AND transcript=? AND url=? AND ifMarker=? AND ifLocal=?;");
             ps.setString(1, newVideoSegment.UUID);
             ps.setString(2, newVideoSegment.character);
-            ps.setString(3, newVideoSegment.transcript);
+            ps.setString(3, newVideoSegment.text);
             ps.setString(4, newVideoSegment.url);
 //            ps.setInt(5, 0);
 //            ps.setInt(6, 0);
@@ -182,7 +182,7 @@ public class VideoSegmentDAO {
             ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoURL`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', ?);");
             ps.setString(1, newVideoSegment.UUID);
             ps.setString(2, newVideoSegment.character);
-            ps.setString(3, newVideoSegment.transcript);
+            ps.setString(3, newVideoSegment.text);
             ps.setString(4, newVideoSegment.url);
             ps.setInt(5, isLocal);
             ps.execute();
