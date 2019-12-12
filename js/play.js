@@ -1,36 +1,28 @@
-
 var index = 0;
 var list;
 var playlistID;
 $(document).ready(function () {
-    console.log(playlistID);
     var playlistID = getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
     list = listClipsInPlaylist(playlistID);
-    //console.log(list);
     console.log($("#video"));
 
 
-
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
 });
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-        vars[key] = value;
-    });
-    return vars;
-}
 
 $("#video")[0].on("ended", function() {
     console.log('Video has ended!');
     index++;
-    console.log(list);
     var video = document.getElementById('video');
     video.setAttribute("src", json.list[index].url);
     video.load();
-    video.play();
-
 });
 
 function listClipsInPlaylist(id) {
@@ -45,7 +37,7 @@ function listClipsInPlaylist(id) {
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            var json = JSON.parse(xhr.responseText);
+            json = JSON.parse(xhr.responseText);
             console.log(json.list);
             var video = document.getElementById('video');
             video.setAttribute("src", json.list[index].url);
@@ -57,22 +49,18 @@ function listClipsInPlaylist(id) {
 }
 
 function next() {
-    var playlistID = getUrlVars()["playlistID"];
-    console.log("playlistID: " + playlistID);
-    list = listClipsInPlaylist(playlistID);
     console.log('Video has ended!');
     index++;
     var video = document.getElementById('video');
-    console.log(list);
-    video.setAttribute("src", list[index].url);
+    video.setAttribute("src", json.list[index].url);
     video.load();
     video.play();
 }
 
 async function goToHome() {
-    var data = {};
+    data = {};
     data["page"] = "home.html";
-    var js = JSON.stringify(data);
+    js = JSON.stringify(data);
 
     window.location = await redirect(js, redirectPage).then(function (value) {
 
