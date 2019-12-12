@@ -4,6 +4,7 @@ import db.LambdaTest;
 import handlers.CreateVideoSegmentLocalHandler;
 import http.*;
 import model.Playlist;
+import model.Segment;
 import model.VideoSegment;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,8 +38,8 @@ public class GetHandlersTests extends LambdaTest {
         GetUnmarkedVideoSegmentsResponse respUM1 = new GetUnmarkedVideoSegmentsHandler().handleRequest(reqUM1, createContext("GetPlaylists"));
         Assert.assertEquals(200, resp1.statusCode);
 
-        for (VideoSegment v: respUM1.list) {
-            System.out.println(v.UUID);
+        for (Segment v: respUM1.segments) {
+            System.out.println(v.url);
         }
 
     }

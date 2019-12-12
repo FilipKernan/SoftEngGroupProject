@@ -44,7 +44,7 @@ public class PageRedirectHandler implements RequestHandler<PageRedirectRequest, 
 
             URL url = generatePresignedURL(page);
             if (!url.toString().isEmpty()) {
-                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200, data);
+                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);
                 return pageRedirectResponce;
             } else {
                 PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, "could not create URL");
