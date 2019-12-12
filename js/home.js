@@ -90,7 +90,7 @@ function addPlaylist(url, name, id) {
      "                            <a>"+name+"</a>\n" +
      "                            <br>\n" +
      "                            <img src=\""+url+"\"\n" +
-     "                                 class=\"video\">\n" +
+     "                                 class=\"image\">\n" +
      "                            <div class=\"controls\">\n" +
      "                                <div class=\"edit_playlist\">\n" +
      "                                    <i class=\"material-icons\">\n" +

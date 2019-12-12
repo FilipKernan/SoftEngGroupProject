@@ -15,13 +15,14 @@
 /* Container for all elements*/
 .list {
     white-space: nowrap;
-    background: #fff;
+    background: transparent;
 }
 
 /* A slider element*/
 .item {
+    border-radius: 25px;
     display: inline-block;
-    background: red;
+    background: darkslateblue;
     width: 24%;
     height: 186px;
     margin: 0.4%;
@@ -34,8 +35,25 @@
 
 /* a video/image*/
 .video {
+    border-radius: 25px 25px 0px 0px;
     position: absolute;
     max-height: 184px;
+    width: 100%;
+    left: 0;
+}
+
+.video2 {
+    border-radius: 25px 25px 25px 25px;
+    position: absolute;
+    max-height: 184px;
+    width: 100%;
+    left: 0;
+}
+
+.image {
+    border-radius: 0px 0px 25px 25px;
+    position: absolute;
+
     width: 100%;
     left: 0;
 }

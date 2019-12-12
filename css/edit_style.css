@@ -1,3 +1,9 @@
+body {
+    background-image: url("https://ids.si.edu/ids/deliveryService?id=NASM-A19740668000-NASM2016-02355-000005&max_w=3000");
+    color: white;
+    background-size: 100%;
+    background-position: center;
+}
 
 /* Makes controls appear on hover*/
 .video:hover + .controls, .controls:hover {
@@ -35,4 +41,18 @@
 }
 .remove_clip:hover{
     cursor: pointer;
+}
+
+.name {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px 5px 5px 5px;
+    background: darkslateblue;
+}
+
+.search {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px 5px 5px 5px;
+    background: darkslateblue;
 }

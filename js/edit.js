@@ -81,7 +81,7 @@ function addVideoClip(url, transcript, character, id, ifMarked) {
 function appendVideoClip(url, transcript, character, id) {
     var clip = $("<div class='item library2' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
-        "                            <video controls class=\"video\">\n" +
+        "                            <video controls class=\"video2\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +

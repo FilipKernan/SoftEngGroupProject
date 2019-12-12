@@ -1,6 +1,7 @@
 /* Right arrow*/
 #arrowRL {
-    background: yellow;
+    border-radius: 0px 20px 20px 0px;
+    background: cornflowerblue;
     width: 20px;
     height: 50px;
     float: right;
@@ -15,8 +16,9 @@
 
 /* Left arrow*/
 #arrowLL {
+    border-radius: 20px 0px 0px 20px;
     margin-top: 54px;
-    background: yellow;
+    background: cornflowerblue;
     width: 20px;
     height: 50px;
     float: left;
@@ -30,7 +32,8 @@
 
 /* Right arrow*/
 #arrowRL2 {
-    background: yellow;
+    border-radius: 0px 20px 20px 0px;
+    background: cornflowerblue;
     width: 20px;
     height: 50px;
     float: right;
@@ -45,8 +48,9 @@
 
 /* Left arrow*/
 #arrowLL2 {
+    border-radius: 20px 0px 0px 20px;
     margin-top: 54px;
-    background: yellow;
+    background: cornflowerblue;
     width: 20px;
     height: 50px;
     float: left;

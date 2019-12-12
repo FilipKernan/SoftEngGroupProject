@@ -1,10 +1,12 @@
+body {
+    background-image: url("https://ids.si.edu/ids/deliveryService?id=NASM-A19740668000-NASM2016-02355-000005&max_w=3000");
+    color: white;
+    background-size: 100%;
+    background-position: center;
+}
 
 .mainHeader {
     padding-left: 3%;
-}
-
-section {
-    height: 20rem;
 }
 
 section.thirdParty>ul {
@@ -57,6 +59,7 @@ footer{
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
+    color: black;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -76,4 +79,11 @@ footer{
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.thirdParty {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px 5px 5px 5px;
+    background: darkslateblue;
 }
