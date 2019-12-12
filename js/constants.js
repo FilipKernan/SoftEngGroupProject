@@ -1,4 +1,4 @@
-export const baseUrl = "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev";
+export const baseUrl = "https://sy8zpxpp8b.execute-api.us-east-2.amazonaws.com/dev";
 
 
 export const getThirdParty = baseUrl + "/admin/thirdParty/get";
@@ -16,3 +16,4 @@ export const renamePlaylist = baseUrl + "/playlist/rename";
 export const addVideoSegment = baseUrl + "/videoSegment/add";
 export const deleteVideoSegment = baseUrl + "/videoSegment/delete";
 export const getVideoSegment = baseUrl + "/videoSegment/get";
+export const markVideoSegment = baseUrl + "/videoSegment/Mark";

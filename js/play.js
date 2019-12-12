@@ -1,3 +1,5 @@
+import {getPlaylistSegments} from "./constants";
+
 var index = 0;
 var list;
 var playlistID;
@@ -28,8 +30,7 @@ $("#video")[0].on("ended", function() {
 
 function listClipsInPlaylist(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/playlist/getSegments", true);
-    var data = {};
+    xhr.open("POST", getPlaylistSegments, true);
     var data = {};
     data["plID"] = id;
     var js = JSON.stringify(data);
@@ -39,7 +40,7 @@ function listClipsInPlaylist(id) {
     xhr.onloadend = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            json = JSON.parse(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
             console.log(json.list);
             var video = document.getElementById('video');
             video.setAttribute("src", json.list[index].url);
@@ -60,9 +61,9 @@ function next() {
 }
 
 async function goToHome() {
-    data = {};
+    var data = {};
     data["page"] = "home.html";
-    js = JSON.stringify(data);
+    var js = JSON.stringify(data);
 
     window.location = await redirect(js, "url").then(function (value) {
 

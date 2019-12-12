@@ -1,3 +1,5 @@
+import {getVideoSegment} from "./constants";
+
 $(document).ready(function () {
     $('form.search').submit(function () {
         var character = $("input[name=character]").val().toLowerCase();
@@ -9,19 +11,19 @@ $(document).ready(function () {
 
 function search(response, character, transcript) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
+    xhr.open("POST", getVideoSegment, true);
     xhr.send();
     xhr.onloadend = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            json = JSON.parse(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
 
             $('.list#Library').children().remove();
             var hasResult = false;
 
-            for (i = 0; i < json.list.length; i++) {
+            for (var i = 0; i < json.list.length; i++) {
 
                 try{
-                    ifMarked = json.list[i].ifMarked;
+                    var ifMarked = json.list[i].ifMarked;
                 }catch(e){
                     ifMarked = false;
                 }

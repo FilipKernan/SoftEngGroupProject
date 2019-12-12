@@ -1,3 +1,5 @@
+import {addVideoSegment} from "./constants";
+
 $(document).ready(function () {
     loading();
     getVideoSegments();
@@ -151,7 +153,7 @@ function newSegment() {
     var js = JSON.stringify(data);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/add", true);
+    xhr.open("POST", addVideoSegment, true);
 
     xhr.send(js);
 

@@ -1,3 +1,5 @@
+import {getThirdParty, registerThirdParty, markVideoSegment} from "./constants";
+
 $(document).ready(function () {
     loading();
     getVideoSegments().then(doneLoading);
@@ -109,9 +111,9 @@ function openDeleteModal(name, url) {
 function populateThirdParties() {
 
     var data = {};
-    js = JSON.stringify(data);
+    var js = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/get", true);
+    xhr.open("POST", getThirdParty, true);
     console.log("sending api request");
     xhr.send(js);
 
@@ -162,8 +164,8 @@ function handleAddThirdParty() {
 
     var json = JSON.stringify(data);
     //console.log(json);
-    xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/register", true);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", registerThirdParty, true);
     xhr.send(json);
 
     xhr.onloadend = function () {
@@ -195,8 +197,8 @@ function handleDelete(name, url) {
     data["addTPS"] = false;
     var json = JSON.stringify(data);
 
-    xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/register", true);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", registerThirdParty, true);
     xhr.send(json);
     xhr.onloadend = function () {
 
@@ -227,8 +229,8 @@ function markVideoSegment(id, ifmark){
     data["id"] = id;
     data["makeMarked"] = ifmark;
     var json = JSON.stringify(data);
-    xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/videoSegment/Mark", true);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", markVideoSegment, true);
     xhr.send(json);
 
     xhr.onloadend = function () {
