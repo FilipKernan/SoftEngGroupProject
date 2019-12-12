@@ -1,7 +1,7 @@
 // gets all video segments from AWS and creates library entries for each of them
 
 
-async function getVideoSegments() {
+async function getVideoSegments(create = true) {
     // var xhr = new XMLHttpRequest();
     // xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
     // xhr.send();
@@ -29,13 +29,17 @@ async function getVideoSegments() {
         if (js["statusCode"] !== 200) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
-            for (var i = 0; i < js.segments.length; i++) {
-                url = js.segments[i].url;
-                transcript = js.segments[i].transcript;
-                character = js.segments[i].character;
-                videoId = js.segments[i].UUID;
-                ifMarked = js.segments[i].isMarked;
-                addVideoClip(url, transcript, character, videoId, ifMarked);
+            if(create) {
+                for (var i = 0; i < js.segments.length; i++) {
+                    url = js.segments[i].url;
+                    transcript = js.segments[i].transcript;
+                    character = js.segments[i].character;
+                    videoId = js.segments[i].UUID;
+                    ifMarked = js.segments[i].isMarked;
+                    addVideoClip(url, transcript, character, videoId, ifMarked);
+                }
+            } else {
+                return js;
             }
         }
     } else {

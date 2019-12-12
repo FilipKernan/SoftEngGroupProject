@@ -2,46 +2,65 @@ $(document).ready(function () {
     $('form.search').submit(function () {
         var character = $("input[name=character]").val().toLowerCase();
         var transcript = $("input[name=transcript]").val().toLowerCase();
-        search(null, character, transcript);
-
+        searchHandler(null, character, transcript).then(preparelibrarySlider);
     });
 });
 
-function search(response, character, transcript) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", getVideoSegment, true);
-    xhr.send();
-    xhr.onloadend = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            var json = JSON.parse(xhr.responseText);
+async function searchHandler(response, character, transcript) {
+    $('.list#Library').children().remove();
+    var hasResult = false;
+    var local = getVideoSegments(false).then(function (result) {
+        console.log(result);
+        if (search(result, character, transcript)) {
+            hasResult = true;
+        }
+    });
 
-            $('.list#Library').children().remove();
-            var hasResult = false;
+    var remoteSites = ["https://g75v8iurq5.execute-api.us-east-1.amazonaws.com/RemoteSite/publicsegments?apikey=I14G0D8EJn4Q44b8dFhtb6CcdIraLflm9dpcyXAX"];
+    for(index = 0; index < remoteSites.length; index++){
+        var keyIdx = remoteSites[index].indexOf("?apikey=");
+        var url = remoteSites[index].substring(0, keyIdx);
+        var api = remoteSites[index].substring(keyIdx+8);
+        let result = await makeRequest("GET", url, "", api);
+        result = JSON.parse(result.statusText);
+        if(search(result, character, transcript)) {
+           hasResult = true;
+        }
+    }
 
-            for (var i = 0; i < json.list.length; i++) {
+    await local.then(function () {
+        if (!hasResult) {
+            $("#Library").append("<p>no result found</p>");
+        }
+    });
 
-                try{
-                    var ifMarked = json.list[i].ifMarked;
-                }catch(e){
-                    ifMarked = false;
-                }
-                if (character && json.list[i].character.toLowerCase().includes(character) && !transcript) {
-                    console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
-                    hasResult = true;
+}
 
-        } else if (transcript && json.list[i].transcript.toLowerCase().includes(transcript) && !character) {
-            console.log(json.list[i].UUID);
-            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+function search(json, character, transcript) {
+    hasResult = false;
+    for (i = 0; i < json.segments.length; i++) {
+        try {
+            ifMarked = json.segments[i].ifMarked;
+        } catch (e) {
+            ifMarked = false;
+        }
+        if (character && json.segments[i].character.toLowerCase().includes(character) && !transcript) {
+            console.log(json.segments[i].UUID);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
+            hasResult = true;
+
+        } else if (transcript && json.segments[i].text.toLowerCase().includes(transcript) && !character) {
+            console.log(json.segments[i].UUID);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
             hasResult = true;
 
         } else if (!transcript && !character) {
-            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
             hasResult = true;
 
-        } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
-            console.log(json.list[i].UUID);
-            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+        } else if (transcript && character && json.segments[i].text.toLowerCase().includes(transcript) && json.segments[i].character.toLowerCase().includes(character)) {
+            console.log(json.segments[i].UUID);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
             hasResult = true;
         }
     }
