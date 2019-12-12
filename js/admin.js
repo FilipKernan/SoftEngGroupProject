@@ -54,19 +54,21 @@ $(document).ready(function () {
 // Creates a new video clip in the slider
 function addVideoClip(url, transcript, character, id, ifMarked) {
     if(ifMarked){
-        icon = "radio_button_checked";
+        icon = "<i class=\"material-icons marked\" style=\"top: 0\">\n" +
+            "                                     radio_button_checked\n" +
+            "                                </i>";
     }else{
-        icon = "radio_button_unchecked";
+        icon = "<i class=\"material-icons mark\" style=\"top: 0\">\n" +
+            "                                     radio_button_unchecked\n" +
+            "                                </i>";
     }
     console.log(ifMarked);
     var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
         "                            <video controls class=\"video\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
-        "                            <div class=\"controls\">\n" +
-        "                                <i class=\"material-icons mark\" style=\"top: 0\">\n" +
-        "                                   " + icon +"\n" +
-        "                                </i>\n" +
+        "                            <div class=\"controls\">\n" + icon +
+        "                                \n" +
         "                            </div>\n" +
         "                               <div style=\"bottom: 4%; position:absolute; left: 50%; transform: translate(-50%);\">Character: "+ character +"</div>\n" +
         "                               <div style=\"bottom: 0; position:absolute; left: 50%; transform: translate(-50%); width: 100%; overflow-wrap: break-word; font-size: 6.5px\">Transcript: "+ transcript +"</div>\n" +
