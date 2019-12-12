@@ -1,12 +1,5 @@
 // gets all video segments from AWS and creates library entries for each of them
-import {
-    createPlaylist,
-    renamePlaylist,
-    getPlaylist,
-    getVideoSegment,
-    deletePlaylist,
-    deleteVideoSegment, getPlaylistSegments, appendPlaylist
-} from "./constants";
+
 
 async function getVideoSegments() {
     // var xhr = new XMLHttpRequest();
@@ -37,11 +30,11 @@ async function getVideoSegments() {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
             for (var i = 0; i < js.list.length; i++) {
-                url = js.list[i].url;
-                transcript = js.list[i].transcript;
-                character = js.list[i].character;
-                videoId = js.list[i].UUID;
-                ifMarked = js.list[i].ifMarked;
+                var url = js.list[i].url;
+                var transcript = js.list[i].transcript;
+                var character = js.list[i].character;
+                var videoId = js.list[i].UUID;
+                var ifMarked = js.list[i].ifMarked;
                 addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }
@@ -62,8 +55,8 @@ async function getPlaylists() {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
             for (var i = 0; i < js.list.length; i++) {
-                playlistName = js.list[i].name;
-                playlistId = js.list[i].ID;
+                var playlistName = js.list[i].name;
+                var playlistId = js.list[i].ID;
                 addPlaylist("https://nerdist.com/wp-content/uploads/2019/03/Star-Trek-5-Captains-star-trek-41126417-1200-630-1200x676.jpg", playlistName, playlistId);
             }
         }
@@ -102,7 +95,7 @@ async function renamePlaylist(id, name) {
     data["newName"] = name;
     data["id"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", renamePlaylist, js);
+    let result = await makeRequest("POST", playlistRename, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -120,7 +113,7 @@ async function createPlaylist(name) {
     var data = {};
     data["name"] = name;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", createPlaylist, js);
+    let result = await makeRequest("POST", playlistCreate, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -141,7 +134,7 @@ async function deletePlaylist(id) {
     var data = {};
     data["id"] = id;
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", deletePlaylist, js);
+    let result = await makeRequest("POST", playlistDelete, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -193,10 +186,10 @@ async function getClipInPlayList(id) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
             for (var i = 0; i < js.list.length; i++) {
-                clipUrl = js.list[i].url;
-                clipCharacter = js.list[i].character;
-                clipTranscript = js.list[i].transcript;
-                clipId = js.list[i].UUID;
+                var clipUrl = js.list[i].url;
+                var clipCharacter = js.list[i].character;
+                var clipTranscript = js.list[i].transcript;
+                var clipId = js.list[i].UUID;
                 await appendVideoClip(clipUrl, clipTranscript, clipCharacter, clipId);
             }
         }

@@ -1,4 +1,3 @@
-import {getPlaylistSegments} from "./constants";
 
 var index = 0;
 var list;
@@ -65,7 +64,7 @@ async function goToHome() {
     data["page"] = "home.html";
     var js = JSON.stringify(data);
 
-    window.location = await redirect(js, "url").then(function (value) {
+    window.location = await redirect(js, redirectPage).then(function (value) {
 
     });
 }

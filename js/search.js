@@ -1,4 +1,3 @@
-import {getVideoSegment} from "./constants";
 
 $(document).ready(function () {
     $('form.search').submit(function () {

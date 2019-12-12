@@ -1,4 +1,3 @@
-import {getThirdParty, registerThirdParty, markVideoSegment} from "./constants";
 
 $(document).ready(function () {
     loading();
@@ -230,7 +229,7 @@ function markVideoSegment(id, ifmark){
     data["makeMarked"] = ifmark;
     var json = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", markVideoSegment, true);
+    xhr.open("POST", videoSegmentMark, true);
     xhr.send(json);
 
     xhr.onloadend = function () {

@@ -1,4 +1,3 @@
-import {addVideoSegment} from "./constants";
 
 $(document).ready(function () {
     loading();

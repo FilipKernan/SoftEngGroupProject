@@ -1,19 +1,21 @@
-export const baseUrl = "https://sy8zpxpp8b.execute-api.us-east-2.amazonaws.com/dev";
+var baseUrl = "https://sy8zpxpp8b.execute-api.us-east-2.amazonaws.com/dev";
 
 
-export const getThirdParty = baseUrl + "/admin/thirdParty/get";
-export const registerThirdParty = baseUrl + "/admin/thirdParty/register";
+var getThirdParty = baseUrl + "/admin/thirdParty/get";
+var registerThirdParty = baseUrl + "/admin/thirdParty/register";
 
 
-export const appendPlaylist = baseUrl + "/playlist/append";
-export const createPlaylist = baseUrl + "/playlist/create";
-export const deletePlaylist = baseUrl + "/playlist/delete";
-export const deleteSegmentInPlaylist = baseUrl + "/playlist/deleteSegment";
-export const getPlaylist = baseUrl + "/playlist/get";
-export const getPlaylistSegments = baseUrl + "/playlist/getSegments";
-export const renamePlaylist = baseUrl + "/playlist/rename";
+var appendPlaylist = baseUrl + "/playlist/append";
+var playlistCreate = baseUrl + "/playlist/create";
+var playlistDelete = baseUrl + "/playlist/delete";
+var deleteSegmentInPlaylist = baseUrl + "/playlist/deleteSegment";
+var getPlaylist = baseUrl + "/playlist/get";
+var getPlaylistSegments = baseUrl + "/playlist/getSegments";
+var playlistRename = baseUrl + "/playlist/rename";
 
-export const addVideoSegment = baseUrl + "/videoSegment/add";
-export const deleteVideoSegment = baseUrl + "/videoSegment/delete";
-export const getVideoSegment = baseUrl + "/videoSegment/get";
-export const markVideoSegment = baseUrl + "/videoSegment/Mark";
+var addVideoSegment = baseUrl + "/videoSegment/add";
+var deleteVideoSegment = baseUrl + "/videoSegment/delete";
+var getVideoSegment = baseUrl + "/videoSegment/get";
+var videoSegmentMark = baseUrl + "/videoSegment/Mark";
+
+var redirectPage = baseUrl + "/redirect";
