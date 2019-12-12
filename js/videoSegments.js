@@ -232,7 +232,6 @@ async function getClipInPlayList(id) {
         if (js["statusCode"] !== 200) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
-
             for (var i = 0; i < js.list.length; i++) {
                 var clipUrl = js.list[i].url;
                 var clipCharacter = js.list[i].character;
