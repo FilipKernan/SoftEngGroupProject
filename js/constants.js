@@ -15,7 +15,7 @@ var playlistRename = baseUrl + "/playlist/rename";
 
 var addVideoSegment = baseUrl + "/videoSegment/add";
 var deleteVideoSegment = baseUrl + "/videoSegment/delete";
-var getVideoSegment = baseUrl + "/videoSegment/get";
+var getVideoSegment = baseUrl + "/videoSegment/getLocal";
 var videoSegmentMark = baseUrl + "/videoSegment/Mark";
 
 var redirectPage = baseUrl + "/redirect";

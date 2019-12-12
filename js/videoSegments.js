@@ -22,7 +22,7 @@ async function getVideoSegments() {
     //     preparelibrarySlider();
     // };
 
-    let result = await makeRequest("POST", getVideoSegment, "");
+    let result = await makeRequest("GET", getVideoSegment, "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
