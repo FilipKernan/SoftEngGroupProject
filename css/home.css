@@ -5,7 +5,6 @@ body {
     background-position: center;
 }
 
-
 /* Makes controls appear on hover*/
 .video:hover + .controls, .controls:hover {
     display: block;
