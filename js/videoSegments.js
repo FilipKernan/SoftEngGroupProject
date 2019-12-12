@@ -2,25 +2,7 @@
 
 
 async function getVideoSegments() {
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", "https://ijhrhn9pr5.execute-api.us-east-2.amazonaws.com/dev/videoSegment/get", true);
-    // xhr.send();
-    // //console.log("sent");
-    // xhr.onloadend = function () {
-    //     if (xhr.readyState == XMLHttpRequest.DONE) {
-    //         //console.log("XHR:" + xhr.responseText);
-    //         json = JSON.parse(xhr.responseText);
-    //         //console.log(json.list);
-    //         for (var i = 0; i < json.list.length; i++) {
-    //             url = json.list[i].url;
-    //             transcript = json.list[i].transcript;
-    //             character = json.list[i].character;
-    //             videoId = json.list[i].UUID;
-    //             addVideoClip(url, transcript, character, videoId);
-    //         }
-    //     }
-    //     preparelibrarySlider();
-    // };
+
 
     let result = await makeRequest("GET", getVideoSegment, "");
     console.log(result.statusText);
@@ -64,7 +46,7 @@ async function getRemoteVideoSegments() {
                         url = js.segments[i].url;
                         text = js.segments[i].text;
                         character = js.segments[i].character;
-                        addVideoClip(url, text, character, "Remote", false);
+                        addVideoClip(url, text, character, url, false);
                     }
             }
         } else {
@@ -251,6 +233,45 @@ async function getClipInPlayList(id) {
 async function appendVideoToPlaylist(playlistID, videoID) {
     var data = {};
     data["playlistID"] = playlistID;
+    if (videoID.includes("http")) {
+        var data = {};
+        data["character"] = $('#' + videoID + '').transcript;
+
+        data["tpsURL"] = videoID;
+
+        data["transcript"] = $('#' + videoID + '').transcript;
+
+        data["id"] = "";
+
+        data["iLocal"] = "false";
+
+        var js = JSON.stringify(data);
+        console.log("JS:" + js);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", addVideoSegment, true);
+
+        xhr.send(js);
+
+        xhr.onloadend = function () {
+            console.log(xhr);
+            console.log(xhr.request);
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                    var js = JSON.parse(xhr.responseText);
+
+                    $('#' + videoID + '').attr('id', js.videoID);
+
+                    videoID = js.videoID;
+
+                } else {
+                    console.log("actual:" + xhr.responseText);
+                    var js = JSON.parse(xhr.responseText);
+                    var err = js["response"];
+                    alert (err);
+                }
+            }
+        }
+    }
     data["videoID"] = videoID;
     var js = JSON.stringify(data);
     let result = await makeRequest("POST", appendPlaylist, js);
