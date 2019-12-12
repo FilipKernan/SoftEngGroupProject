@@ -1,9 +1,10 @@
 
 $(document).ready(function () {
     loading();
-    getVideoSegments();
-    getPlaylists().then(doneLoading);
-
+    let vids = getVideoSegments();
+    let playlists = getPlaylists();
+    let remote = getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]);
+    Promise.all([vids, playlists, remote]).then(preparelibrarySlider).then(doneLoading);
     // Get the modal
     var modal = document.getElementById("playlistModalSubmit");
 
@@ -90,7 +91,7 @@ function addPlaylist(url, name, id) {
      "                            <a>"+name+"</a>\n" +
      "                            <br>\n" +
      "                            <img src=\""+url+"\"\n" +
-     "                                 class=\"video\">\n" +
+     "                                 class=\"image\">\n" +
      "                            <div class=\"controls\">\n" +
      "                                <div class=\"edit_playlist\">\n" +
      "                                    <i class=\"material-icons\">\n" +

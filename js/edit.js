@@ -1,10 +1,12 @@
 $(document).ready(function () {
     loading();
     var playlistID =getUrlVars()["playlistID"];
-    getPlaylistName(playlistID);
+    var playlistName = getPlaylistName(playlistID);
     console.log("playlistID: " + playlistID);
-    getClipInPlayList(playlistID);
-    getVideoSegments().then(doneLoading);
+    var clips = getClipInPlayList(playlistID);
+    var remote = getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]);
+    var vids = getVideoSegments();
+    Promise.all([playlistName, clips, remote, vids]).then(doneLoading).then(preparelibrarySlider);
 
     //appendVideoClip("test.ogg", "", "");
     //appendVideoClip("test.ogg", "", "");
@@ -79,7 +81,7 @@ function addVideoClip(url, transcript, character, id, ifMarked) {
 function appendVideoClip(url, transcript, character, id) {
     var clip = $("<div class='item library2' id=\'" + id + "\'>\n" +
         "                            <a>Video Failed to load</a>\n" +
-        "                            <video controls class=\"video\">\n" +
+        "                            <video controls class=\"video2\">\n" +
         "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
         "                            </video>\n" +
         "                            <div class=\"controls\">\n" +

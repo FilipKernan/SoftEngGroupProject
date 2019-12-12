@@ -30,11 +30,11 @@ async function getVideoSegments() {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
             for (var i = 0; i < js.list.length; i++) {
-                var url = js.list[i].url;
-                var transcript = js.list[i].transcript;
-                var character = js.list[i].character;
-                var videoId = js.list[i].UUID;
-                var ifMarked = js.list[i].ifMarked;
+                url = js.list[i].url;
+                transcript = js.list[i].transcript;
+                character = js.list[i].character;
+                videoId = js.list[i].UUID;
+                ifMarked = js.list[i].ifMarked;
                 addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }
@@ -43,7 +43,54 @@ async function getVideoSegments() {
         var err = js["error"];
         alert (err);
     }
-    preparelibrarySlider();
+    //preparelibrarySlider();
+}
+
+async function getRemoteVideoSegments() {
+    let remoteSites = await getRemoteSites();
+    console.log(remoteSites);
+    for(index = 0; index < remoteSites.list.length; index++){
+        var keyIdx = remoteSites.list[index].url.indexOf("?apikey=");
+        var url = remoteSites.list[index].url.substring(0, keyIdx);
+        var api = remoteSites.list[index].url.substring(keyIdx+8);
+        let result = await makeRequest("GET", url, "", api);
+        var js = JSON.parse(result.statusText);
+        console.log(js);
+        if (result.status === 200) {
+            if (js["statusCode"] !== 200) {
+                alert("Error: " + status + "\n" + js["error"]);
+            }else {
+                    for (var i = 0; i < js.segments.length; i++) {
+                        url = js.segments[i].url;
+                        text = js.segments[i].text;
+                        character = js.segments[i].character;
+                        addVideoClip(url, text, character, "Remote", false);
+                    }
+            }
+        } else {
+            console.log("actual:" + result.statusText);
+            var err = js["error"];
+            alert (err);
+        }
+        //preparelibrarySlider();
+    }
+}
+
+async function getRemoteSites(){
+    let result = await makeRequest("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/get", "");
+    console.log(result.statusText);
+    var js = JSON.parse(result.statusText);
+    if (result.status === 200) {
+        if (js["statusCode"] !== 200) {
+            alert("Error: " + status + "\n" + js["error"]);
+        }else {
+            return js;
+        }
+    } else {
+        console.log("actual:" + result.statusText);
+        var err = js["error"];
+        alert (err);
+    }
 }
 
 async function getPlaylists() {
@@ -251,10 +298,13 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     preparelibrary2Slider();
 }
 
-function makeRequest(method, url, js) {
+function makeRequest(method, url, js, apikey = null) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open(method, url);
+        if(apikey) {
+            xhr.setRequestHeader("x-api-key", apikey);
+        }
         xhr.onload = function () {
             resolve({
                 status: this.status,

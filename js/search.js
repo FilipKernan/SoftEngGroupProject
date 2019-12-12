@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('form.search').submit(function () {
         var character = $("input[name=character]").val().toLowerCase();
@@ -31,27 +30,20 @@ function search(response, character, transcript) {
                     addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
                     hasResult = true;
 
-                } else if (transcript && json.list[i].transcript.toLowerCase().includes(transcript) && !character) {
-                    console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
-                    hasResult = true;
+        } else if (transcript && json.list[i].transcript.toLowerCase().includes(transcript) && !character) {
+            console.log(json.list[i].UUID);
+            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+            hasResult = true;
 
-                } else if (!transcript && !character) {
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
-                    hasResult = true;
+        } else if (!transcript && !character) {
+            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+            hasResult = true;
 
-                } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
-                    console.log(json.list[i].UUID);
-                    addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
-                    hasResult = true;
-                }
-            }
-
-            if (!hasResult) {
-                $("#Library").append("<p>no result found</p>");
-            } else {
-                preparelibrarySlider();
-            }
+        } else if (transcript && character && json.list[i].transcript.toLowerCase().includes(transcript) && json.list[i].character.toLowerCase().includes(character)) {
+            console.log(json.list[i].UUID);
+            addVideoClip(json.list[i].url, json.list[i].transcript, json.list[i].character, ifMarked);
+            hasResult = true;
         }
     }
+    return hasResult;
 }

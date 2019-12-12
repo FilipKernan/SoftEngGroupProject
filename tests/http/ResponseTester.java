@@ -1,6 +1,7 @@
 package http;
 
 import model.Playlist;
+import model.Segment;
 import model.ThirdPartySite;
 import model.VideoSegment;
 import org.junit.Test;
@@ -127,7 +128,7 @@ public class ResponseTester {
 
     @Test
     public void getUnmarkedVideoSegmentsRequest(){
-        List<VideoSegment> vids = new ArrayList<>();
+        List<Segment> vids = new ArrayList<>();
         GetUnmarkedVideoSegmentsResponse response = new GetUnmarkedVideoSegmentsResponse(vids, 200);
         GetUnmarkedVideoSegmentsResponse response2 = new GetUnmarkedVideoSegmentsResponse(403, "Bad things happened");
         GetUnmarkedVideoSegmentsResponse response3 = new GetUnmarkedVideoSegmentsResponse(null, 200);

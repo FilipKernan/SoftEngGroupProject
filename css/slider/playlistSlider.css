@@ -1,6 +1,7 @@
 /* Right arrow*/
 #arrowR {
-    background: yellow;
+    border-radius: 0px 20px 20px 0px;
+    background: cornflowerblue;
     width: 1.5%;
     height: 50px;
     float: right;
@@ -15,8 +16,9 @@
 
 /* Left arrow*/
 #arrowL {
+    border-radius: 20px 0px 0px 20px;
     margin-top: 55.5px;
-    background: yellow;
+    background: cornflowerblue;
     width: 1.5%;
     height: 50px;
     float: left;
@@ -44,4 +46,8 @@
 
 .delete_playlist:hover {
     cursor: pointer;
+}
+
+.playlist {
+    height: 207px;
 }

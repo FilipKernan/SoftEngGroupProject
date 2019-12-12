@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     loading();
     getVideoSegments().then(doneLoading);
