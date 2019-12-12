@@ -6,7 +6,7 @@ body {
 }
 
 /* Makes controls appear on hover*/
-.video:hover + .controls, .controls:hover {
+.video2:hover + .controls, .controls:hover {
     display: block;
 }
 
