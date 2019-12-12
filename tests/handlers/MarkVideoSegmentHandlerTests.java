@@ -14,7 +14,7 @@ public class MarkVideoSegmentHandlerTests extends LambdaTest {
         GetLocalVideoSegmentsRequest cvs2 = new GetLocalVideoSegmentsRequest();
         GetLocalVideoSegmentsResponse resp2 = new GetLocalVideoSegmentsHandler().handleRequest(cvs2, createContext("Get VSs in PL"));
         Assert.assertEquals(200, resp2.statusCode);
-        List<VideoSegment> videoList1 = resp2.list;
+        List<VideoSegment> videoList1 = resp2.segments;
 
         String videoID = videoList1.get(0).UUID;
         MarkSegmentRequest reqMM1 = new MarkSegmentRequest(videoID, true);
