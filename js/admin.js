@@ -1,6 +1,6 @@
 $(document).ready(function () {
     loading();
-    getVideoSegments().then(doneLoading);
+    getVideoSegments().then(doneLoading).then(preparelibrarySlider);
     populateThirdParties();
 // Load 5 video clips
 
