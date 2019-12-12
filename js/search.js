@@ -16,11 +16,11 @@ async function searchHandler(response, character, transcript) {
         }
     });
 
-    var remoteSites = ["https://g75v8iurq5.execute-api.us-east-1.amazonaws.com/RemoteSite/publicsegments?apikey=I14G0D8EJn4Q44b8dFhtb6CcdIraLflm9dpcyXAX"];
-    for(index = 0; index < remoteSites.length; index++){
-        var keyIdx = remoteSites[index].indexOf("?apikey=");
-        var url = remoteSites[index].substring(0, keyIdx);
-        var api = remoteSites[index].substring(keyIdx+8);
+    let remoteSites = await getRemoteSites();
+    for(index = 0; index < remoteSites.list.length; index++){
+        var keyIdx = remoteSites.list[index].url.indexOf("?apikey=");
+        var url = remoteSites.list[index].url.substring(0, keyIdx);
+        var api = remoteSites.list[index].url.substring(keyIdx+8);
         let result = await makeRequest("GET", url, "", api);
         result = JSON.parse(result.statusText);
         if(search(result, character, transcript)) {
@@ -44,6 +44,7 @@ function search(json, character, transcript) {
         } catch (e) {
             ifMarked = false;
         }
+
         if (character && json.segments[i].character.toLowerCase().includes(character) && !transcript) {
             console.log(json.segments[i].UUID);
             addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
