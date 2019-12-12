@@ -10,6 +10,10 @@ body {
     display: block;
 }
 
+.video:hover + .controls, .controls:hover {
+    display: block;
+}
+
 /* edit and delete controls -- makes them hidden by default*/
 .controls {
     display: none;
