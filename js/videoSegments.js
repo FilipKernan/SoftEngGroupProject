@@ -29,12 +29,12 @@ async function getVideoSegments() {
         if (js["statusCode"] !== 200) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
-            for (var i = 0; i < js.list.length; i++) {
-                url = js.list[i].url;
-                transcript = js.list[i].transcript;
-                character = js.list[i].character;
-                videoId = js.list[i].UUID;
-                ifMarked = js.list[i].ifMarked;
+            for (var i = 0; i < js.segments.length; i++) {
+                url = js.segments[i].url;
+                transcript = js.segments[i].transcript;
+                character = js.segments[i].character;
+                videoId = js.segments[i].UUID;
+                ifMarked = js.segments[i].ifMarked;
                 addVideoClip(url, transcript, character, videoId, ifMarked);
             }
         }
@@ -77,7 +77,7 @@ async function getRemoteVideoSegments() {
 }
 
 async function getRemoteSites(){
-    let result = await makeRequest("POST", "https://fqtldon5xe.execute-api.us-east-2.amazonaws.com/dev/admin/thirdParty/get", "");
+    let result = await makeRequest("POST", getThirdParty, "");
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
@@ -232,6 +232,7 @@ async function getClipInPlayList(id) {
         if (js["statusCode"] !== 200) {
             alert("Error: " + status + "\n" + js["error"]);
         }else {
+
             for (var i = 0; i < js.list.length; i++) {
                 var clipUrl = js.list[i].url;
                 var clipCharacter = js.list[i].character;

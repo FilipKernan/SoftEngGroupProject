@@ -7,24 +7,30 @@ $(document).ready(function () {
     var playlistID = getUrlVars()["playlistID"];
     console.log("playlistID: " + playlistID);
     list = listClipsInPlaylist(playlistID);
+    //console.log(list);
     console.log($("#video"));
 
 
-    function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
+
 });
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 
 $("#video")[0].on("ended", function() {
     console.log('Video has ended!');
     index++;
+    console.log(list);
     var video = document.getElementById('video');
     video.setAttribute("src", json.list[index].url);
     video.load();
+    video.play();
+
 });
 
 function listClipsInPlaylist(id) {
@@ -51,10 +57,14 @@ function listClipsInPlaylist(id) {
 }
 
 function next() {
+    var playlistID = getUrlVars()["playlistID"];
+    console.log("playlistID: " + playlistID);
+    list = listClipsInPlaylist(playlistID);
     console.log('Video has ended!');
     index++;
     var video = document.getElementById('video');
-    video.setAttribute("src", json.list[index].url);
+    console.log(list);
+    video.setAttribute("src", list[index].url);
     video.load();
     video.play();
 }
