@@ -50,7 +50,7 @@ async function getRemoteVideoSegments() {
                         url = js.segments[i].url;
                         text = js.segments[i].text;
                         character = js.segments[i].character;
-                        addVideoClip(url, text, character, url, false);
+                        addVideoClip(url, text, character, (text + character).replace(/\s+/g, '').replace('.', '') , false);
                     }
             }
         } else {
@@ -237,45 +237,47 @@ async function getClipInPlayList(id) {
 async function appendVideoToPlaylist(playlistID, videoID) {
     var data = {};
     data["playlistID"] = playlistID;
-    if (videoID.includes("http")) {
-        var data = {};
-        data["character"] = $('#' + videoID + '').transcript;
+    // if (videoID.includes("http")) {
+    //     var data = {};
+    //     data["character"] = $("#" + videoID + "").transcript;
+    //
+    //     data["tpsURL"] = $("#" + videoID + "").getElementsByTagName("video").item(0).getElementsByTagName("source").attr('src');
+    //
+    //     data["transcript"] = $("#" + videoID + "").transcript;
+    //
+    //     data["id"] = "";
+    //
+    //     data["iLocal"] = "false";
+    //
+    //     var js = JSON.stringify(data);
+    //     console.log("JS:" + js);
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("POST", addVideoSegment, true);
+    //
+    //     xhr.send(js);
+    //
+    //     xhr.onloadend = function () {
+    //         console.log(xhr);
+    //         console.log(xhr.request);
+    //         if (xhr.readyState == XMLHttpRequest.DONE) {
+    //             if (xhr.status == 200) {
+    //                 var js = JSON.parse(xhr.responseText);
+    //
+    //                 $('#' + videoID + '').attr('id', js.videoID);
+    //
+    //                 videoID = js.videoID;
+    //
+    //             } else {
+    //                 console.log("actual:" + xhr.responseText);
+    //                 var js = JSON.parse(xhr.responseText);
+    //                 var err = js["response"];
+    //                 alert (err);
+    //             }
+    //         }
+    //     }
+    // }
+    // debugger;
 
-        data["tpsURL"] = videoID;
-
-        data["transcript"] = $('#' + videoID + '').transcript;
-
-        data["id"] = "";
-
-        data["iLocal"] = "false";
-
-        var js = JSON.stringify(data);
-        console.log("JS:" + js);
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", addVideoSegment, true);
-
-        xhr.send(js);
-
-        xhr.onloadend = function () {
-            console.log(xhr);
-            console.log(xhr.request);
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                if (xhr.status == 200) {
-                    var js = JSON.parse(xhr.responseText);
-
-                    $('#' + videoID + '').attr('id', js.videoID);
-
-                    videoID = js.videoID;
-
-                } else {
-                    console.log("actual:" + xhr.responseText);
-                    var js = JSON.parse(xhr.responseText);
-                    var err = js["response"];
-                    alert (err);
-                }
-            }
-        }
-    }
     data["videoID"] = videoID;
     var js = JSON.stringify(data);
     let result = await makeRequest("POST", appendPlaylist, js);
