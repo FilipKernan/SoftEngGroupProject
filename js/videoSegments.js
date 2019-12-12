@@ -14,7 +14,7 @@ async function getVideoSegments(create = true) {
             if(create) {
                 for (var i = 0; i < js.segments.length; i++) {
                     url = js.segments[i].url;
-                    transcript = js.segments[i].transcript;
+                    transcript = js.segments[i].text;
                     character = js.segments[i].character;
                     videoId = js.segments[i].UUID;
                     ifMarked = js.segments[i].isMarked;
