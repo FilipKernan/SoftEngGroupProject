@@ -13,7 +13,7 @@ var getPlaylist = baseUrl + "/playlist/get";
 var getPlaylistSegments = baseUrl + "/playlist/getSegments";
 var playlistRename = baseUrl + "/playlist/rename";
 
-var addVideoSegment = baseUrl + "/videoSegment/add";
+var addVideoSegment = baseUrl + "/videoSegment/addLocal";
 var deleteVideoSegment = baseUrl + "/videoSegment/delete";
 var getVideoSegment = baseUrl + "/videoSegment/getLocal";
 var videoSegmentMark = baseUrl + "/videoSegment/Mark";
