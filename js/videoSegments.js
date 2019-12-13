@@ -231,7 +231,7 @@ async function getClipInPlayList(id) {
         var err = js["error"];
         alert (err);
     }
-    preparelibrary2Slider();
+    //preparelibrary2Slider();
 }
 
 async function appendVideoToPlaylist(playlistID, videoID) {
@@ -306,7 +306,7 @@ async function removeVideoFromPlaylist(playlistID, videoID) {
     data["videoID"] = videoID;
     console.log(data);
     var js = JSON.stringify(data);
-    let result = await makeRequest("POST", deleteVideoSegment, js);
+    let result = await makeRequest("POST", deleteSegmentInPlaylist, js);
     console.log(result.statusText);
     var js = JSON.parse(result.statusText);
     if (result.status === 200) {
