@@ -47,21 +47,21 @@ function search(json, character, transcript) {
 
         if (character && json.segments[i].character.toLowerCase().includes(character) && !transcript) {
             console.log(json.segments[i].UUID);
-            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, "",  ifMarked);
             hasResult = true;
 
         } else if (transcript && json.segments[i].text.toLowerCase().includes(transcript) && !character) {
             console.log(json.segments[i].UUID);
-            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, "", ifMarked);
             hasResult = true;
 
         } else if (!transcript && !character) {
-            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, "", ifMarked);
             hasResult = true;
 
         } else if (transcript && character && json.segments[i].text.toLowerCase().includes(transcript) && json.segments[i].character.toLowerCase().includes(character)) {
             console.log(json.segments[i].UUID);
-            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, ifMarked);
+            addVideoClip(json.segments[i].url, json.segments[i].text, json.segments[i].character, "", ifMarked);
             hasResult = true;
         }
     }
