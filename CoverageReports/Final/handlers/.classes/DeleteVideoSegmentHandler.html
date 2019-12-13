@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DeleteVideoSegmentHandler</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">handlers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DeleteVideoSegmentHandler (handlers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeleteVideoSegmentHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (18/ 21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package handlers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.amazonaws.regions.Regions;
+<i>4</i>&nbsp;import com.amazonaws.services.lambda.runtime.Context;
+<i>5</i>&nbsp;import com.amazonaws.services.lambda.runtime.LambdaLogger;
+<i>6</i>&nbsp;import com.amazonaws.services.lambda.runtime.RequestHandler;
+<i>7</i>&nbsp;import com.amazonaws.services.s3.AmazonS3;
+<i>8</i>&nbsp;import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+<i>9</i>&nbsp;import db.PlaylistDAO;
+<i>10</i>&nbsp;import db.VideoSegmentDAO;
+<i>11</i>&nbsp;import http.DeletePlaylistRequest;
+<i>12</i>&nbsp;import http.DeletePlaylistResponse;
+<i>13</i>&nbsp;import http.DeleteVideoSegmentRequest;
+<i>14</i>&nbsp;import http.DeleteVideoSegmentResponse;
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;public class DeleteVideoSegmentHandler implements RequestHandler&lt;DeleteVideoSegmentRequest, DeleteVideoSegmentResponse&gt; {</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public LambdaLogger logger;
+<i>19</i>&nbsp;
+<b class="fc"><i>20</i>&nbsp;    private AmazonS3 s3 = null;</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    boolean deleteVideoSegment(String id) throws Exception {
+<b class="fc"><i>23</i>&nbsp;        VideoSegmentDAO dao = new VideoSegmentDAO();</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;        return dao.deleteVideoSegment(id);</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public DeleteVideoSegmentResponse handleRequest(DeleteVideoSegmentRequest input, Context context){
+<b class="fc"><i>30</i>&nbsp;        logger = context.getLogger();</b>
+<b class="fc"><i>31</i>&nbsp;        logger.log(input.toString());</b>
+<i>32</i>&nbsp;        DeleteVideoSegmentResponse response;
+<b class="fc"><i>33</i>&nbsp;        String id = input.getID();</b>
+<i>34</i>&nbsp;        try{
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;            if (logger != null) { logger.log(&quot;in createSystemConstant&quot;); }</b>
+<i>37</i>&nbsp;
+<b class="fc"><i>38</i>&nbsp;            if (s3 == null) {</b>
+<b class="fc"><i>39</i>&nbsp;                logger.log(&quot;attach to S3 request&quot;);</b>
+<b class="fc"><i>40</i>&nbsp;                s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();</b>
+<b class="fc"><i>41</i>&nbsp;                logger.log(&quot;attach to S3 succeed&quot;);</b>
+<i>42</i>&nbsp;            }
+<b class="fc"><i>43</i>&nbsp;            s3.deleteObject(&quot;3733mothproject&quot;, &quot;videoSegments/&quot; + input.getID() + &quot;.ogg&quot;);</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;            boolean success = deleteVideoSegment(id);</b>
+<i>47</i>&nbsp;
+<b class="fc"><i>48</i>&nbsp;            if(success){</b>
+<b class="fc"><i>49</i>&nbsp;                response = new DeleteVideoSegmentResponse(id, 200);</b>
+<i>50</i>&nbsp;            } else {
+<b class="nc"><i>51</i>&nbsp;                response = new DeleteVideoSegmentResponse(id, 409);</b>
+<i>52</i>&nbsp;            }
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>55</i>&nbsp;            response = new DeleteVideoSegmentResponse(403, e.getMessage());</b>
+<b class="fc"><i>56</i>&nbsp;        }</b>
+<b class="fc"><i>57</i>&nbsp;        return response;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-13 17:26</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PageRedirectHandler</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">handlers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PageRedirectHandler (handlers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PageRedirectHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package handlers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.amazonaws.HttpMethod;
+<i>4</i>&nbsp;import com.amazonaws.SdkClientException;
+<i>5</i>&nbsp;import com.amazonaws.auth.AWSCredentialsProvider;
+<i>6</i>&nbsp;import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+<i>7</i>&nbsp;import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+<i>8</i>&nbsp;import com.amazonaws.regions.Regions;
+<i>9</i>&nbsp;import com.amazonaws.services.dynamodbv2.document.Page;
+<i>10</i>&nbsp;import com.amazonaws.services.lambda.runtime.Context;
+<i>11</i>&nbsp;import com.amazonaws.services.lambda.runtime.LambdaLogger;
+<i>12</i>&nbsp;import com.amazonaws.services.lambda.runtime.RequestHandler;
+<i>13</i>&nbsp;import com.amazonaws.services.s3.AmazonS3;
+<i>14</i>&nbsp;import com.amazonaws.services.s3.AmazonS3Client;
+<i>15</i>&nbsp;import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+<i>16</i>&nbsp;import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+<i>17</i>&nbsp;import http.PageRedirectRequest;
+<i>18</i>&nbsp;import http.PageRedirectResponce;
+<i>19</i>&nbsp;import org.apache.http.client.entity.UrlEncodedFormEntity;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;import javax.swing.plaf.synth.Region;
+<i>22</i>&nbsp;import java.net.URL;
+<i>23</i>&nbsp;
+<b class="nc"><i>24</i>&nbsp;public class PageRedirectHandler implements RequestHandler&lt;PageRedirectRequest, PageRedirectResponce&gt; {</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public LambdaLogger logger;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public PageRedirectResponce handleRequest(PageRedirectRequest pageRedirectRequest, Context context) {
+<b class="nc"><i>30</i>&nbsp;        logger = context.getLogger();</b>
+<i>31</i>&nbsp;        try {
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;            String page, data;
+<b class="nc"><i>35</i>&nbsp;            String[] splitPage = pageRedirectRequest.getPage().split(&quot;\\?&quot;);</b>
+<b class="nc"><i>36</i>&nbsp;            if (splitPage.length &gt; 1) {</b>
+<b class="nc"><i>37</i>&nbsp;                page = pageRedirectRequest.getPage().split(&quot;\\?&quot;)[0];</b>
+<b class="nc"><i>38</i>&nbsp;                data = pageRedirectRequest.getPage().split(&quot;\\?&quot;)[1];</b>
+<i>39</i>&nbsp;            } else {
+<b class="nc"><i>40</i>&nbsp;                page = pageRedirectRequest.getPage();</b>
+<b class="nc"><i>41</i>&nbsp;                data = &quot;&quot;;</b>
+<i>42</i>&nbsp;            }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;            URL url = generatePresignedURL(page);</b>
+<b class="nc"><i>46</i>&nbsp;            if (!url.toString().isEmpty()) {</b>
+<b class="nc"><i>47</i>&nbsp;                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(url, 200);</b>
+<b class="nc"><i>48</i>&nbsp;                return pageRedirectResponce;</b>
+<i>49</i>&nbsp;            } else {
+<b class="nc"><i>50</i>&nbsp;                PageRedirectResponce pageRedirectResponce = new PageRedirectResponce(400, &quot;could not create URL&quot;);</b>
+<b class="nc"><i>51</i>&nbsp;                return pageRedirectResponce;</b>
+<i>52</i>&nbsp;            }
+<b class="nc"><i>53</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>54</i>&nbsp;            logger.log(&quot;a problem happened it geneatating the url&quot;);</b>
+<b class="nc"><i>55</i>&nbsp;            logger.log(e.getMessage());</b>
+<i>56</i>&nbsp;        }
+<b class="nc"><i>57</i>&nbsp;        return null;</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public URL generatePresignedURL(String page) throws Exception{
+<i>62</i>&nbsp;
+<b class="nc"><i>63</i>&nbsp;        Regions region = Regions.US_EAST_2;</b>
+<b class="nc"><i>64</i>&nbsp;        String bucketName = &quot;3733mothproject&quot;;</b>
+<b class="nc"><i>65</i>&nbsp;        String objectName = &quot;html/&quot; + page;</b>
+<b class="nc"><i>66</i>&nbsp;        URL url = null;</b>
+<i>67</i>&nbsp;        try {
+<b class="nc"><i>68</i>&nbsp;            AWSCredentialsProvider awsCredentialsProvider = new DefaultAWSCredentialsProviderChain();</b>
+<i>69</i>&nbsp;
+<b class="nc"><i>70</i>&nbsp;            AmazonS3 s3Client =AmazonS3ClientBuilder.standard()</b>
+<b class="nc"><i>71</i>&nbsp;                    .withRegion(region)</b>
+<b class="nc"><i>72</i>&nbsp;                    .withCredentials(awsCredentialsProvider)</b>
+<b class="nc"><i>73</i>&nbsp;                    .build();</b>
+<i>74</i>&nbsp;;
+<i>75</i>&nbsp;
+<b class="nc"><i>76</i>&nbsp;            java.util.Date exparationDate = new java.util.Date();</b>
+<b class="nc"><i>77</i>&nbsp;            long expTimeMillis = exparationDate.getTime();</b>
+<b class="nc"><i>78</i>&nbsp;            expTimeMillis += 1000 * 60 * 60;</b>
+<b class="nc"><i>79</i>&nbsp;            exparationDate.setTime(expTimeMillis);</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;            logger.log(&quot;Generating presigned URL&quot;);</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;            GeneratePresignedUrlRequest presignedRequest = new GeneratePresignedUrlRequest(bucketName, objectName).withMethod(HttpMethod.GET).withExpiration(exparationDate);</b>
+<b class="nc"><i>85</i>&nbsp;            url = s3Client.generatePresignedUrl(presignedRequest);</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;
+<b class="nc"><i>90</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>91</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>92</i>&nbsp;        }</b>
+<b class="nc"><i>93</i>&nbsp;        return url;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-12-13 17:26</div>
+</div>
+</body>
+</html>
