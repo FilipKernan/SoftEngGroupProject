@@ -146,7 +146,7 @@ public class VideoSegmentDAO {
 
 //            ps =conn.prepareStatement("INSERT INTO video (videoID,character,transcript,videoURL,ifMarked,ifLocal) values(?,?,?,?,'0','1');");
 //            ps =conn.prepareStatement("INSERT INTO video (videoID, character,transcript,videoURL,ifMarked,ifLocal) values(?,'character','transcript','url','0','1');");
-            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoURL`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', '1');");
+            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoUrl`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', '1');");
 //            ps =conn.prepareStatement("INSERT INTO video WHERE videoID=? AND character=? AND transcript=? AND url=? AND ifMarker=? AND ifLocal=?;");
             ps.setString(1, newVideoSegment.UUID);
             ps.setString(2, newVideoSegment.character);
@@ -179,7 +179,7 @@ public class VideoSegmentDAO {
                 return false;
             }
 
-            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoURL`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', ?);");
+            ps =conn.prepareStatement("INSERT INTO video (`videoID`,`character`,`transcript`,`videoUrl`,`ifMarked`,`ifLocal`) values(?, ?, ?, ?, '0', ?);");
             ps.setString(1, newVideoSegment.UUID);
             ps.setString(2, newVideoSegment.character);
             ps.setString(3, newVideoSegment.text);
