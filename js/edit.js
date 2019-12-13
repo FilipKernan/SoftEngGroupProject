@@ -15,22 +15,16 @@ $(document).ready(function () {
     // appendVideoClip("test.ogg", "", "");
 
 
-    function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
 
-    $('body').on('click', 'div.add_video', function (e) {
-        loading();
-        console.log("adding...");
-        var target = $(e.target.parentElement.parentElement.parentElement);
-        console.log(target);
-        appendVideoToPlaylist(playlistID, target.context.id).then(doneLoading);
-        //preparelibrarySlider();
-    });
+
+    // $('body').on('click', 'div.add_video', function (e) {
+    //     loading();
+    //     console.log("adding...");
+    //     var target = $(e.target.parentElement.parentElement.parentElement);
+    //     console.log(target);
+    //     appendVideoToPlaylist(playlistID, target.context.id).then(doneLoading);
+    //     //preparelibrarySlider();
+    // });
 
     $('body').on('click', 'div.remove_clip', function (e) {
         loading();
@@ -58,16 +52,25 @@ $(document).ready(function () {
     });
 });
 
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 // adds a new video clip to the end of the slider
 function addVideoClip(url, transcript, character, id, ifMarked) {
-    if (id.includes("http")) {
+    if (!id.includes("-")) {
         var clip = $("<div class='item library' id=\'" + id + "\'>\n" +
             "                            <a>Video Failed to load</a>\n" +
             "                            <video controls class=\"video\">\n" +
-            "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
+            "                                <source name='source' src=\""+url+"\" type=\"video/ogg\">\n" +
             "                            </video>\n" +
             "                            <div class=\"controls\">\n" +
-            "                                <div class=\"add_video\" style=\"top: 0\">\n" +
+            "                                <div onclick='addRemoteToPlaylist(\"" + id + "\", \"" + character + "\", \"" + transcript+ "\", \"" + url + "\")' class=\"add_video\" style=\"top: 0\">\n" +
             "                                    <i class=\"material-icons\">\n" +
             "                                        add\n" +
             "                                    </i>\n" +
@@ -83,7 +86,7 @@ function addVideoClip(url, transcript, character, id, ifMarked) {
             "                                <source src=\""+url+"\" type=\"video/ogg\">\n" +
             "                            </video>\n" +
             "                            <div class=\"controls\">\n" +
-            "                                <div class=\"add_video\" style=\"top: 0\">\n" +
+            "                                <div onclick='addLocalToPlaylist(" + id + ")' class=\"add_video\" style=\"top: 0\">\n" +
             "                                    <i class=\"material-icons\">\n" +
             "                                        add\n" +
             "                                    </i>\n" +
@@ -132,3 +135,16 @@ function goToHome() {
     //window.location = getRedirect(js, "https://m8hr3y5zj4.execute-api.us-east-2.amazonaws.com/dev/redirect");
 }
 
+function addRemoteToPlaylist(id, character, transcript, tpsURL) {
+    loading();
+    console.log("adding...");
+    var playlistID = getUrlVars()["playlistID"];
+    appendVideoToPlaylist(playlistID, id, character, transcript, tpsURL).then(doneLoading);
+}
+
+function addLocalToPlaylist(id) {
+    loading();
+    console.log("adding...");
+    var playlistID = getUrlVars()["playlistID"];
+    appendVideoToPlaylist(playlistID, id).then(doneLoading);
+}
