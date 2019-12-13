@@ -26,12 +26,17 @@ $(document).ready(function () {
         loading();
         var id = $((e.target.parentElement.parentElement).parentElement).context.id;
         console.log(id);
-        if(deleteVideo(id)) {
-            console.log("deleting...");
-            getVideoSegments().then(doneLoading);
-        } else {
-            doneLoading();
-        }
+        promise = deleteVideo(id);
+        promise.then(function () {
+            if(promise) {
+                console.log("deleting...");
+                $('.list#Library').children().remove();
+                getVideoSegments().then(doneLoading).then(preparelibrarySlider);
+            } else {
+                doneLoading();
+            }
+        })
+
     });
 
     $('body').on('click', 'div.delete_playlist', function (e) {
@@ -125,7 +130,7 @@ function openModal(id) {
 
 function closeModal(id) {
     var modal = document.getElementById(id);
-
+    loading();
     if (id == "newPlaylist") {
         var playlistNameField = document.getElementById("playlistNameField");
         if (playlistNameField.value !== "") {
@@ -160,7 +165,7 @@ function newSegment() {
     var js = JSON.stringify(data);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", addVideoSegment, true);
+    xhr.open("POST", addVideoSegmentLocal, true);
 
     xhr.send(js);
 
@@ -170,7 +175,7 @@ function newSegment() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
                 $("#Library").empty();
-                getVideoSegments();
+                getVideoSegments().then(preparelibrarySlider).then(doneLoading);
             } else {
                 console.log("actual:" + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
