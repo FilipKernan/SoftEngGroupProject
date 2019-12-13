@@ -6,8 +6,7 @@ $(document).ready(function () {
     var clips = getClipInPlayList(playlistID);
     var remote = getRemoteVideoSegments(["https://avhiou2y5d.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments?apikey=mH0naThzgz3LRgli6PiEa8ktNznRmClw83de0vCc"]);
     var vids = getVideoSegments();
-    Promise.all([playlistName, clips, remote, vids]).then(doneLoading).then(preparelibrarySlider);
-
+    Promise.all([playlistName, clips, remote, vids]).then(doneLoading).then(preparelibrarySlider).then(preparelibrary2Slider);
     //appendVideoClip("test.ogg", "", "");
     //appendVideoClip("test.ogg", "", "");
     // appendVideoClip("test.ogg", "", "");
