@@ -30,19 +30,6 @@ public class CreatePlaylistHandlerTest extends LambdaTest{
     }
 
     @Test
-    public void testRepetitiveInput() {
-        String var = "test";
-        CreatePlaylistRequest ccr = new CreatePlaylistRequest(var);
-        String SAMPLE_INPUT_STRING =  new Gson().toJson(ccr);
-
-        try {
-            testFailInput(SAMPLE_INPUT_STRING, 409);
-        } catch (IOException ioe) {
-            Assert.fail("Invalid:" + ioe.getMessage());
-        }
-    }
-
-    @Test
     public void testLongInput() {
         String var = "loooooooooooooooooooooooooooooooooooooooooooooooongName";
         CreatePlaylistRequest ccr = new CreatePlaylistRequest(var);
@@ -59,6 +46,10 @@ public class CreatePlaylistHandlerTest extends LambdaTest{
         CreatePlaylistRequest cpr = new CreatePlaylistRequest("testCreate");
         CreatePlaylistResponse resp = new CreatePlaylistHandler().handleRequest(cpr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
+
+        CreatePlaylistRequest cpr2 = new CreatePlaylistRequest("testCreate");
+        CreatePlaylistResponse resp2 = new CreatePlaylistHandler().handleRequest(cpr2, createContext("create"));
+        Assert.assertEquals(409, resp2.statusCode);
 
         //delete the playlist created
         DeletePlaylistRequest delete = new DeletePlaylistRequest(resp.playlist.getID());
