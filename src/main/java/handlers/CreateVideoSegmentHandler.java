@@ -15,6 +15,7 @@ import http.CreateVideoSegmentResponse;
 import model.VideoSegment;
 
 import java.io.ByteArrayInputStream;
+import java.util.Dictionary;
 import java.util.UUID;
 
 public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegmentRequest, CreateVideoSegmentResponse> {
@@ -34,12 +35,21 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
         String id = UUID.randomUUID().toString();
 
         try {
-            byte[] encoded = java.util.Base64.getDecoder().decode(req.getBase64Encodedvalue());
-            if (createVideoSegment(req, encoded, id)) {
+            byte[] encoded = null;
+            if (req.isLocal()) {
+                encoded = java.util.Base64.getDecoder().decode(req.getBase64Encodedvalue());
+            }
+            if (!videoExistesInDataBase(req).isEmpty()){
+                id = videoExistesInDataBase(req);
                 responce = new CreateVideoSegmentResponse(id, 200);
             } else {
-                responce = new CreateVideoSegmentResponse(id, 422);
+                if (createVideoSegment(req, encoded, id)) {
+                    responce = new CreateVideoSegmentResponse(id, 200);
+                } else {
+                    responce = new CreateVideoSegmentResponse(id, 422);
+                }
             }
+
 
 
         } catch (Exception e) {
@@ -48,6 +58,17 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
 
         return responce;
+    }
+
+    private String videoExistesInDataBase(CreateVideoSegmentRequest req) {
+
+        VideoSegmentDAO db = new VideoSegmentDAO();
+        try {
+            return db.findURL(req.getTpsURL());
+        } catch (Exception e) {
+            return "";
+        }
+
     }
 
     private boolean createVideoSegment(CreateVideoSegmentRequest req, byte[] encoded, String id) {
@@ -80,8 +101,11 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
             VideoSegmentDAO db = new VideoSegmentDAO();
             try {
                 VideoSegment newVideoSegment = db.generateVideoSegment(req.getCharacter(), req.getTranscript(), id, req.tpsURL);
+                // check if it already exists in the database
+                // if so set the id to the one in the database
                 return db.addVideoSegment(newVideoSegment, 0); //1 means it is local, 0 means it isn't
             } catch (Exception e) {
+
                 logger.log("could not generate new video segment: " + e.getMessage());
                 return false;
             }

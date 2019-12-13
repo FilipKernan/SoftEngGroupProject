@@ -167,6 +167,8 @@ public class VideoSegmentDAO {
     }
 
     public boolean addVideoSegment(VideoSegment newVideoSegment, int isLocal) throws Exception {
+
+
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM video WHERE videoID = ?;");
             ps.setString(1, newVideoSegment.UUID);
@@ -191,6 +193,26 @@ public class VideoSegmentDAO {
             return true;
         } catch (Exception e){
             throw new Exception("Failed in getting books: " + e.getMessage());
+        }
+    }
+
+
+    public String findURL(String url) throws Exception{
+        try{
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM video WHERE videoUrl = ?;");
+            ps.setString(1, url);
+            ResultSet resultSet = ps.executeQuery();
+
+            // already present?
+            while (resultSet.next()) {
+                String id = resultSet.getString("videoID");
+                resultSet.close();
+                return id;
+
+            }
+            return "";
+        } catch (Exception e) {
+            throw new Exception("Could not find the url: " + e.getMessage());
         }
     }
 }
