@@ -43,7 +43,7 @@ public class CreateVideoSegmentHandler implements RequestHandler<CreateVideoSegm
 
 
         } catch (Exception e) {
-            responce = new CreateVideoSegmentResponse(400, "Unable to create video segment:  (" + e.getMessage() + ")");
+            responce = new CreateVideoSegmentResponse(400, "Unable to create video segment:  (" + e.getMessage() + ") + (" + e.getStackTrace().toString() + ")");
         }
 
 
